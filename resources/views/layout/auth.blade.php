@@ -32,11 +32,11 @@
                 
             </div>
         </div>
-       {{-- <div class="col-lg-5 d-none d-lg-block">
+       <div class="col-lg-5 d-none d-lg-block">
             <div id="auth-right">
     
             </div>
-        </div> --}}
+        </div>
     </div>
 </div>
         
