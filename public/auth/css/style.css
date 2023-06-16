@@ -1,0 +1,393 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Auth styles */
+  #auth {
+    background-color: #f8f9fa;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .card {
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    height: 400px; /* Adjust the desired height */
+  }
+  
+  .card.left-border-radius {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  
+  .sideImage img {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+  .sideImage {
+    position: relative;
+    display: inline-block;
+  }
+  .sideImage button {
+    background-color: transparent;
+    border: none;
+  }
+  .small-view button{
+    background-color: transparent;
+    border: none;
+    font-size: 34px;
+    color: #676767;
+  }
+  
+  .arrowUp,
+  .arrowDown,
+  .drop {
+    position: absolute;
+    /* top: 50%; */
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+  }
+  
+  .arrowUp {
+    top: 45px;
+  }
+  
+  .arrowDown {
+    bottom: 45px;
+  }
+  
+  .drop {
+    top: 43%;
+    left: 58%;
+    /* transform: translate(-50%, -50%); */
+  }
+  
+  .arrowUp i,
+  .arrowDown i {
+    display: block;
+    font-size: 50px;
+    color: #fff;
+    margin: 0px;
+  }
+  .drop i {
+    display: block;
+    font-size: 15px;
+    margin: 5px;
+  }
+  
+  
+  .auth-subtitle {
+    color: #888;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .auth-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-weight: bolder;
+  }
+  .login-title {
+    font-size: 45px;
+    margin-bottom: 40px;
+    font-weight: bolder;
+  }
+  
+  .form-group[class*="has-icon-"] .form-control.form-control-xl {
+    padding-left: 3rem;
+  }
+
+.form-group input,
+.form-group select {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #d0cdcd;
+}
+
+  .form-control {
+    border-radius: 8px;
+  }
+  
+  .form-control-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    color: #383838;
+  }
+  .form-control-icon2 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    color: #383838;
+  }
+  
+  .login .social {
+    font-size: 25px;
+  }
+  .social .bi-facebook{
+    color: #0c75cb;
+  }
+  .social .bi-google{
+    color: red;
+  }
+  .social .bi-twitter{
+    color: #2196F3;
+  }
+  .login a{
+    text-decoration: none;
+  }
+  /* switch button */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    vertical-align: middle;
+    margin: 4px 10px 0px 10px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(28px);
+    -ms-transform: translateX(28px);
+    transform: translateX(28px);
+  }
+
+  .package-head sub {
+    font-size: 12px;
+    color: #888f95;
+    margin: 18px 0px 0px 4px;
+  }
+  /* switch button */
+  /* offer package */
+
+.package {
+  margin-bottom: 20px;
+}
+
+.package h4, .package-head h4{
+  font-weight: bold;
+}
+
+.package .card {
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.6s;
+  
+}
+.package .card:hover {
+  transform: scale(1.05);
+}
+
+.package .card-header-one {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #939ca4;
+}
+.package .card-header-two {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #f8e42b;
+}
+.package .card-header-three {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #353535;
+}
+
+.package .card-body {
+  margin-top: 0px;
+}
+
+.package .package-price {
+    margin-top: 0px;
+    text-align: center;
+}
+.package .package-price h1 {
+  margin: 0;
+  font-size: 40px;
+  color: #343a40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.package .package-price sup,
+.package .package-price sub {
+  font-size: 16px;
+  color: #6c757d;
+}
+.package .package-price sup {
+  margin-right: 5px;
+}
+
+.package .package-price sub {
+  display: block;
+  margin-top: 14px;
+  line-height: 4px;
+  margin-left: 3px;
+}
+
+.package p {
+  font-size: 11px;
+  color: #6c757d;
+  text-align: center;
+}
+
+.package span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.package span i {
+    margin-right: 5px;
+    color: #353535;
+}
+.package .active {
+    color: #565656;
+    font-weight: bold;
+}
+
+.package span p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.package .btn-secondary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #353535;
+    font-size: 20px;
+    font-weight: bold;
+}
+.package .btn-secondary:hover{
+  background-color: #1CABE2;
+  border: none;
+}
+
+input.has-value, select.has-value {
+  border-color: #1CABE2;
+  background-color: #e8f3f8;
+  border-width: 2px;
+}
+
+.purchase-currency .currency{
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+    border-color: transparent;
+    font-size: 10px;
+    padding: 3px;
+}
+.purchase-currency label{
+  font-weight: bold;
+  color: #acb1b6;
+}
+  /* offer package */
+  
+
+  
+  @media (max-width: 768px) {
+    .sideImage {
+        display: none;
+      }
+      
+    .card {
+      padding: 20px;
+    }
+  
+    .auth-title {
+      font-size: 26px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    /* Adjust column layout on medium screens */
+    
+    .col-lg-7 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .col-lg-5 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      display: block;
+    }
+    
+  }
+  

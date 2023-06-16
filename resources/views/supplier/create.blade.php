@@ -176,9 +176,5 @@
         $('.dist').hide();
         $('.dist'+e).show();
     }
-
-    
-   
-    
 </script>
 @endpush

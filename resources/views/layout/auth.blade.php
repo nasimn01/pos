@@ -1,48 +1,33 @@
-<!DOCTYPE html>
-<html lang="bn">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD | @yield('siteTitle', 'POS')</title>
-    
-<link rel="stylesheet" href="{{ asset('assets/css/main/app.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/pages/auth.css') }}">
-<link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.svg') }}" type="image/x-icon">
-<link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.png') }}" type="image/png">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    
-<link rel="stylesheet" href="{{ asset('assets/css/shared/iconly.css') }}">
-<script
-  src="https://code.jquery.com/jquery-3.6.1.min.js"
-  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-  crossorigin="anonymous"></script>
-</head>
-
-<body>
-<div id="auth">
-    <div class="row h-100">
-        <div class="col-lg-5 col-12">
-            <div id="auth-left">
-                
-
-                @yield('content')
-                
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MTL | @yield('siteTitle', 'POS')</title>
+    <link rel="stylesheet" href="{{ asset('/auth/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        <div class="login">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="logo">
+                        <img src="{{ asset('/auth/img/logo.png') }}" alt="">
+                    </div>
+                </div>
             </div>
-        </div>
-       <div class="col-lg-7 d-none d-lg-block">
-            <div id="auth-right">
-    
-            </div>
+            @yield('content')
         </div>
     </div>
-</div>
-        
-
-<script src="{{ asset('/assets/js/bootstrap.js') }}"></script>
-<script src="{{ asset('/assets/js/app.js') }}"></script>
-@stack('scripts')
-
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{{ asset('/auth/js/app.js') }}"></script>
+    
+    @stack('scripts')
+  </body>
 </html>
