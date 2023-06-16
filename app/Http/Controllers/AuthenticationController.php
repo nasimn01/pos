@@ -23,6 +23,14 @@ class AuthenticationController extends Controller
     public function signUpStore(SignupRequest $request){
         try{
             $company=new Company;
+            $company->contact=$request->business_contact;
+            $company->business_type=$request->business_type;
+            $company->business_name=$request->business_name;
+            $company->owner_name=$request->owner_name;
+            $company->country_id=$request->country;
+            $company->division_id=$request->state;
+            $company->district_id=$request->city;
+            $company->address=$request->location;
             $company->status=1;
             if($company->save()){
                 $branch=new Branch;

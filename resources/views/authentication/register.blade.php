@@ -206,7 +206,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group position-relative has-icon-left mb-4 ms-1">
-                                    <input type="text" class="form-control form-control-xl" name="location" value="{{ old('location')}}" placeholder="Address">
+                                    <input type="text" class="form-control form-control-xl" name="location" value="{{ old('location')}}" placeholder="Address" required>
                                     <div class="form-control-icon">
                                         <i class="bi bi-geo-alt-fill"></i>
                                     </div>
