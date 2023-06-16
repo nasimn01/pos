@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('navigation_head_views', function (Blueprint $table) {
+        Schema::create('business_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id')->nullable();
-            $table->string('master_head');
-            $table->string('sub_head');
-            $table->string('child_one');
-            $table->string('child_two');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navigation_head_views');
+        Schema::dropIfExists('business_types');
     }
 };

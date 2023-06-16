@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('navigation_head_views', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id')->nullable();
-            $table->string('master_head');
-            $table->string('sub_head');
-            $table->string('child_one');
-            $table->string('child_two');
+            $table->string('package_name')->nullable();
+            $table->integer('package_day')->nullable();
+            $table->decimal('price',14,2)->nullable();
+            $table->string('package_feature')->nullable();
+            $table->string('package_code')->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navigation_head_views');
+        Schema::dropIfExists('packages');
     }
 };

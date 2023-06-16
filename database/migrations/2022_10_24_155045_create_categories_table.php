@@ -17,10 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('category');
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('company_id')->nullable()->index();
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedBigInteger('branch_id')->nullable()->index();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id')->index()->foreign()->references('id')->on('customers')->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id');
             $table->date('sales_date');
             $table->string('reference_no')->nullable();
             $table->string('total_quantity');
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->decimal('round_of',10,2)->default(0);
             $table->string('grand_total');
             $table->string('note')->nullable();
-            $table->unsignedBigInteger('company_id')->index()->foreign()->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedBigInteger('branch_id')->index()->foreign()->references('id')->on('branches')->onDelete('cascade');
-            $table->unsignedBigInteger('warehouse_id')->index()->foreign()->references('id')->on('warehouses')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('warehouse_id');
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->integer('payment_status')->comment('0 unpaid, 1 paid, 2 partial_paid')->default(0);

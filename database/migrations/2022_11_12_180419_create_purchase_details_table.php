@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('purchase_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('purchase_id')->index()->foreign()->references('id')->on('purchases')->onDelete('cascade');
-            $table->unsignedBigInteger('product_id')->index()->foreign()->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('purchase_id');
+            $table->unsignedBigInteger('product_id');
             $table->decimal('quantity',10,2)->default(0);
             $table->decimal('unit_price',10,2)->default(0);
             $table->decimal('sub_amount',10,2)->default(0);

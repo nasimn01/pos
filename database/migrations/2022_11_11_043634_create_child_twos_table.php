@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('child_twos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id')->nullable()->index();
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->string('child_one_id');
             $table->string('head_name');
             $table->string('head_code')->unique();

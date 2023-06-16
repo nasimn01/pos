@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Products\Unit;
+use App\Models\Settings\Unit;
 use Illuminate\Http\Request;
 use App\Http\Requests\Unit\AddNewRequest;
 use App\Http\Requests\Unit\UpdateRequest;
@@ -23,7 +23,7 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
-        return view('unit.index',compact('units'));
+        return view('settings.unit.index',compact('units'));
     }
 
     /**
@@ -33,7 +33,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('unit.create');
+        return view('settings.unit.create');
     }
 
     /**
@@ -77,7 +77,7 @@ class UnitController extends Controller
     public function edit($id)
     {
         $unit=Unit::findOrFail(encryptor('decrypt',$id));
-        return view('unit.edit',compact('unit'));
+        return view('settings.unit.edit',compact('unit'));
     }
 
     /**

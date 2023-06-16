@@ -15,13 +15,10 @@ return new class extends Migration
     {
         Schema::create('childcategories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subcategory_id')->index();
-            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->unsignedBigInteger('subcategory_id');
             $table->string('name');
-            $table->unsignedBigInteger('company_id')->nullable()->index();
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedBigInteger('branch_id')->nullable()->index();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->timestamps();
         });
     }

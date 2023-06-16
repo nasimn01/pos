@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('name_bn')->nullable();
-            $table->unsignedBigInteger('district_id')->nullable()->index();
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

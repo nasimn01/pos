@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('unit_style_id');
             $table->string('name');
+            $table->decimal('qty',40,20)->default(0);
+            $table->boolean('status')->default(1)->comment('1=>active 2=>inactive');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

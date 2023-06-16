@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('supplier_id')->index()->foreign()->references('id')->on('suppliers')->onDelete('cascade');
+            $table->unsignedBigInteger('supplier_id');
             $table->date('purchase_date');
             $table->string('reference_no')->nullable();
             $table->string('total_quantity');
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->decimal('round_of',10,2)->default(0)->nullable();
             $table->decimal('grand_total',10,2)->default(0);
             $table->string('note')->nullable();
-            $table->unsignedBigInteger('company_id')->index()->foreign()->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedBigInteger('branch_id')->index()->foreign()->references('id')->on('branches')->onDelete('cascade');
-            $table->unsignedBigInteger('warehouse_id')->index()->foreign()->references('id')->on('warehouses')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('warehouse_id');
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->integer('payment_status')->comment('0 unpaid, 1 paid, 2 partial_paid')->default(0)->nullable();

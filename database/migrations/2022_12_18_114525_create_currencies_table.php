@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->string('currency_name');
-            $table->string('currency_symbol');
-            $table->string('currency_port');
-            $table->string('currency_rate');
+            $table->string('currency_name')->nullable();
+            $table->string('currency_symbol')->nullable();
+            $table->string('currency_port')->nullable();
+            $table->string('currency_rate')->nullable();
             $table->string('status')->default(0);
             $table->timestamps();
             $table->softDeletes();

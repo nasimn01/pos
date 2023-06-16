@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('transfer_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('transfer_id')->index();
-            $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
-            $table->unsignedBigInteger('product_id')->index();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('transfer_id');
+            $table->unsignedBigInteger('product_id');
             $table->decimal('quantity',10,2,)->default(0);
             $table->decimal('unit_price',10,2,)->default(0);
             $table->decimal('sub_amount',10,2,)->default(0);

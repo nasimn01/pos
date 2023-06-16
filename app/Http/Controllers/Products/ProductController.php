@@ -9,7 +9,7 @@ use App\Models\Products\Category;
 use App\Models\Products\Subcategory;
 use App\Models\Products\Childcategory;
 use App\Models\Products\Brand;
-use App\Models\Products\Unit;
+use App\Models\Settings\Unit;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\AddRequest;
 use App\Http\Requests\Product\UpdateRequest;
@@ -67,8 +67,6 @@ class ProductController extends Controller
             $p->unit_id=$request->unit_id;
             $p->product_name=$request->productName;
             $p->description=$request->description;
-            $p->price=$request->price;
-            $p->purchase_price=$request->purchase_price;
             
             $p->company_id=company()['company_id'];
             $p->status=1;

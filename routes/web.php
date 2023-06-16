@@ -16,7 +16,7 @@ use App\Http\Controllers\Products\CategoryController as category;
 use App\Http\Controllers\Products\SubcategoryController as subcat;
 use App\Http\Controllers\Products\ChildcategoryController as childcat;
 use App\Http\Controllers\Products\BrandController as brand;
-use App\Http\Controllers\Products\UnitController as unit;
+use App\Http\Controllers\Settings\UnitController as unit;
 use App\Http\Controllers\Products\ProductController as product;
 use App\Http\Controllers\Suppliers\SupplierController as supplier;
 use App\Http\Controllers\Customers\CustomerController as customer;
