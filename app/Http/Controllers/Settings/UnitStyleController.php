@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Settings\Unit_style;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Traits\ImageHandleTraits;
+use Exception;
 
 class UnitStyleController extends Controller
 {
@@ -14,9 +17,14 @@ class UnitStyleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $unitstyles= Unit_style::orderBy('id','asc');
+        if($request->name)
+            $unitstyles=$unitstyles->where('name','like','%'.$request->name.'%');
+
+        $unitstyles=$unitstyles->paginate(12);
+        return view('settings.unitstyle.index',compact('unitstyles'));
     }
 
     /**
@@ -26,7 +34,7 @@ class UnitStyleController extends Controller
      */
     public function create()
     {
-        //
+        return view('settings.unitstyle.create');
     }
 
     /**
@@ -37,7 +45,27 @@ class UnitStyleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $data=new Unit_style;
+            $data->name = $request->name;
+            $data->status=1;
+        
+            $data->created_by= currentUserId();
+
+            if($data->save()){
+            Toastr::success('Create Successfully!');
+            return redirect()->route(currentUser().'.unitstyle.index');
+            } else{
+            Toastr::warning('Please try Again!');
+             return redirect()->back();
+            }
+
+        }
+        catch (Exception $e){
+            // dd($e);
+            return back()->withInput();
+
+        }
     }
 
     /**
@@ -57,9 +85,10 @@ class UnitStyleController extends Controller
      * @param  \App\Models\Settings\Unit_style  $unit_style
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unit_style $unit_style)
+    public function edit($id)
     {
-        //
+        $unitstyle= Unit_style::findOrFail(encryptor('decrypt',$id));
+        return view('settings.unitstyle.edit',compact('unitstyle'));
     }
 
     /**
@@ -69,9 +98,29 @@ class UnitStyleController extends Controller
      * @param  \App\Models\Settings\Unit_style  $unit_style
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unit_style $unit_style)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $data= Unit_style::findOrFail(encryptor('decrypt',$id));
+            $data->name = $request->name;
+            $data->status = $request->status;
+        
+            $data->updated_by= currentUserId();
+
+            if($data->save()){
+            Toastr::success('Update Successfully!');
+            return redirect()->route(currentUser().'.unitstyle.index');
+            } else{
+            Toastr::warning('Please try Again!');
+             return redirect()->back();
+            }
+
+        }
+        catch (Exception $e){
+            // dd($e);
+            return back()->withInput();
+
+        }
     }
 
     /**

@@ -1,10 +1,9 @@
 @extends('layout.app')
 
-@section('pageTitle',trans('Update Unit'))
-@section('pageSubTitle',trans('Update'))
+@section('pageTitle','Update Unit')
+@section('pageSubTitle','Update')
 
 @section('content')
-<!-- // Basic multiple Column Form section start -->
 <section id="multiple-column-form">
     <div class="row match-height">
         <div class="col-12">
@@ -14,20 +13,47 @@
                         <form class="form" method="post" action="{{route(currentUser().'.unit.update',encryptor('encrypt',$unit->id))}}">
                             @csrf
                             @method('patch')
-                            <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$unit->id)}}">
                             <div class="row">
-                                
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="form-group">
-                                        <label for="unitName">{{__('Name')}}</label>
-                                        <input type="text" id="unitName" class="form-control"
-                                            placeholder="Unit Name" value="{{ old('unitName',$unit->name)}}" name="unitName">
+                                        <label for="style">Style Name<span class="text-danger">*</span></label>
+                                        <select class="form-control form-select" name="unit_style_id" required>
+                                            <option value="">Selet Style</option>
+                                            @forelse ($unitstyles as $style)
+                                                <option {{old('unit_style_id',$unit->unit_style_id)==$style->id?"selected":""}} value="{{$style->id}}">{{$style->name}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="name">Name<span class="text-danger">*</span></label>
+                                        <input type="text" value="{{old('name',$unit->name)}}" class="form-control" placeholder="Unit Style Name" name="name" required>
+                                    </div>
+                                    {{-- @if($errors->has('name'))
+                                        <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                    @endif --}}
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="qty">Quantity<span class="text-danger">*</span></label>
+                                        <input type="text" value="{{old('qty',$unit->qty)}}" class="form-control"  name="qty" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select id="status" class="form-control form-select" name="status">
+                                            <option value="1" {{old('status',$unit->status)=="1"?"selected":""}} >Active</option>
+                                            <option value="0" {{old('status',$unit->status)=="0"?"selected":""}} >Inactive</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="col-12 d-flex justify-content-start">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                    
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-info me-1 mb-1">Update</button>
                                 </div>
                             </div>
                         </form>

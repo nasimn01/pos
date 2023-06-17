@@ -16,6 +16,7 @@ use App\Http\Controllers\Products\CategoryController as category;
 use App\Http\Controllers\Products\SubcategoryController as subcat;
 use App\Http\Controllers\Products\ChildcategoryController as childcat;
 use App\Http\Controllers\Products\BrandController as brand;
+use App\Http\Controllers\Settings\UnitStyleController as unitstyle;
 use App\Http\Controllers\Settings\UnitController as unit;
 use App\Http\Controllers\Products\ProductController as product;
 use App\Http\Controllers\Suppliers\SupplierController as supplier;
@@ -84,6 +85,7 @@ Route::group(['middleware'=>isAdmin::class],function(){
         Route::resource('district',district::class,['as'=>'admin']);
         Route::resource('upazila',upazila::class,['as'=>'admin']);
         Route::resource('thana',thana::class,['as'=>'admin']);
+        Route::resource('unitstyle',unitstyle::class,['as'=>'admin']);
         Route::resource('unit',unit::class,['as'=>'admin']);
         Route::resource('currency',currency::class,['as'=>'admin']);
         

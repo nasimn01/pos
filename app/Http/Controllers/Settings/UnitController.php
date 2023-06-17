@@ -5,24 +5,26 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 
 use App\Models\Settings\Unit;
+use App\Models\Settings\Unit_style;
 use Illuminate\Http\Request;
-use App\Http\Requests\Unit\AddNewRequest;
-use App\Http\Requests\Unit\UpdateRequest;
-use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Traits\ImageHandleTraits;
 use Exception;
-
 
 class UnitController extends Controller
 {
-    use ResponseTrait;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $units = Unit::all();
+        $units=Unit::orderBy('id','asc');
+        if($request->name)
+            $units=$units->where('name','like','%'.$request->name.'%');
+
+        $units=$units->paginate(12);
         return view('settings.unit.index',compact('units'));
     }
 
@@ -33,7 +35,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('settings.unit.create');
+        $unitstyles= Unit_style::orderBy('name')->get();
+        return view('settings.unit.create',compact('unitstyles'));
     }
 
     /**
@@ -42,28 +45,40 @@ class UnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddNewRequest $request)
+    public function store(Request $request)
     {
         try{
-            $u= new Unit;
-            $u->name=$request->unitName;
-            if($u->save())
-                return redirect()->route(currentUser().'.unit.index')->with($this->resMessageHtml(true,null,'Successfully created'));
-            else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
-        }catch(Exception $e){
-            //dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            $data=new Unit;
+            $data->unit_style_id=$request->unit_style_id;
+            $data->name=$request->name;
+            $data->qty=$request->qty;
+            $data->status=1;
+        
+            $data->created_by= currentUserId();
+
+            if($data->save()){
+            Toastr::success('Create Successfully!');
+            return redirect()->route(currentUser().'.unit.index');
+            } else{
+            Toastr::warning('Please try Again!');
+             return redirect()->back();
+            }
+
+        }
+        catch (Exception $e){
+            // dd($e);
+            return back()->withInput();
+
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Products\Unit  $unit
+     * @param  \App\Models\Settings\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Unit $unit)
     {
         //
     }
@@ -71,41 +86,54 @@ class UnitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Products\Unit  $unit
+     * @param  \App\Models\Settings\Unit  $unit
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $unit=Unit::findOrFail(encryptor('decrypt',$id));
-        return view('settings.unit.edit',compact('unit'));
+        $unitstyles= Unit_style::all();
+        $unit= Unit::findOrFail(encryptor('decrypt',$id));
+        return view('settings.unit.edit',compact('unit','unitstyles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Products\Unit  $unit
+     * @param  \App\Models\Settings\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
-            $u= Unit::findOrFail(encryptor('decrypt',$id));
-            $u->name=$request->unitName;
-            if($u->save())
-                return redirect()->route(currentUser().'.unit.index')->with($this->resMessageHtml(true,null,'Successfully created'));
-            else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
-        }catch(Exception $e){
-            //dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            $data= Unit::findOrFail(encryptor('decrypt',$id));
+            $data->unit_style_id=$request->unit_style_id;
+            $data->name=$request->name;
+            $data->qty=$request->qty;
+            $data->status=$request->status;
+        
+            $data->updated_by= currentUserId();
+
+            if($data->save()){
+            Toastr::success('Update Successfully!');
+            return redirect()->route(currentUser().'.unit.index');
+            } else{
+            Toastr::warning('Please try Again!');
+             return redirect()->back();
+            }
+
+        }
+        catch (Exception $e){
+            // dd($e);
+            return back()->withInput();
+
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Products\Unit  $unit
+     * @param  \App\Models\Settings\Unit  $unit
      * @return \Illuminate\Http\Response
      */
     public function destroy(Unit $unit)
