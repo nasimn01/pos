@@ -84,6 +84,5 @@ function addField() {
 function removeField(event) {
     $(event.target).closest('.col-lg-4').remove();
 }
-
 </script>
 @endpush
