@@ -20,7 +20,6 @@ class PackageController extends Controller
     public function index()
     {
         $data = Package::all();
-        
         return view('settings.package.index',compact('data'));
     }
 

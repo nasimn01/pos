@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Settings\Business_type;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Traits\ImageHandleTraits;
+use Exception;
 
 class BusinessTypeController extends Controller
 {
@@ -16,7 +19,8 @@ class BusinessTypeController extends Controller
      */
     public function index()
     {
-        //
+        $data = Business_type::paginate(10);
+        return view('settings.businesstype.index',compact('data'));
     }
 
     /**
@@ -26,7 +30,7 @@ class BusinessTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('settings.businesstype.create');
     }
 
     /**
@@ -37,7 +41,24 @@ class BusinessTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $data=new Business_type;
+            $data->name = $request->name;
+
+            if($data->save()){
+            Toastr::success('Create Successfully!');
+            return redirect()->route(currentUser().'.business.index');
+            } else{
+            Toastr::warning('Please try Again!');
+             return redirect()->back();
+            }
+
+        }
+        catch (Exception $e){
+            // dd($e);
+            return back()->withInput();
+
+        }
     }
 
     /**
@@ -57,9 +78,10 @@ class BusinessTypeController extends Controller
      * @param  \App\Models\Settings\Business_type  $business_type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Business_type $business_type)
+    public function edit($id)
     {
-        //
+        $data = Business_type::findOrFail(encryptor('decrypt',$id));
+        return view('settings.businesstype.edit',compact('data'));
     }
 
     /**
@@ -69,9 +91,26 @@ class BusinessTypeController extends Controller
      * @param  \App\Models\Settings\Business_type  $business_type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Business_type $business_type)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $data= Business_type::findOrFail(encryptor('decrypt',$id));
+            $data->name = $request->name;
+
+            if($data->save()){
+            Toastr::success('Update Successfully!');
+            return redirect()->route(currentUser().'.business.index');
+            } else{
+            Toastr::warning('Please try Again!');
+             return redirect()->back();
+            }
+
+        }
+        catch (Exception $e){
+            // dd($e);
+            return back()->withInput();
+
+        }
     }
 
     /**
