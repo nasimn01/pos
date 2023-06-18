@@ -106,7 +106,7 @@ class PackageController extends Controller
             $data->price = $request->price;
             $data->package_feature = implode(',', $request->input('package_feature', []));
             $data->package_code = $request->package_code;
-            $data->status=1;
+            $data->status= $request->status;
 
             if($data->save()){
             Toastr::success('Update Successfully!');

@@ -37,35 +37,32 @@
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="code">Package Code</label>
-                                        <input type="text" value="{{old('package_code',$data->package_code)}}" class="form-control" name="package_code">
+                                        <label for="code">Package Color</label>
+                                        <input type="color" value="{{old('package_code',$data->package_code)}}" class="form-control" name="package_code">
                                     </div>
                                 </div>
-                                {{-- @foreach($packageFeatures as $feature)
+                                @foreach($packageFeatures as $feature)
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="feature">Package Feature</label>
                                         <div class="input-wrapper">
-                                            
-                                                <input type="text" value="{{ $feature }}" class="form-control position-relative" name="package_feature[]">
-                                            
-                                            <span class="addbtn text-primary package-feature-button" onclick="addField()"><i class="bi bi-plus-square-fill"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach --}}
-                                @foreach($packageFeatures as $index => $feature)
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="feature">Package Feature</label>
-                                        <div class="input-wrapper">
-                                            <input type="text" value="{{ $feature }}" class="form-control position-relative" name="package_feature[]" id="package_feature_{{ $index }}">
+                                            <input type="text" value="{{ $feature }}" class="form-control position-relative" name="package_feature[]">
                                             <span class="addbtn text-primary package-feature-button" onclick="addField()"><i class="bi bi-plus-square-fill"></i></span>
                                             <span class="deletebtn text-danger package-feature-button" onclick="removeField(event)"><i class="bi bi-trash-fill"></i></span>
                                         </div>
                                     </div>
                                 </div>
                                 @endforeach
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="code">Status</label>
+                                        <select name="status" class="form-select">
+                                            <option value="">Select Status</option>
+                                            <option value="1" {{($data->status)=="1"?"selected":""}}>Active</option>
+                                            <option value="0" {{($data->status)=="0"?"selected":""}}>Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="col-12 d-flex justify-content-end">

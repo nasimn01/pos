@@ -34,8 +34,8 @@
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="code">Package Code</label>
-                                        <input type="text" value="{{old('package_code')}}" class="form-control" name="package_code">
+                                        <label for="code">Package Color</label>
+                                        <input type="color" value="{{old('package_code')}}" class="form-control" name="package_code">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
