@@ -23,7 +23,8 @@
                                 <th scope="col">{{__('Package Name')}}</th>
                                 <th scope="col">{{__('Package Day')}}</th>
                                 <th scope="col">{{__('Price')}}</th>
-                                <th scope="col">{{__('Package Code')}}</th>
+                                <th scope="col">{{__('Package Color')}}</th>
+                                <th scope="col">{{__('Package Feature')}}</th>
                                 <th scope="col">{{__('Status')}}</th>
                                 <th class="white-space-nowrap">{{__('Action') }}</th>
                             </tr>
@@ -33,9 +34,16 @@
                             <tr>
                                 <th scope="row">{{ ++$loop->index }}</th>
                                 <td>{{$d->package_name}}</td>
-                                <td>{{$d->package_day}}</td>
+                                <td>{{$d->package_day}} Days</td>
                                 <td>{{$d->price}}</td>
-                                <td>{{$d->package_code}}</td>
+                                <td><input type="color"value="{{$d->package_code}}" disabled></td>
+                                <td>
+                                    <ul>
+                                        @foreach(explode(',', $d->package_feature) as $feature)
+                                        <li>{{$feature}}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
                                 <td>{{ $d->status == 1?"Active":"Inactive" }}</td>
                                 <td class="white-space-nowrap">
                                     <a href="{{route(currentUser().'.package.edit',encryptor('encrypt',$d->id))}}">
