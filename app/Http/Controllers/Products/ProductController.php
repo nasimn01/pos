@@ -10,11 +10,13 @@ use App\Models\Products\Subcategory;
 use App\Models\Products\Childcategory;
 use App\Models\Products\Brand;
 use App\Models\Settings\Unit;
+use App\Models\Settings\Unit_style;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\AddRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Traits\ImageHandleTraits;
+use App\Models\Products\Product_price;
 use Exception;
 use DB;
 use DNS1D;
@@ -34,6 +36,17 @@ class ProductController extends Controller
         return view('product.index',compact('products'));
     }
 
+    public function getChildUnits(Request $request)
+    {
+        $unitStyleId = $request->input('unitStyleId');
+        
+        // Retrieve the child units based on the selected unit style
+        // Replace the following code with your actual logic to retrieve the child units from the database
+        $childUnits = Unit::where('unit_style_id', $unitStyleId)->get();
+        
+        return response()->json(['childUnits' => $childUnits]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,8 +58,8 @@ class ProductController extends Controller
         $subcategories = Subcategory::where(company())->get();
         $childcategories = Childcategory::where(company())->get();
         $brands = Brand::where(company())->get();
-        $units = Unit::all();
-        return view('product.create',compact('categories','subcategories','childcategories','brands','units'));
+        $unit_style = Unit_style::all();
+        return view('product.create',compact('categories','subcategories','childcategories','brands','unit_style'));
     }
 
     /**
@@ -59,26 +72,37 @@ class ProductController extends Controller
     {
         try{
             $p= new Product;
-            $p->bar_code=company()['company_id'].time();
             $p->category_id=$request->category;
             $p->subcategory_id=$request->subcategory;
             $p->childcategory_id=$request->childcategory;
             $p->brand_id=$request->brand_id;
-            $p->unit_id=$request->unit_id;
+            $p->unit_style_id=$request->unit_style;
             $p->product_name=$request->productName;
             $p->description=$request->description;
+                
             
             $p->company_id=company()['company_id'];
             $p->status=1;
             if($request->has('image'))
                 $p->image=$this->resizeImage($request->image,'images/product/'.company()['company_id'],true,200,200,false);
 
-            if($p->save())
+            if($p->save()){
+                if($request->unit){
+                    foreach($request->unit as $i=>$u){
+                        if($request->price[$i]>0){
+                            $unit = new Product_price;
+                            $unit->product_id=$p->id;
+                            $unit->unit_id=$u;
+                            $unit->price=$request->price[$i];
+                            $unit->barcode=$request->barcode[$i];
+                            $unit->save();
+                        }
+                    }
+                }
                 return redirect()->route(currentUser().'.product.index')->with($this->resMessageHtml(true,null,'Successfully created'));
-            else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            }
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
         }
     }
@@ -106,9 +130,10 @@ class ProductController extends Controller
         $subcategories = Subcategory::where(company())->get();
         $childcategories = Childcategory::where(company())->get();
         $brands = Brand::where(company())->get();
-        $units = Unit::all();
+        $unit_style = Unit_style::all();
+        $product_price = Product_price::all();
         $product= Product::findOrFail(encryptor('decrypt',$id));
-        return view('product.edit',compact('categories','subcategories','childcategories','brands','units','product'));
+        return view('product.edit',compact('categories','subcategories','childcategories','brands','unit_style','product_price','product'));
     }
 
     /**
@@ -121,16 +146,18 @@ class ProductController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         try{
-            $p= Product::findOrFail(encryptor('decrypt',$id));
+            $p=  Product::findOrFail(encryptor('decrypt',$id));
             $p->category_id=$request->category;
             $p->subcategory_id=$request->subcategory;
             $p->childcategory_id=$request->childcategory;
             $p->brand_id=$request->brand_id;
-            $p->unit_id=$request->unit_id;
+            $p->unit_style_id=$request->unit_style;
             $p->product_name=$request->productName;
             $p->description=$request->description;
-            $p->price=$request->price;
-            $p->purchase_price=$request->purchase_price;
+                
+            
+            $p->company_id=company()['company_id'];
+            $p->status=1;
             if($request->has('image')){
                 if($p->image){
                     if($this->deleteImage($p->image,'images/product/'.company()['company_id'])){
@@ -141,14 +168,24 @@ class ProductController extends Controller
                 }
             }
 
-            $p->company_id=company()['company_id'];
-            $p->status=1;
-            if($p->save())
-                return redirect()->route(currentUser().'.product.index')->with($this->resMessageHtml(true,null,'Successfully created'));
-            else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            if($p->save()){
+                if($request->unit){
+                    $unit= Product_price::where('product_id',$p->id)->delete();
+                    foreach($request->unit as $i=>$u){
+                        if($request->price[$i]>0){
+                            $unit = new Product_price;
+                            $unit->product_id=$p->id;
+                            $unit->unit_id=$u;
+                            $unit->price=$request->price[$i];
+                            $unit->barcode=$request->barcode[$i];
+                            $unit->save();
+                        }
+                    }
+                }
+                return redirect()->route(currentUser().'.product.index')->with($this->resMessageHtml(true,null,'Successfully Updated'));
+            }
         }catch(Exception $e){
-            //dd($e);
+            // dd($e);
             return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
         }
     }

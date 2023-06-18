@@ -16,7 +16,7 @@
                                 @method('patch')
                                 <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$product->id)}}">
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="Category">{{__('Category')}}<span class="text-danger">*</span></label>
                                             <select onchange="show_subcat(this.value)" class="form-control form-select" name="category" id="category">
@@ -24,14 +24,12 @@
                                                 @forelse($categories as $cat)
                                                     <option value="{{$cat->id}}" {{ old('category',$product->category_id)==$cat->id?"selected":""}}> {{ $cat->category}}</option>
                                                 @empty
-                                                    <option value="">No Category found</option>
+                                                    <option value="">No Data Found</option>
                                                 @endforelse
-                                                
                                             </select>
-                                           
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="subcategory">{{__('Sub Category')}}</label>
                                             <select onchange="show_childcat(this.value)" class="form-control form-select" name="subcategory" id="subcategory">
@@ -39,12 +37,12 @@
                                                 @forelse($subcategories as $sub)
                                                     <option class="subcat subcat{{$sub->category_id}}" value="{{$sub->id}}" {{ old('subcategory',$product->subcategory_id)==$sub->id?"selected":""}}> {{ $sub->name}}</option>
                                                 @empty
-                                                    <option value="">No Sub Category found</option>
+                                                    <option value="">No Data Found</option>
                                                 @endforelse
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="childcategory">{{__('Child Category')}}</label>
                                             <select class="form-control form-select" name="childcategory" id="childcategory">
@@ -52,26 +50,28 @@
                                                 @forelse($childcategories as $child)
                                                     <option class="childcat childcat{{$child->subcategory_id}}" value="{{$child->id}}" {{ old('childcategory',$product->childcategory_id)==$child->id?"selected":""}}> {{ $child->name}}</option>
                                                 @empty
-                                                    <option value="">No Child Category found</option>
+                                                    <option value="">No Data Found</option>
                                                 @endforelse
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="unit_id">{{__('Unit')}}</label>
-                                            <select class="form-control form-select" name="unit_id" id="unit_id">
+                                            <label for="unit_id">{{__('Unit Style')}}</label>
+                                            <select class="form-control form-select" name="unit_style" id="unit_style_select">
                                                 <option value="">Select Unit</option>
-                                                @forelse($units as $u)
-                                                    <option value="{{$u->id}}" {{ old('name',$product->unit_id)==$u->id?"selected":""}}> {{ $u->name}}</option>
+                                                @forelse($unit_style as $u)
+                                                    <option value="{{$u->id}}" {{ old('name',$product->unit_style_id)==$u->id?"selected":""}}> {{ $u->name}}</option>
                                                 @empty
-                                                    <option value="">No Unit found</option>
+                                                    <option value="">No Data Found</option>
                                                 @endforelse
-                                                
+                                                @if($errors->has('name'))
+                                                <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="brand_id">{{__('Brand')}}</label>
                                             <select class="form-control form-select" name="brand_id" id="brand_id">
@@ -79,12 +79,12 @@
                                                 @forelse($brands as $b)
                                                     <option value="{{$b->id}}" {{ old('name',$product->brand_id)==$b->id?"selected":""}}> {{ $b->name}}</option>
                                                 @empty
-                                                    <option value="">No Brand found</option>
+                                                    <option value="">No Data Found</option>
                                                 @endforelse
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="Product Name">{{__('Name')}}<span class="text-danger">*</span></label>
                                             <input type="text" id="productName" class="form-control"
@@ -92,45 +92,49 @@
                                               
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="price">{{__('Sell Price')}}<span class="text-danger">*</span></label>
-                                            <input type="text" id="price" class="form-control" placeholder="Price" value="{{ old('price',$product->price)}}" name="price">
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="purchase_price">{{__('Purchase Price')}}</label>
-                                            <input type="text" id="purchase_price" class="form-control"
-                                                placeholder="Purchase Price" value="{{ old('purchase_price',$product->purchase_price)}}" name="purchase_price">
-                                                @if($errors->has('purchase_price'))
-                                                    <span class="text-danger"> {{ $errors->first('purchase_price') }}</span>
-                                                @endif
-                                                
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="image">{{__('Image')}}</label>
-                                            <input type="file" id="image" class="form-control"
-                                                placeholder="Image" name="image">
+                                            <input type="file" id="image" class="form-control" name="image">
                                                 
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="description">{{__('Description')}}</label>
                                             <textarea  class="form-control" id="description"
                                                 placeholder="Product description" name="description">{{ old('description',$product->description)}}</textarea>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <table class="table table-borderd" id="child_units_table" class="table">
+                                            <thead>
+                                                <tr class="bg-primary text-white text-center">
+                                                    <th>Unit Name</th>
+                                                    <th>Price</th>
+                                                    <th>Barcode</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($product_price as $pr)
+                                                <tr class="text-center">
+                                                    <td><input type="hidden" name="unit[]" value="{{$pr->unit_id}}">{{$pr->unit?->name}}</td>
+                                                    <td><input type="text" class="form-control" value="{{$pr->price}}" name="price[]"></td>
+                                                    <td><input type="text" class="form-control" value="{{$pr->barcode}}" name="barcode[]"></td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td colspan="3">No Data Found</td>
+                                                </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     
                                     <div class="col-12 d-flex justify-content-end">
                                     <img width="80px" height="40px" class="float-first" src="{{asset('images/product/'.company()['company_id'].'/'.$product->image)}}" alt="">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                        
+                                        <button type="submit" class="btn btn-info me-1 mb-1">{{__('Update')}}</button>
                                     </div>
                                 </div>
                             </form>
@@ -143,6 +147,46 @@
 @endsection
 
 @push('scripts')
+<script>
+$(document).ready(function() {
+    $('#unit_style_select').change(function() {
+        var selectedUnitStyle = $(this).val();
+        if (selectedUnitStyle !== '') {
+            $.ajax({
+                url: '{{route(currentUser().'.getChildUnits')}}',
+                type: 'GET',
+                data: {
+                    unitStyleId: selectedUnitStyle
+                },
+                dataType: 'json',
+                success: function(response) {
+                    var childUnits = response.childUnits;
+                    var tableBody = $('#child_units_table tbody');
+                    tableBody.empty();
+                    if (childUnits.length > 0) {
+                        $.each(childUnits, function(index, childUnit) {
+                            var row = '<tr class="text-center">' +
+                                '<td><input type="hidden" name="unit[]" value="' + childUnit.id + '">' + childUnit.name + '</td>' +
+                                '<td><input type="text" class="form-control" name="price[]"></td>' +
+                                '<td><input type="text" class="form-control" name="barcode[]"></td>' +
+                                '</tr>';
+                            tableBody.append(row);
+                        });
+                    } else {
+                        var row = '<tr class="text-center"><td colspan="3">No data found</td></tr>';
+                        tableBody.append(row);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error); // Handle the error if needed
+                }
+            });
+        } else {
+            $('#child_units_table tbody').empty();
+        }
+    });
+});
+</script>
 <script>
     /* call on load page */
     $(document).ready(function(){

@@ -2,6 +2,7 @@
 
 namespace App\Models\Products;
 
+use App\Models\Settings\Unit_style;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,7 +27,8 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function unit(){
-        return $this->belongsTo(Unit::class);
+    public function unitStyle(){
+        return $this->belongsTo(Unit_style::class);
     }
+    
 }

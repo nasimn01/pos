@@ -131,6 +131,10 @@ Route::group(['middleware'=>isOwner::class],function(){
         Route::get('/qrcodepreview',[product::class,'qrcodepreview'])->name('owner.qrcodepreview');
         Route::get('/barcodepreview',[product::class,'barcodepreview'])->name('owner.barcodepreview');
         Route::get('/labelprint',[product::class,'labelprint'])->name('owner.labelprint');
+
+        Route::get('/get-unit', [product::class,'unitGet'])->name('owner.unit');
+        Route::get('/get-child-units', [product::class, 'getChildUnits'])->name('owner.getChildUnits');
+
         
 
         //Accounts

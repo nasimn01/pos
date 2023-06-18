@@ -4,156 +4,186 @@
 @section('pageSubTitle',trans('Create'))
 
 @section('content')
-  <!-- // Basic multiple Column Form section start -->
-    <section id="multiple-column-form">
-        <div class="row match-height">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.product.store')}}">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="Category">{{__('Category')}}<span class="text-danger">*</span></label>
-                                            <select onchange="show_subcat(this.value)" class="form-control form-select" name="category" id="category">
-                                                <option value="">Select Category</option>
-                                                @forelse($categories as $cat)
-                                                    <option value="{{$cat->id}}" {{ old('category')==$cat->id?"selected":""}}> {{ $cat->category}}</option>
-                                                @empty
-                                                    <option value="">No Category found</option>
-                                                @endforelse
-                                                
-                                            </select>
-                                            @if($errors->has('category'))
-                                            <span class="text-danger"> {{ $errors->first('category') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="subcategory">{{__('Sub Category')}}</label>
-                                            <select onchange="show_childcat(this.value)" class="form-control form-select" name="subcategory" id="subcategory">
-                                                <option value="">Select Sub Category</option>
-                                                @forelse($subcategories as $sub)
-                                                    <option class="subcat subcat{{$sub->category_id}}" value="{{$sub->id}}" {{ old('subcategory')==$sub->id?"selected":""}}> {{ $sub->name}}</option>
-                                                @empty
-                                                    <option value="">No Sub Category found</option>
-                                                @endforelse
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="childcategory Name">{{__('Child Category')}}</label>
-                                            <select class="form-control form-select" name="childcategory" id="childcategory">
-                                                <option value="">Select Child Category</option>
-                                                @forelse($childcategories as $child)
-                                                    <option class="childcat childcat{{$child->subcategory_id}}" value="{{$child->id}}" {{ old('childcategory')==$child->id?"selected":""}}> {{ $child->name}}</option>
-                                                @empty
-                                                    <option value="">No Child Category found</option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="unit_id">{{__('Unit')}}</label>
-                                            <select class="form-control form-select" name="unit_id" id="unit_id">
-                                                <option value="">Select Unit</option>
-                                                @forelse($units as $u)
-                                                    <option value="{{$u->id}}" {{ old('name')==$u->id?"selected":""}}> {{ $u->name}}</option>
-                                                @empty
-                                                    <option value="">No Unit found</option>
-                                                @endforelse
-                                                @if($errors->has('name'))
-                                                <span class="text-danger"> {{ $errors->first('name') }}</span>
-                                                @endif
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="brand_id">{{__('Brand')}}</label>
-                                            <select class="form-control" name="brand_id" id="brand_id">
-                                                <option value="">Select Brand</option>
-                                                @forelse($brands as $b)
-                                                    <option value="{{$b->id}}" {{ old('name')==$b->id?"selected":""}}> {{ $b->name}}</option>
-                                                @empty
-                                                    <option value="">No Brand found</option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="Product Name">{{__('Product Name')}}<span class="text-danger">*</span></label>
-                                            <input type="text" id="productName" class="form-control"
-                                                placeholder="Product Name" value="{{ old('productName')}}" name="productName">
-                                                @if($errors->has('productName'))
-                                                <span class="text-danger"> {{ $errors->first('productName') }}</span>
-                                                @endif
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="price">{{__('Sell Price')}}<span class="text-danger">*</span></label>
-                                            <input type="text" id="price" class="form-control"
-                                                placeholder="Price" value="{{ old('price')}}" name="price">
-                                                @if($errors->has('price'))
-                                                    <span class="text-danger"> {{ $errors->first('price') }}</span>
-                                                @endif
-                                                
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="purchase_price">{{__('Purchase Price')}}</label>
-                                            <input type="text" id="purchase_price" class="form-control"
-                                                placeholder="Purchase Price" value="{{ old('purchase_price')}}" name="purchase_price">
-                                                @if($errors->has('purchase_price'))
-                                                    <span class="text-danger"> {{ $errors->first('purchase_price') }}</span>
-                                                @endif
-                                                
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="image">{{__('Image')}}</label>
-                                            <input type="file" id="image" class="form-control"
-                                                placeholder="Image" name="image">
-                                                @if($errors->has('image'))
-                                                    <span class="text-danger"> {{ $errors->first('image') }}</span>
-                                                @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="description">{{__('Description')}}</label>
-                                            <textarea  class="form-control" id="description"
-                                                placeholder="Product description" name="description">{{ old('description')}}</textarea>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                        
+<section id="multiple-column-form">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.product.store')}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="Category">{{__('Category')}}<span class="text-danger">*</span></label>
+                                        <select onchange="show_subcat(this.value)" class="form-control form-select" name="category" id="category">
+                                            <option value="">Select Category</option>
+                                            @forelse($categories as $cat)
+                                                <option value="{{$cat->id}}" {{ old('category')==$cat->id?"selected":""}}> {{ $cat->category}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+                                            
+                                        </select>
+                                        @if($errors->has('category'))
+                                        <span class="text-danger"> {{ $errors->first('category') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="subcategory">{{__('Sub Category')}}</label>
+                                        <select onchange="show_childcat(this.value)" class="form-control form-select" name="subcategory" id="subcategory">
+                                            <option value="">Select Sub Category</option>
+                                            @forelse($subcategories as $sub)
+                                                <option class="subcat subcat{{$sub->category_id}}" value="{{$sub->id}}" {{ old('subcategory')==$sub->id?"selected":""}}> {{ $sub->name}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="childcategory Name">{{__('Child Category')}}</label>
+                                        <select class="form-control form-select" name="childcategory" id="childcategory">
+                                            <option value="">Select Child Category</option>
+                                            @forelse($childcategories as $child)
+                                                <option class="childcat childcat{{$child->subcategory_id}}" value="{{$child->id}}" {{ old('childcategory')==$child->id?"selected":""}}> {{ $child->name}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="unit_id">{{__('Unit Style')}}</label>
+                                        <select class="form-control form-select" name="unit_style" id="unit_style_select">
+                                            <option value="">Select Unit</option>
+                                            @forelse($unit_style as $u)
+                                                <option value="{{$u->id}}" {{ old('name')==$u->id?"selected":""}}> {{ $u->name}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+                                            @if($errors->has('name'))
+                                            <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="brand_id">{{__('Brand')}}</label>
+                                        <select class="form-control" name="brand_id" id="brand_id">
+                                            <option value="">Select Brand</option>
+                                            @forelse($brands as $b)
+                                                <option value="{{$b->id}}" {{ old('name')==$b->id?"selected":""}}> {{ $b->name}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="Product Name">{{__('Product Name')}}<span class="text-danger">*</span></label>
+                                        <input type="text" id="productName" class="form-control"
+                                            placeholder="Product Name" value="{{ old('productName')}}" name="productName">
+                                            @if($errors->has('productName'))
+                                            <span class="text-danger"> {{ $errors->first('productName') }}</span>
+                                            @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="image">{{__('Image')}}</label>
+                                        <input type="file" id="image" class="form-control" name="image">
+                                            @if($errors->has('image'))
+                                                <span class="text-danger"> {{ $errors->first('image') }}</span>
+                                            @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="description">{{__('Description')}}</label>
+                                        <textarea  class="form-control" id="description"
+                                            placeholder="Product description" name="description">{{ old('description')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <table class="table table-borderd" id="child_units_table" class="table">
+                                        <thead>
+                                            <tr class="bg-primary text-white text-center">
+                                                <th>Unit Name</th>
+                                                <th>Price</th>
+                                                <th>Barcode</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Child units will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
 
 @push('scripts')
+<script>
+$(document).ready(function() {
+    $('#unit_style_select').change(function() {
+        var selectedUnitStyle = $(this).val();
+        if (selectedUnitStyle !== '') {
+            $.ajax({
+                url: '{{route(currentUser().'.getChildUnits')}}',
+                type: 'GET',
+                data: {
+                    unitStyleId: selectedUnitStyle
+                },
+                dataType: 'json',
+                success: function(response) {
+                    var childUnits = response.childUnits;
+                    var tableBody = $('#child_units_table tbody');
+                    tableBody.empty();
+                    if (childUnits.length > 0) {
+                        $.each(childUnits, function(index, childUnit) {
+                            var row = '<tr class="text-center">' +
+                                '<td><input type="hidden" name="unit[]" value="' + childUnit.id + '">' + childUnit.name + '</td>' +
+                                '<td><input type="text" class="form-control" name="price[]"></td>' +
+                                '<td><input type="text" class="form-control" name="barcode[]"></td>' +
+                                '</tr>';
+                            tableBody.append(row);
+                        });
+                    } else {
+                        var row = '<tr class="text-center"><td colspan="3">No data found</td></tr>';
+                        tableBody.append(row);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error); // Handle the error if needed
+                }
+            });
+        } else {
+            $('#child_units_table tbody').empty();
+        }
+    });
+});
+</script>
+
 <script>
     /* call on load page */
     $(document).ready(function(){
@@ -168,10 +198,6 @@
     function show_childcat(e){
         $('.childcat').hide();
         $('.childcat'+e).show();
-    }
-
-    
-   
-    
+    } 
 </script>
 @endpush
