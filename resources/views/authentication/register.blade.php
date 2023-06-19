@@ -270,9 +270,12 @@
                             <div class="col-lg-4">
                                 <div class="package mt-3">
                                     <div class="card shadow">
-                                        <div class="card-header-one" style="background-color: {{$d->package_code}};">
+                                        <div class="card-head" style="background-color: {{$d->package_code}};"></div>
+                                        <div class="package-title mt-4 d-flex justify-content-between">
+                                            <h4>{{$d->package_name}}</h4>
+                                            <input type="hidden" name="package" value="">
+                                            <span class="checked d-none" id="checked-{{$d->id}}"><i class="bi bi-check-circle-fill"></i></span>
                                         </div>
-                                        <h4 class="mt-4">{{$d->package_name}}</h4>
                                         <div class="card-body">
                                             <div class="package-price">
                                                 <h1><sup><i class="bi bi-coin"></i></sup>{{ number_format($d->price, 0) }}<sub><span>per</span> <br><span>month</span></sub></h1>
@@ -280,11 +283,11 @@
                                             </div>
                                             <div class="package-features">
                                                 @foreach(explode(',', $d->package_feature) as $feature)
-                                                <span><i class="bi bi-star-fill"></i><p>{{$feature}}</p></span>
+                                                    <span><i class="bi bi-star-fill"></i><p>{{$feature}}</p></span>
                                                 @endforeach
                                             </div>
                                             <div class="text-center">
-                                                <button type="button" class="btn btn-secondary mt-3">Buy Now</button>
+                                                <button type="button" class="btn btn-secondary w-100 mt-3" id="buy-btn-{{$d->id}}">Buy Now</button>
                                             </div>
                                         </div>
                                     </div>
@@ -332,6 +335,35 @@
 </form>
 @endsection
 @push('scripts')
+<script>
+    $(document).ready(function() {
+        $('button[id^="buy-btn-"]').click(function() {
+            // Extract the package ID from the button's ID attribute
+            var packageId = $(this).attr('id').split('-')[2];
+            
+            // Get the corresponding checked span and input field
+            var checkedSpan = $('#checked-' + packageId);
+            var inputField = $(this).closest('.package').find('input[name="package"]');
+            
+            if ($(this).hasClass('btn-selected')) {
+                // If the button is already selected, deselect it
+                checkedSpan.addClass('d-none');
+                inputField.val('');
+                $(this).removeClass('btn-danger').addClass('btn-secondary').removeClass('btn-selected').text('Buy Now');
+            } else {
+                // Deselect any previously selected buttons
+                $('.btn-selected').removeClass('btn-danger').addClass('btn-secondary').removeClass('btn-selected').text('Buy Now');
+                $('.checked').addClass('d-none');
+                $('input[name="package"]').val('');
+                
+                // Select the clicked button
+                checkedSpan.removeClass('d-none');
+                inputField.val(packageId);
+                $(this).removeClass('btn-secondary').addClass('btn-danger').addClass('btn-selected').text('Cancel');
+            }
+        });
+    });
+</script>
 <script>
     /* call on load page */
     $(document).ready(function(){
