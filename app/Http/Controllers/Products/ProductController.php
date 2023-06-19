@@ -39,11 +39,7 @@ class ProductController extends Controller
     public function getChildUnits(Request $request)
     {
         $unitStyleId = $request->input('unitStyleId');
-        
-        // Retrieve the child units based on the selected unit style
-        // Replace the following code with your actual logic to retrieve the child units from the database
         $childUnits = Unit::where('unit_style_id', $unitStyleId)->get();
-        
         return response()->json(['childUnits' => $childUnits]);
     }
 

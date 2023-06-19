@@ -247,7 +247,7 @@
                         <p class="auth-subtitle">step 3 out of 3</p>
                         <h1 class="auth-title mb-5">Select your Package</h1>
                         <div class="row">
-                            <div class="col-12 package-head d-flex justify-content-center">
+                            {{-- <div class="col-12 package-head d-flex justify-content-center">
                                 <div><h4>Monthly</h4></div>
                                 <div>
                                     <label class="switch">
@@ -264,11 +264,37 @@
                                     <option value="">canada</option>
                                     <option value="1">BDT</option>
                                 </select>
-                            </div>
+                            </div> --}}
+
+                            @forelse (App\Models\Settings\Package::where('status',1)->get();  as $d)
                             <div class="col-lg-4">
                                 <div class="package mt-3">
                                     <div class="card shadow">
-                                        <div class="card-header-one">
+                                        <div class="card-header-one" style="background-color: {{$d->package_code}};">
+                                        </div>
+                                        <h4 class="mt-4">{{$d->package_name}}</h4>
+                                        <div class="card-body">
+                                            <div class="package-price">
+                                                <h1><sup><i class="bi bi-coin"></i></sup>{{ number_format($d->price, 0) }}<sub><span>per</span> <br><span>month</span></sub></h1>
+                                                <p class="my-4">You pay $22.88 --renews at $44.88/year</p>
+                                            </div>
+                                            <div class="package-features">
+                                                @foreach(explode(',', $d->package_feature) as $feature)
+                                                <span><i class="bi bi-star-fill"></i><p>{{$feature}}</p></span>
+                                                @endforeach
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-secondary mt-3">Buy Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @empty
+                            <div class="col-lg-4">
+                                <div class="package mt-3">
+                                    <div class="card shadow">
+                                        <div class="card-header-one" style="background-color: #939ca4">
                                         </div>
                                         <h4 class="mt-4">Silver</h4>
                                         <div class="card-body">
@@ -288,53 +314,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="package mt-3">
-                                    <div class="card shadow">
-                                        <div class="card-header-two">
-                                        </div>
-                                        <h4 class="mt-4">Gold</h4>
-                                        <div class="card-body">
-                                            <div class="package-price">
-                                                <h1><sup><i class="bi bi-coin"></i></sup>120<sub><span>per</span> <br><span>month</span></sub></h1>
-                                                <p class="my-4">You pay $22.88 --renews at $44.88/year</p>
-                                            </div>
-                                            <div>
-                                                <span><i class="bi bi-star-fill"></i><p class="active">7 Days trail</p></span>
-                                                <span><i class="bi bi-star-fill"></i><p>Unlimited user</p></span>
-                                                <span><i class="bi bi-star-fill"></i><p>Limit werehouse</p></span>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="button" class="btn btn-secondary mt-3">Buy Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="package mt-3">
-                                    <div class="card shadow">
-                                        <div class="card-header-three">
-                                        </div>
-                                        <h4 class="mt-4">Platinum</h4>
-                                        <div class="card-body">
-                                            <div class="package-price">
-                                                <h1><sup><i class="bi bi-coin"></i></sup>120<sub><span>per</span> <br><span>month</span></sub></h1>
-                                                <p class="my-4">You pay $22.88 --renews at $44.88/year</p>
-                                            </div>
-                                            <div>
-                                                <span><i class="bi bi-star-fill"></i><p class="active">7 Days trail</p></span>
-                                                <span><i class="bi bi-star-fill"></i><p>Unlimited user</p></span>
-                                                <span><i class="bi bi-star-fill"></i><p>Unlimited werehouse</p></span>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="button" class="btn btn-secondary mt-3">Buy Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 d-flex">
+                            @endforelse
+                            <div class="col-12 d-flex">
                                 <div class="small-view">
                                     <button type="button" class=" mt-3 me-2 prev-step"><span><i class="bi bi-arrow-left-circle-fill"></i></span></button>
                                 </div>

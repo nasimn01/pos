@@ -130,8 +130,11 @@ class PackageController extends Controller
      * @param  \App\Models\Settings\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Package $package)
+    public function destroy($id)
     {
-        //
+        $data= Package::findOrFail(encryptor('decrypt',$id));
+        $data->delete();
+        Toastr::warning('Data Permanently Deleted');
+        return redirect()->back();
     }
 }
