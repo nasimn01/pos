@@ -287,7 +287,7 @@
                                                 @endforeach
                                             </div>
                                             <div class="text-center">
-                                                <button type="button" class="btn btn-secondary fw-bold fs-3 w-100" id="buy-btn-{{$d->id}}">Buy Now</button>
+                                                <button type="button" class="btn btn-secondary fw-bold fs-5 w-100" id="buy-btn-{{$d->id}}">Buy Now</button>
                                             </div>
                                         </div>
                                     </div>
