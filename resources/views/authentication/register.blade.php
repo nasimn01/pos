@@ -281,13 +281,13 @@
                                                 <h1><sup><i class="bi bi-coin"></i></sup>{{ number_format($d->price, 0) }}<sub><span>per</span> <br><span>month</span></sub></h1>
                                                 <p class="my-4">You pay $22.88 --renews at $44.88/year</p>
                                             </div>
-                                            <div class="package-features">
+                                            <div class="package-features mb-3">
                                                 @foreach(explode(',', $d->package_feature) as $feature)
                                                     <span><i class="bi bi-star-fill"></i><p>{{$feature}}</p></span>
                                                 @endforeach
                                             </div>
                                             <div class="text-center">
-                                                <button type="button" class="btn btn-secondary w-100 mt-3" id="buy-btn-{{$d->id}}">Buy Now</button>
+                                                <button type="button" class="btn btn-secondary fw-bold fs-3 w-100" id="buy-btn-{{$d->id}}">Buy Now</button>
                                             </div>
                                         </div>
                                     </div>
