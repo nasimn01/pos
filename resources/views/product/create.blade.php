@@ -89,6 +89,15 @@
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label for="code">{{__('Item Code')}}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" value="{{ old('itemCode')}}" name="itemCode">
+                                            @if($errors->has('itemCode'))
+                                            <span class="text-danger"> {{ $errors->first('itemCode') }}</span>
+                                            @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label for="Product Name">{{__('Product Name')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="productName" class="form-control"
                                             placeholder="Product Name" value="{{ old('productName')}}" name="productName">

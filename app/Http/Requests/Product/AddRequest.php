@@ -25,6 +25,7 @@ class AddRequest extends FormRequest
     {
         return [
             'category' =>'required',
+            'itemCode' => 'required|unique:products,item_code',
             'productName' => 'required',
             'price' => 'required',
             
@@ -36,7 +37,8 @@ class AddRequest extends FormRequest
 
     public function messages(){
         return [
-            'required' => "The :attribute field is required"
+            'required' => "The :attribute field is required",
+            'unique' => "This :attribute is already used. Please try another",
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class UpdateRequest extends FormRequest
 {
@@ -21,17 +22,20 @@ class UpdateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $r)
     {
+        $id=encryptor('decrypt',$r->uptoken);
         return [
             'category' =>'required',
+            'itemCode' => 'required|unique:products,item_code,'.$id,
             'productName' => 'required',
             'price' => 'required',
         ];
     }
     public function messages(){
         return [
-            'required' => "The :attribute field is required"
+            'required' => "The :attribute field is required",
+            'unique' => "This :attribute is already used. Please try another",
         ];
     }
 }

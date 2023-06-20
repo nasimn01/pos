@@ -20,6 +20,7 @@
                                     <th scope="col">{{__('Category')}}</th>
                                     <th scope="col">{{__('Sub Category')}}</th>
                                     <th scope="col">{{__('Child Category')}}</th>
+                                    <th scope="col">{{__('Item Code')}}</th>
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Unit Stule')}}</th>
                                     <th scope="col">{{__('Image')}}</th>
@@ -35,6 +36,7 @@
                                     <td>{{$p->category?->category}}</td>
                                     <td>{{$p->subcategory?->name}}</td>
                                     <td>{{$p->childcategory?->name}}</td>
+                                    <td>{{$p->item_code}}</td>
                                     <td>{{$p->product_name}}</td>
                                     <td>{{$p->unitStyle?->name}}</td>
                                      <td><img width="80px" height="40px" class="float-first" src="{{asset('images/product/'.company()['company_id'].'/'.$p->image)}}" alt=""></td>
@@ -44,19 +46,19 @@
                                         <a href="{{route(currentUser().'.product.edit',encryptor('encrypt',$p->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
+                                        {{-- <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                         <form id="form{{$p->id}}" action="{{route(currentUser().'.product.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                             @csrf
                                             @method('delete')
                                             
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <th colspan="12" class="text-center">No Pruduct Found</th>
+                                    <th colspan="11" class="text-center">No Pruduct Found</th>
                                 </tr>
                                 @endforelse
                             </tbody>

@@ -73,6 +73,7 @@ class ProductController extends Controller
             $p->childcategory_id=$request->childcategory;
             $p->brand_id=$request->brand_id;
             $p->unit_style_id=$request->unit_style;
+            $p->item_code=$request->itemCode;
             $p->product_name=$request->productName;
             $p->description=$request->description;
                 
@@ -148,6 +149,7 @@ class ProductController extends Controller
             $p->childcategory_id=$request->childcategory;
             $p->brand_id=$request->brand_id;
             $p->unit_style_id=$request->unit_style;
+            $p->item_code=$request->itemCode;
             $p->product_name=$request->productName;
             $p->description=$request->description;
                 

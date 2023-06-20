@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('childcategory_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->unsignedBigInteger('unit_style_id');
+            $table->string('item_code')->unique()->nullable();
             $table->string('product_name')->nullable();
             $table->string('description', 5000)->nullable();
             $table->integer('status')->default(1)->comment('0 -> inactive 1 -> active');
