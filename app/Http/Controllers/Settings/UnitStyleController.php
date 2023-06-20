@@ -19,7 +19,7 @@ class UnitStyleController extends Controller
      */
     public function index(Request $request)
     {
-        $unitstyles= Unit_style::orderBy('id','asc');
+        $unitstyles= Unit_style::where(company())->orderBy('id','asc');
         if($request->name)
             $unitstyles=$unitstyles->where('name','like','%'.$request->name.'%');
 
@@ -50,6 +50,7 @@ class UnitStyleController extends Controller
             $data->name = $request->name;
             $data->status=1;
         
+            $data->company_id=company()['company_id'];
             $data->created_by= currentUserId();
 
             if($data->save()){
@@ -105,6 +106,7 @@ class UnitStyleController extends Controller
             $data->name = $request->name;
             $data->status = $request->status;
         
+            $data->company_id=company()['company_id'];
             $data->updated_by= currentUserId();
 
             if($data->save()){

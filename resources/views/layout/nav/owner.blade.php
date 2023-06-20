@@ -16,6 +16,14 @@
             <li class="py-1"><a href="{{route(currentUser().'.users.index')}}">{{__('User')}}</a></li>
             <li class="py-1"><a href="{{route(currentUser().'.branch.index')}}">{{__('Branch')}}</a></li>
             <li class="py-1"><a href="{{route(currentUser().'.warehouse.index')}}">{{__('Warehouse')}}</a></li>
+            
+            <li class="submenu-item sidebar-item has-sub">
+                <a href="#" class='sidebar-link'> {{__('Unit')}}</a>
+                <ul class="submenu">
+                    <li class="py-1"><a href="{{route(currentUser().'.unitstyle.index')}}">{{__('Unit Style')}}</a></li>
+                    <li class="py-1"><a href="{{route(currentUser().'.unit.index')}}">{{__('Unit')}}</a></li>
+                </ul>
+            </li>
 		</ul>
         
     </li>

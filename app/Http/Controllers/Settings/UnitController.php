@@ -20,7 +20,7 @@ class UnitController extends Controller
      */
     public function index(Request $request)
     {
-        $units=Unit::orderBy('id','asc');
+        $units=Unit::where(company())->orderBy('id','asc');
         if($request->name)
             $units=$units->where('name','like','%'.$request->name.'%');
 
@@ -54,6 +54,7 @@ class UnitController extends Controller
             $data->qty=$request->qty;
             $data->status=1;
         
+            $data->company_id=company()['company_id'];
             $data->created_by= currentUserId();
 
             if($data->save()){
@@ -112,6 +113,7 @@ class UnitController extends Controller
             $data->qty=$request->qty;
             $data->status=$request->status;
         
+            $data->company_id=company()['company_id'];
             $data->updated_by= currentUserId();
 
             if($data->save()){

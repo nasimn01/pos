@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('qty',40,20)->default(0);
             $table->boolean('status')->default(1)->comment('1=>active 2=>inactive');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

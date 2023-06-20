@@ -87,8 +87,6 @@ Route::group(['middleware'=>isAdmin::class],function(){
         Route::resource('district',district::class,['as'=>'admin']);
         Route::resource('upazila',upazila::class,['as'=>'admin']);
         Route::resource('thana',thana::class,['as'=>'admin']);
-        Route::resource('unitstyle',unitstyle::class,['as'=>'admin']);
-        Route::resource('unit',unit::class,['as'=>'admin']);
         Route::resource('package',package::class,['as'=>'admin']);
         Route::resource('business',business::class,['as'=>'admin']);
         Route::resource('currency',currency::class,['as'=>'admin']);
@@ -104,6 +102,8 @@ Route::group(['middleware'=>isOwner::class],function(){
         Route::resource('brand',brand::class,['as'=>'owner']);
         Route::resource('branch',branch::class,['as'=>'owner']);
         Route::resource('warehouse',warehouse::class,['as'=>'owner']);
+        Route::resource('unitstyle',unitstyle::class,['as'=>'owner']);
+        Route::resource('unit',unit::class,['as'=>'owner']);
 
         //Owner profile
         Route::get('/profile', [profile::class,'ownerProfile'])->name('owner.profile');

@@ -27,8 +27,8 @@ return new class extends Migration
             $table->decimal('round_of',10,2)->default(0);
             $table->string('grand_total');
             $table->string('note')->nullable();
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('warehouse_id');
             $table->string('created_by');
             $table->string('updated_by')->nullable();
