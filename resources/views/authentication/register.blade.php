@@ -139,8 +139,11 @@
                                 <div class="form-group position-relative has-icon-left mb-4">
                                     <select class="form-control form-select" name="business_type">
                                         <option value="">Select Your Business type</option>
-                                        <option value="1" {{ old('business_type')==1?"selected":""}}>Business Type 1</option>
-                                        <option value="2" {{ old('business_type')==2?"selected":""}}>Business Type 2</option>
+                                        @forelse (App\Models\Settings\Business_type::all();  as $d)
+                                        <option value="{{$d->id}}" {{ old('business_type')==$d->id?"selected":""}}> {{ $d->name}}</option>
+                                        @empty
+                                            <option value="">No Data Found</option>
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
