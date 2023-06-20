@@ -66,8 +66,8 @@ class PurchaseController extends Controller
     public function product_search(Request $request)
     {
         if($request->name){
-            $product=Product::select('id','product_name as value','bar_code as label')->where(company())->where(function($query) use ($request) {
-                        $query->where('product_name','like', '%' . $request->name . '%')->orWhere('bar_code','like', '%' . $request->name . '%');
+            $product=Product::select('id','product_name as value','item_code as label')->where(company())->where(function($query) use ($request) {
+                        $query->where('product_name','like', '%' . $request->name . '%')->orWhere('item_code','like', '%' . $request->name . '%');
                         })->get();
                       print_r(json_encode($product));  
         }
