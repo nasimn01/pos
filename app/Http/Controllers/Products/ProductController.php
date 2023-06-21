@@ -128,9 +128,9 @@ class ProductController extends Controller
         $childcategories = Childcategory::where(company())->get();
         $brands = Brand::where(company())->get();
         $unit_style = Unit_style::all();
-        $product_price = Product_price::all();
         $product= Product::findOrFail(encryptor('decrypt',$id));
-        return view('product.edit',compact('categories','subcategories','childcategories','brands','unit_style','product_price','product'));
+        //$product_price = Product_price::where('product_id',$product->id)->get();
+        return view('product.edit',compact('categories','subcategories','childcategories','brands','unit_style','product'));
     }
 
     /**
@@ -168,7 +168,7 @@ class ProductController extends Controller
 
             if($p->save()){
                 if($request->unit){
-                    $unit= Product_price::where('product_id',$p->id)->delete();
+                    Product_price::where('product_id',$p->id)->delete();
                     foreach($request->unit as $i=>$u){
                         if($request->price[$i]>0){
                             $unit = new Product_price;

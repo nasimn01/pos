@@ -125,7 +125,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse ($product_price as $pr)
+                                            @forelse ($product->product_price as $pr)
                                             <tr class="text-center">
                                                 <td><input type="hidden" name="unit[]" value="{{$pr->unit_id}}">{{$pr->unit?->name}}</td>
                                                 <td><input type="text" class="form-control" value="{{$pr->price}}" name="price[]"></td>

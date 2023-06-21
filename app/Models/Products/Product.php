@@ -30,5 +30,8 @@ class Product extends Model
     public function unitStyle(){
         return $this->belongsTo(Unit_style::class);
     }
+    public function product_price(){
+        return $this->hasMany(Product_price::class);
+    }
     
 }

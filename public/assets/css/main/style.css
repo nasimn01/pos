@@ -159,4 +159,14 @@ body {
     font-size: 1.9rem;
     border-left: 1px solid #ccc;
   }
+  .index-tbl{
+    border-left: 3px solid;
+    border-color: #1CABE2;
+    border-radius: 5px;
+    padding: 0;
+  }
+  .tbl-th{
+    background-color: #d9f2fc;
+    padding: 2px 0px 2px 0px !important;
+  }
   

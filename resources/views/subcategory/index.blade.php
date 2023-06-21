@@ -7,45 +7,49 @@
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
+                <div class="text-end me-3">
+                    <a class="float-end" href="{{route(currentUser().'.subcategory.create')}}"style="font-size:1.7rem"><i class="bi bi-plus-square-fill"></i></a>
+                </div>
                     <!-- table bordered -->
                     <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <a class="float-end" href="{{route(currentUser().'.subcategory.create')}}"style="font-size:1.7rem"><i class="bi bi-plus-square-fill"></i></a>
-                            <thead>
-                                <tr>
+                        <div class="card mx-3 index-tbl shadow-sm">
+                            <table class="table mb-0 px-2">
+                                <thead>
+                                    <tr class="tbl-th text-center">
                                     <th scope="col">{{__('#SL')}}</th>
                                     <th scope="col">{{__('Category')}}</th>
                                     <th scope="col">{{__('Name')}}</th>
                                     <th class="white-space-nowrap">{{__('ACTION')}}</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
 
-                                @forelse($subcategories as $sub)
-                                <tr>
-                                <th scope="row">{{ ++$loop->index }}</th>
+                                    @forelse($subcategories as $sub)
+                                    <tr class="text-center">
+                                    <th scope="row">{{ ++$loop->index }}</th>
 
-                                    <td>{{$sub->category?->category}}</td>
-                                    <td>{{$sub->name}}</td>
-                                    <td class="white-space-nowrap">
-                                        <a href="{{route(currentUser().'.subcategory.edit',encryptor('encrypt',$sub->id))}}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                       
-                                        <form id="form{{$sub->id}}" action="{{route(currentUser().'.subcategory.destroy',encryptor('encrypt',$sub->id))}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <th colspan="3" class="text-center">No Pruduct Found</th>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                                        <td>{{$sub->category?->category}}</td>
+                                        <td>{{$sub->name}}</td>
+                                        <td class="white-space-nowrap">
+                                            <a href="{{route(currentUser().'.subcategory.edit',encryptor('encrypt',$sub->id))}}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        
+                                            <form id="form{{$sub->id}}" action="{{route(currentUser().'.subcategory.destroy',encryptor('encrypt',$sub->id))}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <th colspan="3" class="text-center">No Pruduct Found</th>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
