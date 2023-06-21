@@ -3,8 +3,6 @@
 @section('pageSubTitle',trans('List'))
 
 @section('content')
-
-<!-- Bordered table start -->
 <section class="section">
     <div class="row" id="table-bordered">
         <div class="col-12">
@@ -71,7 +69,4 @@
             </div>
     </div>
 </section>
-<!-- Bordered table end -->
-
-
 @endsection

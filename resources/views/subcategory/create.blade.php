@@ -4,7 +4,6 @@
 @section('pageSubTitle',trans('Create'))
 
 @section('content')
-<!-- // Basic multiple Column Form section start -->
 <section id="multiple-column-form">
     <div class="row match-height">
         <div class="col-12">
@@ -24,7 +23,6 @@
                                             @empty
                                                 <option value="">No Category found</option>
                                             @endforelse
-                                            
                                         </select>
                                         @if($errors->has('category'))
                                         <span class="text-danger"> {{ $errors->first('category') }}</span>
@@ -42,10 +40,8 @@
                                             @endif
                                     </div>
                                 </div>
-
                                 <div class="col-12 d-flex justify-content-start">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                    
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button> 
                                 </div>
                             </div>
                         </form>

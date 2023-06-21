@@ -3,8 +3,6 @@
 @section('pageSubTitle',trans('Profile'))
 
 @section('content')
-
-<!-- Bordered table start -->
 <section id="multiple-column-form">
     <div class="card p-4">
         <div class="row match-height">
@@ -64,9 +62,6 @@
         </div>
     </div>
 </section>
-<!-- Bordered table end -->
-
-
 @endsection
 
 @push('scripts')

@@ -3,15 +3,10 @@
 @section('pageSubTitle',trans('List'))
 
 @section('content')
-
-<!-- Bordered table start -->
 <section class="section">
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
-                <?php
-                //print_r($subcategories);
-                ?>
                     <!-- table bordered -->
                     <div class="table-responsive">
                         <table class="table table-bordered mb-0">
@@ -56,7 +51,4 @@
             </div>
     </div>
 </section>
-<!-- Bordered table end -->
-
-
 @endsection

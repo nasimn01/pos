@@ -4,7 +4,6 @@
 @section('pageSubTitle',trans('update'))
 
 @section('content')
-<!-- // Basic multiple Column Form section start -->
 <section id="multiple-column-form">
     <div class="row match-height">
         <div class="col-12">
@@ -46,7 +45,6 @@
 
                                 <div class="col-12 d-flex justify-content-start">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                    
                                 </div>
                             </div>
                         </form>
