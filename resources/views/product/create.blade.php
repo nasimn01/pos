@@ -8,7 +8,11 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab active" href="{{route(currentUser().'.product.create')}}">Add New</a>
+                    <a class="card-tab" href="{{route(currentUser().'.product.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.product.store')}}">
                             @csrf
@@ -173,7 +177,7 @@ $(document).ready(function() {
                             var row = '<tr class="text-center">' +
                                 '<td><input type="hidden" name="unit[]" value="' + childUnit.id + '">' + childUnit.name + '</td>' +
                                 '<td><input type="text" class="form-control" name="price[]"></td>' +
-                                '<td><input type="text" class="form-control" name="barcode[]"></td>' +
+                                '<td><input type="text" class="form-control" name="barcode[]" onBlur="Availability(this)" required></td>' +
                                 '</tr>';
                             tableBody.append(row);
                         });
@@ -192,6 +196,29 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+    function Availability(inputField) {
+        var barcode = inputField.value;
+        $.ajax({
+            url: '{{route(currentUser().'.checkBarcodeAvailability')}}',
+            type: 'GET',
+            data: { barcode: barcode },
+            dataType: 'json',
+            success: function(response) {
+                if (!response.available) {
+                    alert('This Barcode is already used');
+                    inputField.value = ""; // Clear the input field
+                    var priceInput = inputField.closest('tr').querySelector('input[name="price[]"]');
+                    priceInput.value = ""; // Clear the price input field
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(error); // Handle the error if needed
+            }
+        });
+    }
+</script>
+
 
 <script>
     /* call on load page */

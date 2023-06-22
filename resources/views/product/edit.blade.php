@@ -8,7 +8,11 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab " href="{{route(currentUser().'.product.create')}}">Add New</a>
+                    <a class="card-tab" href="{{route(currentUser().'.product.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.product.update',encryptor('encrypt',$product->id))}}">
                             @csrf

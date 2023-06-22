@@ -30,17 +30,41 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::where(company())->paginate(10);
+        $products = Product::where(company())->orderBy('id','asc');
+        if($request->name)
+            $products=$products->where('item_code','like','%'.$request->name.'%')
+                                 ->orwhere('product_name','like','%'.$request->name.'%');
+
+        $products=$products->paginate(10);
         return view('product.index',compact('products'));
     }
 
+  
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getChildUnits(Request $request)
     {
         $unitStyleId = $request->input('unitStyleId');
         $childUnits = Unit::where('unit_style_id', $unitStyleId)->get();
         return response()->json(['childUnits' => $childUnits]);
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkBarcodeAvailability(Request $request)
+    {
+        $barcode = $request->input('barcode');
+        $existBarcode = Product_price::where(company())->where('barcode', $barcode)->first();
+
+        return response()->json(['available' => !$existBarcode]);
     }
 
     /**
@@ -92,6 +116,7 @@ class ProductController extends Controller
                             $unit->unit_id=$u;
                             $unit->price=$request->price[$i];
                             $unit->barcode=$request->barcode[$i];
+                            $unit->company_id=company()['company_id'];
                             $unit->save();
                         }
                     }
@@ -176,6 +201,7 @@ class ProductController extends Controller
                             $unit->unit_id=$u;
                             $unit->price=$request->price[$i];
                             $unit->barcode=$request->barcode[$i];
+                            $unit->company_id=company()['company_id'];
                             $unit->save();
                         }
                     }

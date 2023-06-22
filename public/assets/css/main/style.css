@@ -169,4 +169,57 @@ body {
     background-color: #d9f2fc;
     padding: 2px 0px 2px 0px !important;
   }
+  .card {
+    
+    position: relative;
+}
+.card-tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    gap: 0;
+}
+
+.card-tab:first-child {
+   z-index: 1;
+}
+
+.card-tab {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    background-color: #fbfcfc;
+    border-radius: 2px;
+    border-bottom: 3px solid transparent;
+    box-shadow: 6px 0 7px rgba(0, 0, 0, 0.1);
+}
+
+.card-tab:hover {
+    background-color: #d9f2fc;
+}
+.card-tab.active {
+    border-bottom-color: #1CABE2;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group .form-control {
+    border-radius: 0;
+}
+
+.input-group-append {
+    margin-left: 5px;
+}
+
+.input-group-buttons .btn {
+    flex-shrink: 0;
+}
+
+
+
   

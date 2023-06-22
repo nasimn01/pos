@@ -7,28 +7,23 @@
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
-                <div class="row pb-1 px-3">
-                    <div class="col-10">
+                <div class="card-tabs">
+                    <a class="card-tab " href="{{route(currentUser().'.unitstyle.create')}}">Add New</a>
+                    <a class="card-tab active" href="{{route(currentUser().'.unitstyle.index')}}">List</a>
+                </div>
+                <div class="row pb-1 px-3 mt-5">
+                    <div class="col-md-6">
                         <form action="" method="get">
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="text" name="name" value="{{isset($_GET['name'])?$_GET['name']:''}}" placeholder="Name" class="form-control">
-                                </div>
-                                
-                                <div class="col-2 ps-0">
-                                    <button class="btn btn-sm btn-info float-end" type="submit">Search</button>
-                                </div>
-                                <div class="col-4 p-0 m-0">
-                                    <a class="btn btn-sm btn-warning ms-2" href="{{route(currentUser().'.unitstyle.index')}}" title="Clear">Clear</a>
+                            <div class="input-group">
+                                <input type="text" name="name" value="{{isset($_GET['name'])?$_GET['name']:''}}" placeholder="Name" class="form-control">
+                                <div class="input-group-append ms-1">
+                                    <button class="btn btn-sm btn-info" type="submit">Search</button>
+                                    <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.unitstyle.index')}}" title="Clear">Clear</a>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="col-2">
-                        <a class="float-end" href="{{route(currentUser().'.unitstyle.create')}}"style="font-size:1.7rem"><i class="bi bi-plus-square-fill"></i></a>
-                    </div>
                 </div>
-                
                 <!-- table bordered -->
                 <div class="table-responsive mt-2">
                     <div class="card mx-3 index-tbl shadow-sm">

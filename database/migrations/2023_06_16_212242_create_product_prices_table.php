@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('product_id')->nullable();
             $table->string('unit_id')->nullable();
             $table->decimal('price',14,2)->nullable();
-            $table->string('barcode')->nullable();
+            $table->string('barcode')->unique()->nullable();
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });
     }

@@ -134,6 +134,8 @@ Route::group(['middleware'=>isOwner::class],function(){
 
         Route::get('/get-unit', [product::class,'unitGet'])->name('owner.unit');
         Route::get('/get-child-units', [product::class, 'getChildUnits'])->name('owner.getChildUnits');
+        Route::get('/check-barcode-availability', [product::class, 'checkBarcodeAvailability'])->name('owner.checkBarcodeAvailability');
+
 
         
 
