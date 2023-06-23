@@ -14,18 +14,18 @@
                 <div class="row pb-1 px-3 mt-5">
                     <div class="col-md-6">
                         <form action="" method="get">
-                            <div class="input-group">
-                                <input type="text" name="name" value="{{isset($_GET['name'])?$_GET['name']:''}}" placeholder="Product name or item code" class="form-control">
+                            <div class="input-group index-search">
+                                <input type="text" name="name" value="{{isset($_GET['name'])?$_GET['name']:''}}" placeholder="Product name or item code" class="form-control" required>
                                 <div class="input-group-append ms-1">
-                                    <button class="btn btn-sm btn-info" type="submit">Search</button>
-                                    <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.product.index')}}" title="Clear">Clear</a>
+                                    <button class="btn btn-sm btn-info py-2" type="submit">Search</button>
+                                    <a class="btn btn-sm btn-warning py-2" href="{{route(currentUser().'.product.index')}}" title="Clear">Clear</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
                 
-                <div class="table-responsive ">
+                <div class="table-responsive mt-1">
                     <div class="card mx-3 index-tbl shadow-sm">
                         <table class="table mb-0 px-2">
                             <thead>

@@ -14,11 +14,11 @@
                 <div class="row pb-1 px-3 mt-5">
                     <div class="col-md-6">
                         <form action="" method="get">
-                            <div class="input-group">
+                            <div class="input-group index-search">
                                 <input type="text" name="name" value="{{isset($_GET['name'])?$_GET['name']:''}}" placeholder="Name" class="form-control">
                                 <div class="input-group-append ms-1">
-                                    <button class="btn btn-sm btn-info" type="submit">Search</button>
-                                    <a class="btn btn-sm btn-warning" href="{{route(currentUser().'.unit.index')}}" title="Clear">Clear</a>
+                                    <button class="btn btn-sm btn-info py-2" type="submit">Search</button>
+                                    <a class="btn btn-sm btn-warning py-2" href="{{route(currentUser().'.unit.index')}}" title="Clear">Clear</a>
                                 </div>
                             </div>
                         </form>

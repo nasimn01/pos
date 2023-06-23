@@ -219,6 +219,9 @@ body {
 .input-group-buttons .btn {
     flex-shrink: 0;
 }
+.index-search input{
+    border: 1px solid #1CABE2;
+}
 
 
 

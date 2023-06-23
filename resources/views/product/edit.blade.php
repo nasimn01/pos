@@ -64,12 +64,12 @@
                                         <select class="form-control form-select" name="unit_style" id="unit_style_select">
                                             <option value="">Select Unit</option>
                                             @forelse($unit_style as $u)
-                                                <option value="{{$u->id}}" {{ old('name',$product->unit_style_id)==$u->id?"selected":""}}> {{ $u->name}}</option>
+                                                <option value="{{$u->id}}" {{ old('unit_style',$product->unit_style_id)==$u->id?"selected":""}}> {{ $u->name}}</option>
                                             @empty
                                                 <option value="">No Data Found</option>
                                             @endforelse
-                                            @if($errors->has('name'))
-                                            <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                            @if($errors->has('unit_style'))
+                                            <span class="text-danger"> {{ $errors->first('unit_style') }}</span>
                                             @endif
                                         </select>
                                     </div>
@@ -131,12 +131,12 @@
                                         <tbody>
                                             @forelse ($product->product_price as $pr)
                                             <tr class="text-center">
-                                                <td><input type="hidden" name="unit[]" value="{{$pr->unit_id}}">{{$pr->unit?->name}}</td>
+                                                <td><input type="hidden" name="product_price[]" value="{{$pr->unit_id}}">{{$pr->unit?->name}}</td>
                                                 <td><input type="text" class="form-control" value="{{$pr->price}}" name="price[]"></td>
                                                 <td><input type="text" class="form-control" value="{{$pr->barcode}}" name="barcode[]"></td>
                                             </tr>
                                             @empty
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td colspan="3">No Data Found</td>
                                             </tr>
                                             @endforelse
@@ -178,7 +178,7 @@ $(document).ready(function() {
                     if (childUnits.length > 0) {
                         $.each(childUnits, function(index, childUnit) {
                             var row = '<tr class="text-center">' +
-                                '<td><input type="hidden" name="unit[]" value="' + childUnit.id + '">' + childUnit.name + '</td>' +
+                                '<td><input type="hidden" name="product_price[]" value="' + childUnit.id + '">' + childUnit.name + '</td>' +
                                 '<td><input type="text" class="form-control" name="price[]"></td>' +
                                 '<td><input type="text" class="form-control" name="barcode[]"></td>' +
                                 '</tr>';

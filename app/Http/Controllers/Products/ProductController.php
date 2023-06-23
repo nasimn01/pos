@@ -108,16 +108,16 @@ class ProductController extends Controller
                 $p->image=$this->resizeImage($request->image,'images/product/'.company()['company_id'],true,200,200,false);
 
             if($p->save()){
-                if($request->unit){
-                    foreach($request->unit as $i=>$u){
+                if($request->product_price){
+                    foreach($request->product_price as $i=>$pp){
                         if($request->price[$i]>0){
-                            $unit = new Product_price;
-                            $unit->product_id=$p->id;
-                            $unit->unit_id=$u;
-                            $unit->price=$request->price[$i];
-                            $unit->barcode=$request->barcode[$i];
-                            $unit->company_id=company()['company_id'];
-                            $unit->save();
+                            $ppr = new Product_price;
+                            $ppr->product_id=$p->id;
+                            $ppr->unit_id=$pp;
+                            $ppr->price=$request->price[$i];
+                            $ppr->barcode=$request->barcode[$i];
+                            $ppr->company_id=company()['company_id'];
+                            $ppr->save();
                         }
                     }
                 }
@@ -192,17 +192,17 @@ class ProductController extends Controller
             }
 
             if($p->save()){
-                if($request->unit){
+                if($request->product_price){
                     Product_price::where('product_id',$p->id)->delete();
-                    foreach($request->unit as $i=>$u){
+                    foreach($request->product_price as $i=>$pp){
                         if($request->price[$i]>0){
-                            $unit = new Product_price;
-                            $unit->product_id=$p->id;
-                            $unit->unit_id=$u;
-                            $unit->price=$request->price[$i];
-                            $unit->barcode=$request->barcode[$i];
-                            $unit->company_id=company()['company_id'];
-                            $unit->save();
+                            $ppr = new Product_price;
+                            $ppr->product_id=$p->id;
+                            $ppr->unit_id=$pp;
+                            $ppr->price=$request->price[$i];
+                            $ppr->barcode=$request->barcode[$i];
+                            $ppr->company_id=company()['company_id'];
+                            $ppr->save();
                         }
                     }
                 }
