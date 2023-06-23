@@ -62,8 +62,11 @@ class ProductController extends Controller
     public function checkBarcodeAvailability(Request $request)
     {
         $barcode = $request->input('barcode');
-        $existBarcode = Product_price::where(company())->where('barcode', $barcode)->first();
-
+        if($request->productId){
+            $existBarcode = Product_price::where(company())->where('product_id','!=',$request->productId)->where('barcode', $barcode)->first();
+        }else{
+            $existBarcode = Product_price::where(company())->where('barcode', $barcode)->first();
+        }
         return response()->json(['available' => !$existBarcode]);
     }
 

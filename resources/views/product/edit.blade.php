@@ -133,7 +133,7 @@
                                             <tr class="text-center">
                                                 <td><input type="hidden" name="product_price[]" value="{{$pr->unit_id}}">{{$pr->unit?->name}}</td>
                                                 <td><input type="text" class="form-control" value="{{$pr->price}}" name="price[]"></td>
-                                                <td><input type="text" class="form-control" value="{{$pr->barcode}}" name="barcode[]"></td>
+                                                <td><input type="text" class="form-control" value="{{$pr->barcode}}" name="barcode[]" onBlur="Availability(this)"></td>
                                             </tr>
                                             @empty
                                             <tr class="text-center">
@@ -180,7 +180,7 @@ $(document).ready(function() {
                             var row = '<tr class="text-center">' +
                                 '<td><input type="hidden" name="product_price[]" value="' + childUnit.id + '">' + childUnit.name + '</td>' +
                                 '<td><input type="text" class="form-control" name="price[]"></td>' +
-                                '<td><input type="text" class="form-control" name="barcode[]"></td>' +
+                                '<td><input type="text" class="form-control" name="barcode[]" onBlur="Availability(this)"></td>' +
                                 '</tr>';
                             tableBody.append(row);
                         });
@@ -198,6 +198,29 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+<script>
+    function Availability(inputField) {
+        var barcode = inputField.value;
+        var product_id = {{$product->id}}
+        $.ajax({
+            url: '{{route(currentUser().'.checkBarcodeAvailability')}}',
+            type: 'GET',
+            data: { barcode: barcode,
+                    productId: product_id
+                },
+            dataType: 'json',
+            success: function(response) {
+                if (!response.available) {
+                    alert('This Barcode is already used');
+                    inputField.value = ""; // Clear the input field
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(error); // Handle the error if needed
+            }
+        });
+    }
 </script>
 <script>
     /* call on load page */
