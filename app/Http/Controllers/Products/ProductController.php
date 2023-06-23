@@ -36,7 +36,6 @@ class ProductController extends Controller
         if($request->name)
             $products=$products->where('item_code','like','%'.$request->name.'%')
                                  ->orwhere('product_name','like','%'.$request->name.'%');
-
         $products=$products->paginate(10);
         return view('product.index',compact('products'));
     }
@@ -103,8 +102,6 @@ class ProductController extends Controller
             $p->item_code=$request->itemCode;
             $p->product_name=$request->productName;
             $p->description=$request->description;
-                
-            
             $p->company_id=company()['company_id'];
             $p->status=1;
             if($request->has('image'))
@@ -180,8 +177,6 @@ class ProductController extends Controller
             $p->item_code=$request->itemCode;
             $p->product_name=$request->productName;
             $p->description=$request->description;
-                
-            
             $p->company_id=company()['company_id'];
             $p->status=1;
             if($request->has('image')){
