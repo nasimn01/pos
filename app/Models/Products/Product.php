@@ -2,6 +2,7 @@
 
 namespace App\Models\Products;
 
+use App\Models\Settings\Unit;
 use App\Models\Settings\Unit_style;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

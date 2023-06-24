@@ -84,6 +84,15 @@ class PurchaseController extends Controller
             $product=Product::where(company())->where('id',$request->item_id)->first();
             $data='<tr>';
             $data.='<td class="p-2">'.$product->product_name.'<input name="product_id[]" type="hidden" value="'.$product->id.'"></td>';
+            $data.='<td class="p-2">
+                        <select class="form-control form-select mt-2 " name="unit[]" required>
+                            <option value="">Select</option>';
+                            foreach ($product->product_price as $unit) {
+                                $data .= '<option value="' . $unit->unit_id . '">' . $unit->unit?->name . '</option>';
+                            }
+            $data .= '</select>
+                    </td>';
+            
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="qty[]" type="text" class="form-control qty" value="0"></td>';
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="price[]" type="text" class="form-control price" value="0"></td>';
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="tax[]" type="text" class="form-control tax" value=""></td>';
@@ -117,7 +126,8 @@ class PurchaseController extends Controller
         try{
             $pur= new Purchase;
             $pur->supplier_id=$request->supplierName;
-            $pur->purchase_date=$request->purchase_date;
+            $purchaseDate = date('Y-m-d', strtotime($request->purchase_date));
+            $pur->purchase_date = $purchaseDate;
             $pur->reference_no=$request->reference_no;
             $pur->total_quantity=$request->total_qty;
             $pur->sub_amount=$request->tsubtotal;
@@ -140,6 +150,7 @@ class PurchaseController extends Controller
                         $pd=new Purchase_details;
                         $pd->purchase_id=$pur->id;
                         $pd->product_id=$product_id;
+                        $pd->unit_id=$request->unit[$i];
                         $pd->quantity=$request->qty[$i];
                         $pd->unit_price=$request->price[$i];
                         $pd->tax=$request->tax[$i]>0?$request->tax[$i]:0;

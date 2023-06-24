@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('sales_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sales_id');
+            $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('product_id');
             $table->decimal('quantity',10,2)->default(0);
             $table->decimal('unit_price',10,2)->default(0);
             $table->decimal('sub_amount',10,2)->default(0);
             $table->decimal('tax',10,2)->default(0);
-            $table->integer('discount_type')->comment('0 amount, 2 percent')->default(0);
+            $table->integer('discount_type')->comment('0 amount, 1 percent')->default(0);
             $table->decimal('discount',10,2)->default(0);
             $table->decimal('total_amount',10,2)->default(0);
             $table->timestamps();

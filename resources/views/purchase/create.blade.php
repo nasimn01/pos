@@ -108,6 +108,7 @@
                                     <thead>
                                         <tr class="bg-primary text-white">
                                             <th class="p-2">Product Name</th>
+                                            <th class="p-2">Unit</th>
                                             <th class="p-2">Quantity</th>
                                             <th class="p-2">Purchase Price</th>
                                             <th class="p-2">Tax %</th>
