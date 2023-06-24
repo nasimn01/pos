@@ -364,7 +364,6 @@ class ProductController extends Controller
             }
             $barcode.="</div>";
         }
-
         echo json_encode($barcode);
     }
 }
