@@ -41,11 +41,7 @@ class ProductController extends Controller
     }
 
   
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function getChildUnits(Request $request)
     {
         $unitStyleId = $request->input('unitStyleId');
@@ -53,11 +49,7 @@ class ProductController extends Controller
         return response()->json(['childUnits' => $childUnits]);
     }
     
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function checkBarcodeAvailability(Request $request)
     {
         $barcode = $request->input('barcode');
