@@ -8,7 +8,11 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab" href="{{route(currentUser().'.users.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.users.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         @if(Session::has('response'))
                             {!!Session::get('response')['message']!!}
@@ -18,7 +22,7 @@
                             @method('PATCH')
                             <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$user->id)}}">
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="role_id">{{__('Role')}}<span class="text-danger">*</span></label>
                                         <select class="form-control" name="role_id" id="role_id">
@@ -34,7 +38,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="userName">{{__('Name')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="userName" class="form-control" value="{{ old('userName',$user->name)}}" name="userName">
@@ -44,7 +48,7 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="userEmail">{{__('Email')}}</label>
                                         <input type="text" id="userEmail" class="form-control" value="{{ old('userEmail',$user->email)}}" name="userEmail">
@@ -53,7 +57,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="contactNumber">{{__('Contact Number')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="contactNumber" class="form-control" value="{{ old('contactNumber',$user->contact_no)}}" name="contactNumber">
@@ -64,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="row">  
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="branch_id">{{__('Branch')}}</label>
                                         <select class="form-control" name="branch_id" id="branch_id">
@@ -81,7 +85,7 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="password">{{__('Password')}}<span class="text-danger">*</span></label>
                                         <input type="password" id="password" class="form-control" name="password">
@@ -90,7 +94,7 @@
                                             @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="image">{{__('Image')}}</label>
                                         <input type="file" id="image" class="form-control"
@@ -104,7 +108,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-end">
                                 <img width="80px" height="40px" class="float-first" src="{{asset('images/users/'.company()['company_id'].'/'.$user->image)}}" alt="">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
+                                    <button type="submit" class="btn btn-info me-1 mb-1">{{__('Update')}}</button>
                                     
                                 </div>
                             </div>

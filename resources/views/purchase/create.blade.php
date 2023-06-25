@@ -110,7 +110,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 tbl-scroll">
                                 <table class="table mb-5">
                                     <thead>
-                                        <tr class="bg-primary text-white">
+                                        <tr class="bg-primary text-white text-center">
                                             <th class="p-2">Product Name</th>
                                             <th class="p-2">Unit</th>
                                             <th class="p-2">Quantity</th>

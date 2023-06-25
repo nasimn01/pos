@@ -8,7 +8,11 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab" href="{{route(currentUser().'.district.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.district.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         <form class="form" method="post" action="{{route(currentUser().'.district.update',encryptor('encrypt',$district->id))}}">
                             @csrf
@@ -50,7 +54,7 @@
                             
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
+                                    <button type="submit" class="btn btn-info me-1 mb-1">Update</button>
                                     
                                 </div>
                             </div>

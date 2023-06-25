@@ -8,12 +8,16 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab active" href="{{route(currentUser().'.currency.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.currency.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.currency.store')}}">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">{{__('Currency')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="name" class="form-control"
@@ -23,7 +27,7 @@
                                             @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">{{__('Symbol')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="Symbol" class="form-control"
@@ -33,7 +37,7 @@
                                             @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">{{__('Port')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="port" class="form-control"
@@ -43,7 +47,7 @@
                                             @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">{{__('Rate')}}<span class="text-danger">*</span></label>
                                         <input type="text" id="rate" class="form-control"

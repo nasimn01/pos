@@ -7,12 +7,12 @@
 <section class="section">
     <div class="row" id="table-bordered">
         <div class="col-12">
-            <div class="card">
-                    <!-- table bordered -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
+        <div class="card">
+                <div class="table-responsive">
+                    <div class="card mx-3 index-tbl shadow-sm">
+                        <table class="table mb-0 px-2">
                             <thead>
-                                <tr>
+                                <tr class="tbl-th text-center">
                                     <th scope="col">{{__('Company Name')}}</th>
                                     <th scope="col">{{__('Contact')}}</th>
                                     <th scope="col">{{__('Country')}}</th>
@@ -25,7 +25,7 @@
                             </thead>
                             <tbody>
                                 @forelse($data as $company)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{$company->name}}</td>
                                     <td>{{$company->contact}}</td>
                                     <td>{{$company->country?->name}}</td>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        
+        </div>
     </div>
 </section>
 @endsection

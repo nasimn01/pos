@@ -14,6 +14,7 @@ use App\Models\Settings\Company;
 use App\Models\Customers\customer;
 use App\Models\Products\Product;
 use App\Http\Requests\Sales\AddNewRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ResponseTrait;
 use Exception;
 use DB;
@@ -167,14 +168,16 @@ class SalesController extends Controller
 
                     }
                 }
-                
-                return redirect()->route(currentUser().'.sales.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                Toastr::success('Create Successfully!');
+                return redirect()->route(currentUser().'.sales.index');
             }else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                Toastr::warning('Please try again');
+                return redirect()->back()->withInput();
         }catch(Exception $e){
+            Toastr::warning('Please try again');
             DB::rollback();
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput();
         }
     }
 

@@ -8,12 +8,15 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab active" href="{{route(currentUser().'.district.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.district.index')}}">List</a>
+                </div>
+                <div class="card-content mt-2">
                     <div class="card-body">
                         <form class="form" method="post" action="{{route(currentUser().'.district.store')}}">
                             @csrf
                             <div class="row">
-                                
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="division_id">Division<span class="text-danger">*</span></label>

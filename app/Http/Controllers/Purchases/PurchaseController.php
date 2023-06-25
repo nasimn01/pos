@@ -82,10 +82,10 @@ class PurchaseController extends Controller
     {
         if($request->item_id){
             $product=Product::where(company())->where('id',$request->item_id)->first();
-            $data='<tr>';
+            $data='<tr class="text-center">';
             $data.='<td class="p-2">'.$product->product_name.'<input name="product_id[]" type="hidden" value="'.$product->id.'"></td>';
             $data.='<td class="p-2">
-                        <select class="form-control form-select mt-2 " name="unit[]" required>
+                        <select class="form-control form-select " name="unit[]" required>
                             <option value="">Select</option>';
                             foreach ($product->product_price as $unit) {
                                 $data .= '<option value="' . $unit->unit_id . '">' . $unit->unit?->name . '</option>';
@@ -97,7 +97,7 @@ class PurchaseController extends Controller
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="price[]" type="text" class="form-control price" value="0"></td>';
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="tax[]" type="text" class="form-control tax" value=""></td>';
             $data.='<td class="p-2">
-                        <select onchange="get_cal(this)" class="form-control form-select mt-2 discount_type" name="discount_type[]">
+                        <select onchange="get_cal(this)" class="form-control form-select discount_type" name="discount_type[]">
                             <option value="0">%</option>
                             <option value="1">Fixed</option>
                         </select>

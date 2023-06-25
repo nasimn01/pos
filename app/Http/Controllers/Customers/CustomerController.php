@@ -12,6 +12,7 @@ use App\Models\Settings\Branch;
 use Illuminate\Http\Request;
 use App\Http\Requests\Customer\AddNewRequest;
 use App\Http\Requests\Customer\UpdateRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ResponseTrait;
 use Exception;
 
@@ -73,13 +74,16 @@ class CustomerController extends Controller
             $cus->company_id=company()['company_id'];
             $cus->branch_id?branch()['branch_id']:null;
            
-            if($cus->save())
-                return redirect()->route(currentUser().'.customer.index')->with($this->resMessageHtml(true,null,'Successfully created'));
-            else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            if($cus->save()){
+                Toastr::success('Create Successfully!');
+                return redirect()->route(currentUser().'.customer.index');
+            }else{
+                Toastr::warning('Please try Again!');
+                return redirect()->back()->withInput();
+            }
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput();
         }
     }
 
@@ -135,13 +139,16 @@ class CustomerController extends Controller
             $sup->post_code= $request->postCode;
             $sup->address= $request->address;
            
-            if($sup->save())
-                return redirect()->route(currentUser().'.customer.index')->with($this->resMessageHtml(true,null,'Successfully created'));
-            else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            if($sup->save()){
+                Toastr::success('Update Successfully!');
+                return redirect()->route(currentUser().'.customer.index');
+            }else{
+                Toastr::warning('Please try Again!');
+                return redirect()->back()->withInput();
+            }
         }catch(Exception $e){
-            //dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            dd($e);
+            return redirect()->back()->withInput();
         }
     }
 

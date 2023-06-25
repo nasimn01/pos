@@ -7,13 +7,16 @@
 <section class="section">
     <div class="row" id="table-bordered">
         <div class="col-12">
-            <div class="card">
-                    <!-- table bordered -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                        <a class="float-end" href="{{route(currentUser().'.branch.create')}}"style="font-size:1.7rem"><i class="bi bi-plus-square-fill"></i></a>
+        <div class="card">
+                <div class="card-tabs">
+                    <a class="card-tab" href="{{route(currentUser().'.branch.create')}}">Add New</a>
+                    <a class="card-tab active" href="{{route(currentUser().'.branch.index')}}">List</a>
+                </div>
+                <div class="table-responsive mt-5">
+                    <div class="card mx-3 index-tbl shadow-sm">
+                        <table class="table mb-0 px-2">
                             <thead>
-                                <tr>
+                                <tr class="tbl-th text-center">
                                     <th scope="col">{{__('#SL')}}</th>
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Contact')}}</th>
@@ -26,8 +29,8 @@
                             </thead>
                             <tbody>
                                 @forelse($branchs as $cat)
-                                <tr>
-                                <th scope="row">{{ ++$loop->index }}</th>
+                                <tr class="text-center">
+                                    <th scope="row">{{ ++$loop->index }}</th>
                                     <td>{{$cat->name}}</td>
                                     <td>{{$cat->contact}}</td>
                                     <td>{{$cat->binNumber}}</td>
@@ -39,19 +42,18 @@
                                         <a href="{{route(currentUser().'.branch.edit',encryptor('encrypt',$cat->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <!-- <a href="javascript:void()" onclick="$('#form{{$cat->id}}').submit()">
+                                            {{-- <a href="javascript:void()" onclick="$('#form{{$cat->id}}').submit()">
                                             <i class="bi bi-trash"></i>
-                                        </a> -->
+                                        </a>
                                         <form id="form{{$cat->id}}" action="{{route(currentUser().'.branch.destroy',encryptor('encrypt',$cat->id))}}" method="post">
                                             @csrf
                                             @method('delete')
-                                            
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <th colspan="4" class="text-center">No Branch Found</th>
+                                    <th colspan="6" class="text-center">No Data Found</th>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -59,7 +61,7 @@
                     </div>
                 </div>
             </div>
-        
+        </div>
     </div>
 </section>
 @endsection

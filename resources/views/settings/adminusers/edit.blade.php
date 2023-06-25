@@ -12,14 +12,18 @@
                     @if(Session::has('response'))
                         {!!Session::get('response')['message']!!}
                     @endif
-                    <div class="card-content">
+                    <div class="card-tabs">
+                        <a class="card-tab" href="{{route(currentUser().'.admin.create')}}">Add New</a>
+                        <a class="card-tab" href="{{route(currentUser().'.admin.index')}}">List</a>
+                    </div>
+                    <div class="card-content mt-5">
                         <div class="card-body">
                             <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.admin.update',encryptor('encrypt',$user->id))}}">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$user->id)}}">
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="userName">{{__('Name')}}<span class="text-danger">*</span></label>
                                             <input type="text" id="userName" class="form-control" value="{{ old('userName',$user->name)}}" name="userName">
@@ -29,7 +33,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="userEmail">{{__('Email')}}</label>
                                             <input type="text" id="userEmail" class="form-control" value="{{ old('userEmail',$user->email)}}" name="userEmail">
@@ -38,7 +42,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="contactNumber">{{__('Contact Number')}}<span class="text-danger">*</span></label>
                                             <input type="text" id="contactNumber" class="form-control" value="{{ old('contactNumber',$user->contact_no)}}" name="contactNumber">
@@ -48,7 +52,7 @@
                                         </div>
                                     </div>
                                  
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="password">{{__('Password')}}<span class="text-danger">*</span></label>
                                             <input type="password" id="password" class="form-control" name="password">
@@ -57,7 +61,7 @@
                                                 @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="image">{{__('Image')}}</label>
                                             <input type="file" id="image" class="form-control"
@@ -67,7 +71,7 @@
                                                 @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="language">{{__('Language')}}</label>
                                             <select class="form-control" name="language" id="language">
@@ -80,7 +84,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
+                                        <button type="submit" class="btn btn-info me-1 mb-1">{{__('Update')}}</button>
                                     </div>
                                 </div>
                             </form>
