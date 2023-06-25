@@ -10,6 +10,7 @@ use App\Http\Requests\Childcategory\AddNewRequest;
 use App\Http\Requests\Childcategory\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 
 class ChildcategoryController extends Controller
@@ -51,12 +52,12 @@ class ChildcategoryController extends Controller
             $childcat->name=$request->childcat;
             $childcat->company_id=company()['company_id'];
             if($childcat->save())
-                return redirect()->route(currentUser().'.childcategory.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.childcategory.index')->with(Toastr::success('Create Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             //dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -98,12 +99,12 @@ class ChildcategoryController extends Controller
             $childcat->subcategory_id=$request->subcategory;
             $childcat->name=$request->childcat;
             if($childcat->save())
-                return redirect()->route(currentUser().'.childcategory.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.childcategory.index')->with(Toastr::success('Update Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             //dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

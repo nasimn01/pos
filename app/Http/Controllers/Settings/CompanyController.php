@@ -14,6 +14,7 @@ use App\Models\Settings\Location\Upazila;
 use App\Models\Currency\Currency;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 
 class CompanyController extends Controller
@@ -116,12 +117,12 @@ class CompanyController extends Controller
 
 
             if($com->save())
-                return redirect()->route(currentUser().'.company.index')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                return redirect()->route(currentUser().'.company.index')->with(Toastr::success('Update Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

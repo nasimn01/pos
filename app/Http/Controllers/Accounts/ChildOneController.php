@@ -9,6 +9,7 @@ use App\Models\Accounts\sub_head;
 use Illuminate\Http\Request;
 use App\Http\Requests\Accounts\ChildOne\AddNewRequest;
 use App\Http\Requests\Accounts\ChildOne\UpdateRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ResponseTrait;
 use Exception;
 
@@ -54,12 +55,12 @@ class ChildOneController extends Controller
             $mac->opening_balance= $request->opening_balance;
 
         if($mac->save())
-                return redirect()->route(currentUser().'.child_one.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.child_one.index')->with(Toastr::success('Create Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
-            dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            // dd($e);
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -104,12 +105,12 @@ class ChildOneController extends Controller
             $mac->opening_balance= $request->opening_balance;
 
         if($mac->save())
-                return redirect()->route(currentUser().'.child_one.index')->with($this->resMessageHtml(true,null,'Successfully Updated'));
+                return redirect()->route(currentUser().'.child_one.index')->with(Toastr::success('Update Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
-            dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            // dd($e);
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

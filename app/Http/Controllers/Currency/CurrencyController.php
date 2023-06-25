@@ -8,6 +8,7 @@ use App\Models\Currency\Currency;
 use Illuminate\Http\Request;
 use App\Http\Requests\Currency\AddNewRequest;
 use App\Http\Requests\Currency\UpdateRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ResponseTrait;
 use Exception;
 
@@ -50,12 +51,12 @@ class CurrencyController extends Controller
             $cur->currency_port=$request->port;
             $cur->currency_rate=$request->rate;
             if($cur->save())
-                return redirect()->route(currentUser().'.currency.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.currency.index')->with(Toastr::success('Create Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -98,12 +99,12 @@ class CurrencyController extends Controller
             $cur->currency_port=$request->port;
             $cur->currency_rate=$request->rate;
             if($cur->save())
-                return redirect()->route(currentUser().'.currency.index')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                return redirect()->route(currentUser().'.currency.index')->with(Toastr::success('Update Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

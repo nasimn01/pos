@@ -12,6 +12,7 @@ use App\Models\Accounts\child_one;
 use App\Models\Accounts\child_two;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use DB;
 use Session;
 use Exception;
@@ -364,14 +365,14 @@ class JournalVoucherController extends Controller
                     }
                 }
                 DB::commit();
-				return redirect()->route(currentUser().'.journal.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+				return redirect()->route(currentUser().'.journal.index')->with(Toastr::success('Create Successfully!'));
 			}else{
-				return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+				return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
 			}
 		}catch (Exception $e) {
 			dd($e);
 			DB::rollBack();
-			return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+			return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
 		}
     }
 

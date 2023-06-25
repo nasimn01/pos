@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Division\AddNewRequest;
 use App\Http\Requests\Division\UpdateRequest;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 
 class DivisionController extends Controller
@@ -51,12 +52,12 @@ class DivisionController extends Controller
             $division->name=$request->divisionName;
             $division->name_bn=$request->divisionBn;
             if($division->save())
-                return redirect()->route(currentUser().'.division.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.division.index')->with(Toastr::success('Create Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -99,12 +100,12 @@ class DivisionController extends Controller
             $division->name=$request->divisionName;
             $division->name_bn=$request->divisionBn;
             if($division->save())
-                return redirect()->route(currentUser().'.division.index')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                return redirect()->route(currentUser().'.division.index')->with(Toastr::success('Update Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
     }
 }
 

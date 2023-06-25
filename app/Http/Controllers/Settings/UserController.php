@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Settings\Branch;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ImageHandleTraits;
 use App\Http\Requests\User\AddNewRequest;
 use Illuminate\Support\Facades\Hash;
@@ -67,13 +68,13 @@ class UserController extends Controller
             if($request->has('image'))
                 $user->image=$this->resizeImage($request->image,'images/users/'.company()['company_id'],true,200,200,false);
             if($user->save())
-                return redirect()->route(currentUser().'.users.index')->with($this->resMessageHtml(true,null,'Successfully Registred'));
+                return redirect()->route(currentUser().'.users.index')->with(Toastr::success('Registerd Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
             
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -138,15 +139,15 @@ class UserController extends Controller
                         [
                             'image'=>$user->image?$user->image:$user->image,
                         ]);
-                    return redirect()->route(currentUser().'.profile.update')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                    return redirect()->route(currentUser().'.profile.update')->with(Toastr::success('Update Successfully!'));
                 }else{
-                    return redirect()->route(currentUser().'.users.index')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                    return redirect()->route(currentUser().'.users.index')->with(Toastr::success('Update Successfully!'));
                 }
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

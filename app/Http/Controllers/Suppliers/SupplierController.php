@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Supplier\AddNewRequest;
 use App\Http\Requests\Supplier\UpdateRequest;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 
 class SupplierController extends Controller
@@ -75,12 +76,12 @@ class SupplierController extends Controller
             //$sup->branch_id?branch()['branch_id']:null;
            
             if($sup->save())
-                return redirect()->route(currentUser().'.supplier.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.supplier.index')->with(Toastr::success('Create Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -138,12 +139,12 @@ class SupplierController extends Controller
             $sup->branch_id= $request->branch_id;
            
             if($sup->save())
-                return redirect()->route(currentUser().'.supplier.index')->with($this->resMessageHtml(true,null,'Successfully Updated'));
+                return redirect()->route(currentUser().'.supplier.index')->with(Toastr::success('Update Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             //dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

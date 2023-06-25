@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Thana\AddNewRequest;
 use App\Http\Requests\Thana\UpdateRequest;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 
 class ThanaController extends Controller
@@ -51,12 +52,12 @@ class ThanaController extends Controller
             $thana->name=$request->thanaName;
             $thana->name_bn=$request->thanaBn;
             if($thana->save())
-                return redirect()->route(currentUser().'.thana.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.thana.index')->with(Toastr::success('Create Successfully!'));
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','please try again'));    
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -99,12 +100,12 @@ class ThanaController extends Controller
             $thana->name=$request->thanaName;
             $thana->name_bn=$request->thanaBn;
             if($thana->save())
-                return redirect()->route(currentUser().'.thana.index')->with($this->resMessageHtml(true,null,'Successfully update'));
+                return redirect()->route(currentUser().'.thana.index')->with(Toastr::success('Update Successfully!'));
                 else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

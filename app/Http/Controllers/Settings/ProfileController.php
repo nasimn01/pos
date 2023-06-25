@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ImageHandleTraits;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -68,15 +69,15 @@ class ProfileController extends Controller
                             'image'=>$user->image?$user->image:$user->image,
                             'userName'=>encryptor('encrypt',$user->name),
                         ]);
-                    return redirect()->route(currentUser().'.profile.update')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                    return redirect()->route(currentUser().'.profile.update')->with(Toastr::success('Update Successfully!'));
                 }else{
-                    return redirect()->route(currentUser().'.users.index')->with($this->resMessageHtml(true,null,'Successfully updated'));
+                    return redirect()->route(currentUser().'.users.index')->with(Toastr::success('Update Successfully!'));
                 }
             else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

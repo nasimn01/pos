@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Product\AddRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Traits\ImageHandleTraits;
 use App\Models\Products\Product_price;
 use Exception;
@@ -113,11 +114,11 @@ class ProductController extends Controller
                         }
                     }
                 }
-                return redirect()->route(currentUser().'.product.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.product.index')->with(Toastr::success('Create Successfully!'));
             }
         }catch(Exception $e){
             // dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
@@ -196,11 +197,11 @@ class ProductController extends Controller
                         }
                     }
                 }
-                return redirect()->route(currentUser().'.product.index')->with($this->resMessageHtml(true,null,'Successfully Updated'));
+                return redirect()->route(currentUser().'.product.index')->with(Toastr::success('Update Successfully!'));
             }
         }catch(Exception $e){
             // dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

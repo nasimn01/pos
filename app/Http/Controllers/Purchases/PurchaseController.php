@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Purchases\AddNewRequest;
 use App\Http\Requests\Purchases\UpdateRequest;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use DB;
 
@@ -177,13 +178,13 @@ class PurchaseController extends Controller
                     }
                 }
                 
-                return redirect()->route(currentUser().'.purchase.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.purchase.index')->with(Toastr::success('Create Successfully!'));
             }else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             DB::rollback();
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 

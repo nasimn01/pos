@@ -12,6 +12,7 @@ use App\Models\Settings\Warehouse;
 use App\Models\Settings\Company;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
+use Brian2694\Toastr\Facades\Toastr;
 use DB;
 use Exception;
 
@@ -155,21 +156,17 @@ class TransferController extends Controller
                             $stockt->tax=$pd->tax;
                             $stockt->discount=$pd->discount;
                             $stockt->save();
-
                             DB::commit();
                         }
-
                     }
-
                 }
-                
-                return redirect()->route(currentUser().'.transfer.index')->with($this->resMessageHtml(true,null,'Successfully created'));
+                return redirect()->route(currentUser().'.transfer.index')->with(Toastr::success('Create Successfully!'));
             }else
-                return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+                return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }catch(Exception $e){
             DB::rollback();
             dd($e);
-            return redirect()->back()->withInput()->with($this->resMessageHtml(false,'error','Please try again'));
+            return redirect()->back()->withInput()->with(Toastr::warning('Please try again!'));
         }
     }
 
