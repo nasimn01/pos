@@ -15,7 +15,11 @@
 <section id="multiple-column-form">
     <div class="match-height">
         <div class="card">
-            <div class="card-content">
+            <div class="card-tabs">
+                <a class="card-tab active" href="{{route(currentUser().'.purchase.create')}}">Add New</a>
+                <a class="card-tab " href="{{route(currentUser().'.purchase.index')}}">List</a>
+            </div>
+            <div class="card-content mt-5">
                 <div class="card-body">
                     <form class="form" method="post" action="{{route(currentUser().'.purchase.store')}}">
                         @csrf
