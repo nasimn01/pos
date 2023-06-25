@@ -8,17 +8,18 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab " href="{{route(currentUser().'.child_one.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.child_one.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         <form class="form" method="post" action="{{route(currentUser().'.child_one.update',encryptor('encrypt',$child->id))}}">
                             @csrf
                             @method('patch')
                             <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$child->id)}}">
                             <div class="row">
-                                
-
-                                
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="sub_head">{{__('Sub Head')}}</label>
                                         <select class="form-control form-select" name="sub_head" id="sub_head">
@@ -34,7 +35,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="head_name">{{__('Head Name')}}</label>
                                         <input type="text" id="head_name" class="form-control"
@@ -44,7 +45,7 @@
                                     <span class="text-danger"> {{ $errors->first('head_name') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="head_code">{{__('Head Code')}}</label>
                                         <input type="text" id="head_code" class="form-control"
@@ -54,7 +55,7 @@
                                     <span class="text-danger"> {{ $errors->first('head_code') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="opening_balance">{{__('Opening Balance')}}</label>
                                         <input type="text" id="opening_balance" class="form-control"
@@ -63,7 +64,7 @@
                                 </div>
 
                                 <div class="col-12 d-flex justify-content-start">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
+                                    <button type="submit" class="btn btn-info me-1 mb-1">{{__('Update')}}</button>
                                     
                                 </div>
                             </div>

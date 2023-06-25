@@ -7,11 +7,11 @@
     <div class="row" id="table-bordered">
         <div class="col-12">
             <div class="card">
-                    <!-- table bordered -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
+                <div class="table-responsive">
+                    <div class="card mx-3 index-tbl shadow-sm">
+                        <table class="table mb-0 px-2">
                             <thead>
-                                <tr>
+                                <tr class="tbl-th text-center">
                                     <th scope="col">{{__('Master Head')}}</th>
                                     <th scope="col">{{__('Sub Head')}}</th>
                                     <th scope="col">{{__('Child One')}}</th>
@@ -21,7 +21,7 @@
                             <tbody>
                                 @forelse($data as $d) <!-- master head loop -->
                                     @if($d->sub_head)
-                                        <tr>
+                                        <tr class="text-center">
                                             <td>{{$d->head_name}} - {{$d->head_code}}</td>
                                             <td></td>
                                             <td></td>
@@ -29,7 +29,7 @@
                                         </tr>
                                         @foreach($d->sub_head as $subhead) <!-- sub head loop -->
                                             @if($subhead->child_one)
-                                                <tr>
+                                                <tr class="text-center">
                                                     <td></td>
                                                     <td>{{$subhead->head_name}} - {{$subhead->head_code}}</td>
                                                     <td></td>
@@ -37,14 +37,14 @@
                                                 </tr>
                                                 @foreach($subhead->child_one as $childOne) <!-- child one head loop -->
                                                     @if($childOne->child_two)
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td></td>
                                                             <td></td>
                                                             <td>{{$childOne->head_name}} - {{$childOne->head_code}}</td>
                                                             <td></td>
                                                         </tr>
                                                         @foreach($childOne->child_two as $childTwo) <!-- child two head loop -->
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </section>
 @endsection

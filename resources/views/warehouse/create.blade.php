@@ -8,7 +8,11 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <div class="card-content">
+                <div class="card-tabs">
+                    <a class="card-tab " href="{{route(currentUser().'.warehouse.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.warehouse.index')}}">List</a>
+                </div>
+                <div class="card-content mt-5">
                     <div class="card-body">
                         <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.warehouse.store')}}">
                             @csrf
@@ -57,8 +61,7 @@
                                 </div>
 
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                    
+                                    <button type="submit" class="btn btn-info me-1 mb-1">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>

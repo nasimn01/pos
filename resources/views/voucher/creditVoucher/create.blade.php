@@ -8,7 +8,11 @@
     <div class="row match-height">
         <div class="col-12">
             <div class="card">
-                <h4 class="card-title text-center">{{__('Credit Voucher Entry')}}</h4>
+                <div class="card-tabs">
+                    <a class="card-tab active" href="{{route(currentUser().'.credit.create')}}">Add New</a>
+                    <a class="card-tab " href="{{route(currentUser().'.credit.index')}}">List</a>
+                </div>
+                <h4 class="card-title text-center mt-5">{{__('Credit Voucher Entry')}}</h4>
                 <div class="card-content">
                     <div class="card-body">
                         <form class="form" enctype="multipart/form-data" method="post" action="{{route(currentUser().'.credit.store')}}">
