@@ -38,7 +38,7 @@
                                     <td>{{$d->price}}</td>
                                     <td><input type="color"value="{{$d->package_code}}" disabled></td>
                                     <td>
-                                        <ul>
+                                        <ul class="text-start">
                                             @foreach(explode(',', $d->package_feature) as $feature)
                                             <li>{{$feature}}</li>
                                             @endforeach
