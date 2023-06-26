@@ -33,7 +33,6 @@
                                     <label for="supplierName" class="float-end"><h6>{{__('Customer')}}</h6></label>
                                 </div>
                                 <div class="col-md-4 mt-4">
-                                    
                                     <select class="form-control form-select" name="cus" id="cus">
                                         <option value="">Select Customer</option>
                                         @forelse($customers as $c)
@@ -43,59 +42,57 @@
                                         @endforelse
                                     </select>
                                 </div>
-
-
                             </div>
                             <div class="row m-4">
                                 <div class="col-6 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-sm btn-success me-1 mb-1 ps-5 pe-5">{{__('Show')}}</button>
-                                    
                                 </div>
                                 <div class="col-6 d-flex justify-content-Start">
                                     <a href="{{route(currentUser().'.salreport')}}" class="btn pbtn btn-sm btn-warning me-1 mb-1 ps-5 pe-5">{{__('Reset')}}</a>
-                                    
                                 </div>
                             </div>
-                            <table class="table mb-5">
-                                <thead>
-                                    <tr class="bg-primary text-white text-center">
-                                    <th class="p-2">{{__('Sales Date')}}</th>
-                                        <th class="p-2">{{__('Customer')}}</th>
-                                        <th class="p-2">{{__('Reference Number')}}</th>
-                                        <th class="p-2">{{__('Quantity')}}</th>
-                                        <th class="p-2">{{__('Sub Amount')}}</th>
-                                        <th class="p-2">{{__('Tax')}}</th>
-                                        <th class="p-2">{{__('Discount')}}</th>
-                                        <th class="p-2">{{__('Total Amount')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($data as $d)
-                                    <tr class="text-center">
-                                        <td>{{$d->sales_date}}</td>
-                                        <td>{{$d->customer?->customer_name}}</td>
-                                        <td>{{$d->reference_no}}</td>
-                                        <td>{{$d->total_quantity}}</td>
-                                        <td>{{$d->sub_amount}}</td>
-                                        <td>{{$d->tax}}</td>
-                                        <td>
-                                            @if($d->discount)
-                                                @if($d->discount_type==2)
-                                                    %{{$d->discount}}
-                                                @else
-                                                    {{$d->discount}}
+                            <div class="table-responsive">
+                                <table class="table mb-5">
+                                    <thead>
+                                        <tr class="bg-primary text-white text-center">
+                                        <th class="p-2">{{__('Sales Date')}}</th>
+                                            <th class="p-2">{{__('Customer')}}</th>
+                                            <th class="p-2">{{__('Reference Number')}}</th>
+                                            <th class="p-2">{{__('Quantity')}}</th>
+                                            <th class="p-2">{{__('Sub Amount')}}</th>
+                                            <th class="p-2">{{__('Tax')}}</th>
+                                            <th class="p-2">{{__('Discount')}}</th>
+                                            <th class="p-2">{{__('Total Amount')}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($data as $d)
+                                        <tr class="text-center">
+                                            <td>{{$d->sales_date}}</td>
+                                            <td>{{$d->customer?->customer_name}}</td>
+                                            <td>{{$d->reference_no}}</td>
+                                            <td>{{$d->total_quantity}}</td>
+                                            <td>{{$d->sub_amount}}</td>
+                                            <td>{{$d->tax}}</td>
+                                            <td>
+                                                @if($d->discount)
+                                                    @if($d->discount_type==2)
+                                                        %{{$d->discount}}
+                                                    @else
+                                                        {{$d->discount}}
+                                                    @endif
                                                 @endif
-                                            @endif
-                                        </td>
-                                        <td>{{$d->grand_total}}</td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <th colspan="9" class="text-center">No data Found</th>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td>{{$d->grand_total}}</td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <th colspan="9" class="text-center">No data Found</th>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </form>
                     </div>
                 </div>

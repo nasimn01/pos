@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="table-responsive">
                     <div class="card mx-3 index-tbl shadow-sm">
-                        <table class="table mb-0 px-2">
+                        <table class="table table-bordered mb-0 px-2">
                             <thead>
                                 <tr class="tbl-th text-center">
                                     <th scope="col">{{__('Master Head')}}</th>

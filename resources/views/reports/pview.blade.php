@@ -42,8 +42,6 @@
                                         @endforelse
                                     </select>
                                 </div>
-
-
                             </div>
                             <div class="row m-4">
                                 <div class="col-6 d-flex justify-content-end">
@@ -55,46 +53,48 @@
                                     
                                 </div>
                             </div>
-                            <table class="table mb-5">
-                                <thead>
-                                    <tr class="bg-primary text-white text-center">
-                                        <th class="p-2">{{__('Purchase Date')}}</th>
-                                        <th class="p-2">{{__('Supplier')}}</th>
-                                        <th class="p-2">{{__('Reference Number')}}</th>
-                                        <th class="p-2">{{__('Quantity')}}</th>
-                                        <th class="p-2">{{__('Sub Amount')}}</th>
-                                        <th class="p-2">{{__('Tax')}}</th>
-                                        <th class="p-2">{{__('Discount')}}</th>
-                                        <th class="p-2">{{__('Total Amount')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($data as $d)
-                                    <tr class="text-center">
-                                        <td>{{$d->purchase_date}}</td>
-                                        <td>{{$d->supplier?->supplier_name}}</td>
-                                        <td>{{$d->reference_no}}</td>
-                                        <td>{{$d->total_quantity}}</td>
-                                        <td>{{$d->sub_amount}}</td>
-                                        <td>{{$d->tax}}</td>
-                                        <td>
-                                            @if($d->discount)
-                                                @if($d->discount_type==2)
-                                                    %{{$d->discount}}
-                                                @else
-                                                    {{$d->discount}}
+                            <div class="table-responsive">
+                                <table class="table  mb-5">
+                                    <thead>
+                                        <tr class="bg-primary text-white text-center">
+                                            <th class="p-2">{{__('Purchase Date')}}</th>
+                                            <th class="p-2">{{__('Supplier')}}</th>
+                                            <th class="p-2">{{__('Reference Number')}}</th>
+                                            <th class="p-2">{{__('Quantity')}}</th>
+                                            <th class="p-2">{{__('Sub Amount')}}</th>
+                                            <th class="p-2">{{__('Tax')}}</th>
+                                            <th class="p-2">{{__('Discount')}}</th>
+                                            <th class="p-2">{{__('Total Amount')}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($data as $d)
+                                        <tr class="text-center">
+                                            <td>{{$d->purchase_date}}</td>
+                                            <td>{{$d->supplier?->supplier_name}}</td>
+                                            <td>{{$d->reference_no}}</td>
+                                            <td>{{$d->total_quantity}}</td>
+                                            <td>{{$d->sub_amount}}</td>
+                                            <td>{{$d->tax}}</td>
+                                            <td>
+                                                @if($d->discount)
+                                                    @if($d->discount_type==2)
+                                                        %{{$d->discount}}
+                                                    @else
+                                                        {{$d->discount}}
+                                                    @endif
                                                 @endif
-                                            @endif
-                                        </td>
-                                        <td>{{$d->grand_total}}</td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <th colspan="7" class="text-center">No data Found</th>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td>{{$d->grand_total}}</td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <th colspan="7" class="text-center">No data Found</th>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </form>
                     </div>
                 </div>

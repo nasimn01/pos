@@ -14,19 +14,19 @@
                             @method('patch')
                             <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$company->id)}}">
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">{{__('Company Name')}}</label>
                                         <input type="text" class="form-control" value="{{ old('name',$company->name)}}" name="name"  placeholder="Company Name" >
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="contact">{{__('Contact')}}</label>
                                         <input type="text" class="form-control" value="{{ old('contact',$company->contact)}}" name="contact" >
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="country">{{__('Country')}}</label>
                                         <select class="form-control form-select" name="country">
@@ -34,12 +34,12 @@
                                             @forelse($country as $d)
                                                 <option value="{{$d->id}}" {{ old('country',$company->country_id)==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
-                                                <option value="">No Country found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="division_id">{{__('Division')}}</label>
                                         <select class="form-control form-select" name="division">
@@ -47,12 +47,12 @@
                                             @forelse($division as $d)
                                                 <option value="{{$d->id}}" {{ old('division',$company->division_id)==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
-                                                <option value="">No Division found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="district">{{__('District')}}</label>
                                         <select class="form-control form-select" name="district">
@@ -60,12 +60,12 @@
                                             @forelse($district as $d)
                                                 <option value="{{$d->id}}" {{ old('district',$company->district_id)==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
-                                                <option value="">No District found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="upazila">{{__('Upazila')}}</label>
                                         <select class="form-control form-select" name="upazila">
@@ -73,12 +73,12 @@
                                             @forelse($upazila as $d)
                                                 <option value="{{$d->id}}" {{ old('upazila',$company->upazila_id)==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
-                                                <option value="">No Upazila found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="thana">{{__('Thana')}}</label>
                                         <select class="form-control form-select" name="thana">
@@ -86,12 +86,12 @@
                                             @forelse($thana as $d)
                                                 <option value="{{$d->id}}" {{ old('thana',$company->thana_id)==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
-                                                <option value="">No Thana found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="thana">{{__('Currency')}}</label>
                                         <select class="form-control form-select" name="currency">
@@ -99,19 +99,19 @@
                                             @forelse($currency as $d)
                                                 <option value="{{$d->id}}" {{ old('currency',$company->currency)==$d->id?"selected":""}}> {{ $d->currency_name}}</option>
                                             @empty
-                                                <option value="">No Currency found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="description">{{__('Address')}}</label>
                                         <textarea  class="form-control" name="address">{{ old('address',$company->address)}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary mb-1">{{__('Save')}}</button>
+                                    <button type="submit" class="btn btn-info mb-1">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>

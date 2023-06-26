@@ -35,32 +35,34 @@
                                     
                                 </div>
                             </div>
-                            <table class="table mb-5">
-                                <thead>
-                                    <tr class="bg-primary text-white text-center">
-                                        <th class="p-2">{{__('#SL')}}</th>
-                                        <th class="p-2">{{__('Product ID')}}</th>
-                                        <th class="p-2">{{__('Product Name')}}</th>
-                                        <th class="p-2">{{__('Total Quantity')}}</th>
-                                        <th class="p-2">{{__('Current Quantity')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($stock as $s)
-                                    <tr class="text-center">
-                                        <th scope="row">{{ ++$loop->index }}</th>
-                                        <td>{{$s->product_id}}</td>
-                                        <td>{{$s->product_name}}</td>
-                                        <td>{{$s->quantity}}</td>
-                                        <td>{{$s->qty}}</td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <th colspan="4" class="text-center">No data Found</th>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table mb-5">
+                                    <thead>
+                                        <tr class="bg-primary text-white text-center">
+                                            <th class="p-2">{{__('#SL')}}</th>
+                                            <th class="p-2">{{__('Product ID')}}</th>
+                                            <th class="p-2">{{__('Product Name')}}</th>
+                                            <th class="p-2">{{__('Total Quantity')}}</th>
+                                            <th class="p-2">{{__('Current Quantity')}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($stock as $s)
+                                        <tr class="text-center">
+                                            <th scope="row">{{ ++$loop->index }}</th>
+                                            <td>{{$s->product_id}}</td>
+                                            <td>{{$s->product_name}}</td>
+                                            <td>{{$s->quantity}}</td>
+                                            <td>{{$s->qty}}</td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <th colspan="4" class="text-center">No data Found</th>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </form>
                     </div>
                 </div>

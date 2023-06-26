@@ -28,7 +28,7 @@
                                             @forelse($subcategory as $sub)
                                                 <option value="{{$sub->id}}" {{ old('subcategory',$childcategory->subcategory_id)==$sub->id?"selected":""}}> {{ $sub->name}}</option>
                                             @empty
-                                                <option value="">No Category found</option>
+                                                <option value="">No data found</option>
                                             @endforelse
                                         </select>
                                         @if($errors->has('subcategory'))
@@ -48,8 +48,7 @@
                                 </div>
 
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
-                                    
+                                    <button type="submit" class="btn btn-info me-1 mb-1">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>

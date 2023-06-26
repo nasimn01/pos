@@ -29,7 +29,7 @@
                                     @endif
                                 </div>
 
-                                <div class="col-12 d-flex justify-content-start">
+                                <div class="col-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">{{__('Save')}}</button>
                                     
                                 </div>

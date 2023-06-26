@@ -43,7 +43,7 @@
                                                 <th class="p-2">{{__('#SL')}}</th>
                                                 <th class="p-2">{{__('Product Name')}}</th>
                                                 <th class="p-2">{{__('Quantity')}}</th>
-                                                <th class="p-2">{{__('Bar Code')}}</th>
+                                                <th class="p-2">{{__('Item Code')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,7 +53,7 @@
                                                 <th scope="row"><input class="get_data" value="{{$s->product_id}}" type="checkbox"></th>
                                                 <td>{{$s->product_name}}</td>
                                                 <td>{{$s->quantity}}</td>
-                                                <td>{{$s->bar_code}}</td>
+                                                <td>{{$s->item_code}}</td>
                                             </tr>
                                         @empty
                                             <tr>

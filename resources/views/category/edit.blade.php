@@ -38,7 +38,7 @@
                                 
                                 <div class="col-12 d-flex justify-content-end">
                                     <img width="80px" height="40px" class="float-first" src="{{asset('images/category/'.company()['company_id'].'/'.$category->image)}}" alt="">
-                                    <button type="submit" class="btn btn-primary mb-1">{{__('Save')}}</button>
+                                    <button type="submit" class="btn btn-info mb-1">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>
