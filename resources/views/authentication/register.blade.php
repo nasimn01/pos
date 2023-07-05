@@ -36,69 +36,69 @@
                         <h1 class="auth-title mb-5">Personal Information</h1>
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group position-relative has-icon-left mb-4 me-1">
+                                <div class="form-group position-relative has-icon-left me-1">
                                     <input type="text" name="FullName" value="{{old('FullName')}}" class="form-control form-control-xl" placeholder="Full Name">
                                     <div class="form-control-icon">
                                         <i class="bi bi-person-circle"></i>
                                     </div>
-                                    @if($errors->has('FullName'))
-                                        <small class="d-block text-danger">
-                                            {{$errors->first('FullName')}}
-                                        </small>
-                                    @endif
                                 </div>
+                                @if($errors->has('FullName'))
+                                    <small class="d-block text-danger">
+                                        {{$errors->first('FullName')}}
+                                    </small>
+                                @endif
                             </div>
                             <div class="col-12">
-                                <div class="form-group position-relative has-icon-left mb-4">
+                                <div class="form-group position-relative has-icon-left mt-4">
                                     <input type="email" name="EmailAddress" value="{{old('EmailAddress')}}" class="form-control form-control-xl" placeholder="Email">
                                     <div class="form-control-icon">
                                         <i class="bi bi-envelope-fill"></i>
                                     </div>
-                                    @if($errors->has('EmailAddress'))
-                                        <small class="d-block text-danger">
-                                            {{$errors->first('EmailAddress')}}
-                                        </small>
-                                    @endif
                                 </div>
+                                @if($errors->has('EmailAddress'))
+                                    <small class="d-block text-danger">
+                                        {{$errors->first('EmailAddress')}}
+                                    </small>
+                                @endif
                             </div>
                             <div class="col-12">
-                                <div class="form-group position-relative has-icon-left mb-4">
+                                <div class="form-group position-relative has-icon-left mt-4">
                                     <input type="text" name="PhoneNumber" value="{{old('PhoneNumber')}}" class="form-control form-control-xl" placeholder="Phone Number">
                                     <div class="form-control-icon">
                                         <i class="bi bi-telephone-fill"></i>
                                     </div>
-                                    @if($errors->has('PhoneNumber'))
-                                        <small class="d-block text-danger">
-                                            {{$errors->first('PhoneNumber')}}
-                                        </small>
-                                    @endif
                                 </div>
+                                @if($errors->has('PhoneNumber'))
+                                    <small class="d-block text-danger">
+                                        {{$errors->first('PhoneNumber')}}
+                                    </small>
+                                @endif
                             </div>
                             <div class="col-12">
-                                <div class="form-group position-relative has-icon-left mb-4">
+                                <div class="form-group position-relative has-icon-left mt-4">
                                     <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
                                     <div class="form-control-icon">
                                         <i class="bi bi-shield-lock-fill"></i>
                                     </div>
-                                    @if($errors->has('password'))
-                                        <small class="d-block text-danger">
-                                            {{$errors->first('password')}}
-                                        </small>
-                                    @endif
                                 </div>
+                                @if($errors->has('password'))
+                                    <small class="d-block text-danger">
+                                        {{$errors->first('password')}}
+                                    </small>
+                                @endif
                             </div>
                             <div class="col-12">
-                                <div class="form-group position-relative has-icon-left mb-4">
+                                <div class="form-group position-relative has-icon-left mt-4">
                                     <input type="password" name="password_confirmation" class="form-control form-control-xl" placeholder="Retype Password">
                                     <div class="form-control-icon">
                                         <i class="bi bi-shield-lock-fill"></i>
                                     </div>
-                                    @if($errors->has('password_confirmation'))
-                                        <small class="d-block text-danger">
-                                            {{$errors->first('password_confirmation')}}
-                                        </small>
-                                    @endif
                                 </div>
+                                @if($errors->has('password_confirmation'))
+                                    <small class="d-block text-danger">
+                                        {{$errors->first('password_confirmation')}}
+                                    </small>
+                                @endif
                             </div>
                             <div class="col-2">
                                 <button type="button" class="btn btn-primary mt-5 next-step">Continue</button>

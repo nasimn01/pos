@@ -17,7 +17,7 @@
                 <h1 class="login-title mb-4 text-uppercase">Login</h1>
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group position-relative has-icon-left mb-4">
+                        <div class="form-group position-relative has-icon-left">
                             <input type="text" name="PhoneNumber" value="{{old('PhoneNumber')}}" class="form-control form-control-xl" placeholder="Phone Number">
                             <div class="form-control-icon">
                                 <i class="bi bi-telephone-fill"></i>
@@ -25,15 +25,15 @@
                             <div class="form-control-icon2 text-success">
                                 <i class="bi bi-check-circle-fill"></i>
                             </div>
-                            @if($errors->has('PhoneNumber'))
-                                <small class="d-block text-danger">
-                                    {{$errors->first('PhoneNumber')}}
-                                </small>
-                            @endif
                         </div>
+                        @if($errors->has('PhoneNumber'))
+                            <small class="d-block text-danger">
+                                {{$errors->first('PhoneNumber')}}
+                            </small>
+                        @endif
                     </div>
                     <div class="col-12">
-                        <div class="form-group position-relative has-icon-left mb-2">
+                        <div class="form-group position-relative has-icon-left mt-4 ">
                             <input type="password" name="password" id="pass_log_id" class="form-control form-control-xl" placeholder="Password">
                             
                             <div class="form-control-icon">
@@ -42,12 +42,12 @@
                             <div class="form-control-icon2">
                                 <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                             </div>
-                            @if($errors->has('password'))
-                                <small class="d-block text-danger">
-                                    {{$errors->first('password')}}
-                                </small>
-                            @endif
                         </div>
+                        @if($errors->has('password'))
+                            <small class="d-block text-danger">
+                                {{$errors->first('password')}}
+                            </small>
+                        @endif
                         <a class="" href="#">Forgot Password?</a>
                     </div>
                     <div class="col-12 text-center">
