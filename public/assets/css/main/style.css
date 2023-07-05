@@ -215,6 +215,9 @@ body {
 .input-group-append {
     margin-left: 5px;
 }
+.input-group-append .btn{
+    border-radius: 0px !important;
+}
 
 .input-group-buttons .btn {
     flex-shrink: 0;
