@@ -74,66 +74,65 @@
 @endsection
 
 @push('scripts')
-    <script>
-        function preview_lavel(type){
-            var get_data=new Array();
-            $('.get_data').each(function(){
-                if($(this).is(":checked"))
-                    get_data.push($(this).val());
-            });
+<script>
+    function preview_lavel(type){
+        var get_data=new Array();
+        $('.get_data').each(function(){
+            if($(this).is(":checked"))
+                get_data.push($(this).val());
+        });
 
-            var checkall=$('.checkall').is(":checked")?1:0;
+        var checkall=$('.checkall').is(":checked")?1:0;
 
-            if(type=="qrcode")
-                var url="{{route(currentUser().'.qrcodepreview')}}";
-            else
-                var url="{{route(currentUser().'.barcodepreview')}}";
+        if(type=="qrcode")
+            var url="{{route(currentUser().'.qrcodepreview')}}";
+        else
+            var url="{{route(currentUser().'.barcodepreview')}}";
 
-            $.ajax({
-                'url': url,
-                'type': 'GET',
-                'dataType' : 'json',
-                'data': {datas:get_data,checkall:checkall},
-                success: function(response){ // What to do if we succeed
-                    console.log(response);
-                    $('.labeldata').html(response);
-                },
-                error: function(response){
-                    console.log(response);
-                }
-            });
-        }
+        $.ajax({
+            'url': url,
+            'type': 'GET',
+            'dataType' : 'json',
+            'data': {datas:get_data,checkall:checkall},
+            success: function(response){ // What to do if we succeed
+                console.log(response);
+                $('.labeldata').html(response);
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    }
 
-        function print_label(ptype,ltype){
-            var get_data=new Array();
-            $('.get_data').each(function(){
-                if($(this).is(":checked"))
-                    get_data.push($(this).val());
-            });
+    function print_label(ptype,ltype){
+        var get_data=new Array();
+        $('.get_data').each(function(){
+            if($(this).is(":checked"))
+                get_data.push($(this).val());
+        });
 
-            var checkall=$('.checkall').is(":checked")?1:0;
-            $.ajax({
-                'url': "{{route(currentUser().'.labelprint')}}",
-                'type': 'GET',
-                'dataType' : 'json',
-                'data': {datas:get_data,checkall:checkall,ptype:ptype,ltype:ltype},
-                success: function(response){ // What to do if we succeed
-                    var divContents = response;
-                    var a = window.open('', '', 'height=700, width=800');
-                    a.document.write('<html>');
-                    a.document.write('<body >');
-                    a.document.write(divContents);
-                    a.document.write('</body></html>');
-                    a.document.close();
-                    a.onload=function(){
-                        a.print();
-                    };
-                },
-                error: function(response){
-                    console.log(response);
-                }
-            });
-        }
-    </script>
-
+        var checkall=$('.checkall').is(":checked")?1:0;
+        $.ajax({
+            'url': "{{route(currentUser().'.labelprint')}}",
+            'type': 'GET',
+            'dataType' : 'json',
+            'data': {datas:get_data,checkall:checkall,ptype:ptype,ltype:ltype},
+            success: function(response){ // What to do if we succeed
+                var divContents = response;
+                var a = window.open('', '', 'height=700, width=800');
+                a.document.write('<html>');
+                a.document.write('<body >');
+                a.document.write(divContents);
+                a.document.write('</body></html>');
+                a.document.close();
+                a.onload=function(){
+                    a.print();
+                };
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    }
+</script>
 @endpush
