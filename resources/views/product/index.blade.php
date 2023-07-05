@@ -39,7 +39,7 @@
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Unit Stule')}}</th>
                                     <th scope="col">{{__('Image')}}</th>
-                                    <th scope="col">{{__('Status')}}</th>
+                                    {{-- <th scope="col">{{__('Status')}}</th> --}}
                                     <th class="white-space-nowrap">{{__('ACTION')}}</th>
                                 </tr>
                             </thead>
@@ -55,7 +55,7 @@
                                     <td>{{$p->product_name}}</td>
                                     <td>{{$p->unitStyle?->name}}</td>
                                         <td><img width="80px" height="40px" class="float-first" src="{{asset('images/product/'.company()['company_id'].'/'.$p->image)}}" alt=""></td>
-                                    <td>@if($p->status == 1) Active @else Inactive @endif</td>
+                                    {{-- <td>@if($p->status == 1) Active @else Inactive @endif</td> --}}
                                     <!-- or <td>{{ $p->status == 1?"Active":"Inactive" }}</td>-->
                                     <td class="white-space-nowrap">
                                         <a href="{{route(currentUser().'.product.edit',encryptor('encrypt',$p->id))}}">
