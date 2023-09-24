@@ -269,16 +269,15 @@ $(function() {
                     name: data.term
                 },
                 success: function(res){
-                console.log(res);
                     var result;
                     result = [{label: 'No Records Found ',value: ''}];
                     if (res.length) {
                         result = $.map(res, function(el){
                             return {
-                                label: el.value +'--'+ el.label,
+                                label: el.product_name +'-'+ el.barcode,
                                 value: '',
                                 id: el.id,
-                                item_name: el.value
+                                item_name: el.product_name
                             };
                         });
                     }
@@ -291,27 +290,26 @@ $(function() {
         },
 
             response:function(e,ui){
-            if(ui.content.length==1){
-                $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
-                $(this).autocomplete("close");
-            }
-            //console.log(ui.content[0].id);
+                if(ui.content.length==1){
+                    $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+                    $(this).autocomplete("close");
+                }
+                //console.log(ui.content[0].id);
             },
 
             //loader start
-            search: function (e, ui) {
-            },
+            search: function (e, ui) {},
             select: function (e, ui) { 
                 if(typeof ui.content!='undefined'){
-                console.log("Autoselected first");
-                if(isNaN(ui.content[0].id)){
-                    return;
-                }
-                var item_id=ui.content[0].id;
+                    console.log("Autoselected first");
+                    if(isNaN(ui.content[0].id)){
+                        return;
+                    }
+                    var item_id=ui.content[0].id;
                 }
                 else{
-                console.log("manual Selected");
-                var item_id=ui.item.id;
+                    console.log("manual Selected");
+                    var item_id=ui.item.id;
                 }
 
                 return_row_with_data(item_id);
@@ -326,21 +324,17 @@ $(function() {
 function return_row_with_data(item_id){
   $("#item_search").addClass('ui-autocomplete-loader-center');
     $.ajax({
-            autoFocus:true,
-                url: "{{route(currentUser().'.pur.product_search_data')}}",
-                method: 'GET',
-                dataType: 'json',
-                data: {
-                    item_id: item_id
-                },
-                success: function(res){
-                    $('#details_data').append(res);
-                    $("#item_search").val('');
-                    $("#item_search").removeClass('ui-autocomplete-loader-center');
-                },error: function(e){
-                    console.log("error "+e);
-                }
-            });
+        autoFocus:true,
+        url: "{{route(currentUser().'.pur.product_search_data')}}",
+        method: 'GET',
+        dataType: 'json',
+        data: {item_id: item_id},
+        success: function(res){
+            $('#details_data').append(res);
+            $("#item_search").val('');
+            $("#item_search").removeClass('ui-autocomplete-loader-center');
+        },error: function(e){console.log("error "+e);}
+    });
 	
 }
 //INCREMENT ITEM

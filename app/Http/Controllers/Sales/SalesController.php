@@ -66,9 +66,26 @@ class SalesController extends Controller
     {
         if($request->name){
             if($request->oldpro)
-                $product=DB::select("SELECT products.id,products.price,products.product_name,products.bar_code,sum(stocks.quantity) as qty FROM `products` JOIN stocks on stocks.product_id=products.id WHERE stocks.company_id=".company()['company_id']." and stocks.branch_id=".$request->branch_id." and stocks.warehouse_id=".$request->warehouse_id." and (products.product_name like '%". $request->name ."%' or products.bar_code like '%". $request->name ."%') and products.id not in (".rtrim($request->oldpro,',').") GROUP BY products.id");
+                $product=DB::select("SELECT products.id,product_prices.price,products.product_name,product_prices.barcode,sum(stocks.quantity) as qty FROM `product_prices`
+                                     JOIN products on products.id=product_prices.product_id
+                                     JOIN stocks on stocks.product_id=product_prices.product_id
+                                    WHERE 
+                                    stocks.company_id=".company()['company_id']." and
+                                    stocks.branch_id=".$request->branch_id." and
+                                    stocks.warehouse_id=".$request->warehouse_id." and
+                                    (products.product_name like '%". $request->name ."%' or product_prices.barcode like '%". $request->name ."%') and
+                                    product_prices.barcode not in (".rtrim($request->oldpro,',').")
+                                    GROUP BY product_prices.barcode");
             else
-                $product=DB::select("SELECT products.id,products.price,products.product_name,products.bar_code,sum(stocks.quantity) as qty FROM `products` JOIN stocks on stocks.product_id=products.id WHERE stocks.company_id=".company()['company_id']." and stocks.branch_id=".$request->branch_id." and stocks.warehouse_id=".$request->warehouse_id." and (products.product_name like '%". $request->name ."%' or products.bar_code like '%". $request->name ."%') GROUP BY products.id");
+                $product=DB::select("SELECT products.id,product_prices.price,products.product_name,product_prices.barcode,sum(stocks.quantity) as qty FROM `product_prices`
+                                    JOIN products on products.id=product_prices.product_id
+                                    JOIN stocks on stocks.product_id=product_prices.product_id
+                                    WHERE 
+                                    stocks.company_id=".company()['company_id']." and
+                                    stocks.branch_id=".$request->branch_id." and
+                                    stocks.warehouse_id=".$request->warehouse_id." and
+                                    (products.product_name like '%". $request->name ."%' or product_prices.barcode like '%". $request->name ."%') 
+                                    GROUP BY product_prices.barcode");
             
             print_r(json_encode($product));  
         }
@@ -81,11 +98,14 @@ class SalesController extends Controller
      */
     public function product_sc_d(Request $request)
     {
-        if($request->item_id){
-            $product=collect(\DB::select("SELECT products.id,products.price,products.product_name,products.bar_code,sum(stocks.quantity) as qty FROM `products` JOIN stocks on stocks.product_id=products.id WHERE stocks.company_id=".company()['company_id']." and stocks.branch_id=".$request->branch_id." and stocks.warehouse_id=".$request->warehouse_id." and products.id=".$request->item_id." GROUP BY products.id"))->first();
+        if($request->barcode){
+            $product=collect(\DB::select("SELECT products.id,product_prices.price,products.product_name,product_prices.barcode,sum(stocks.quantity) as qty FROM `product_prices` JOIN products on products.id=product_prices.product_id
+            JOIN stocks on stocks.product_id=product_prices.product_id WHERE stocks.company_id=".company()['company_id']." and stocks.branch_id=".$request->branch_id." and stocks.warehouse_id=".$request->warehouse_id." and product_prices.barcode='".$request->barcode."' GROUP BY products.id"))->first();
             
             $data='<tr class="productlist">';
-            $data.='<td class="p-2">'.$product->product_name.'<input name="product_id[]" type="hidden" value="'.$product->id.'" class="product_id_list"><input name="stockqty[]" type="hidden" value="'.$product->qty.'" class="stockqty"></td>';
+            $data.='<td class="p-2">'.$product->product_name.'<input name="product_id[]" type="hidden" value="'.$product->id.'" class="product_id_list">
+                        <input type="hidden" value="'.$product->barcode.'" class="barcode_list">
+                        <input name="stockqty[]" type="hidden" value="'.$product->qty.'" class="stockqty"></td>';
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="qty[]" type="text" class="form-control qty" value="0"></td>';
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="price[]" type="text" class="form-control price" value="'.$product->price.'"></td>';
             $data.='<td class="p-2"><input onkeyup="get_cal(this)" name="tax[]" type="text" class="form-control tax" value=""></td>';

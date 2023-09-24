@@ -264,7 +264,7 @@ $(function() {
           let warehouse_id=$('#warehouse_id').val();
           let oldpro="";
           $(".productlist").each(function(){
-            oldpro+=$(this).find(".product_id_list").val()+",";
+            oldpro+=$(this).find(".barcode_list").val()+",";
           })
           
             $.ajax({
@@ -280,10 +280,11 @@ $(function() {
                     result = [{label: 'No Records Found ',value: ''}];
                     if (res.length) {
                         result = $.map(res, function(el){
+                            
                             return {
-                                label: el.bar_code+'-'+el.product_name +'-'+el.price+' ('+el.qty+')',
+                                label: el.barcode+'-'+el.product_name +'-'+el.price+' ('+el.qty+')',
                                 value: '',
-                                id: el.id,
+                                id: el.barcode,
                                 item_name: el.product_name
                             };
                         });
@@ -313,14 +314,14 @@ $(function() {
                 if(isNaN(ui.content[0].id)){
                     return;
                 }
-                var item_id=ui.content[0].id;
+                var barcode=ui.content[0].id;
                 }
                 else{
                 console.log("manual Selected");
-                var item_id=ui.item.id;
+                var barcode=ui.item.id;
                 }
 
-                return_row_with_data(item_id);
+                return_row_with_data(barcode);
                 $("#item_search").val('');
             },   
             //loader end
@@ -329,7 +330,7 @@ $(function() {
 
 });
 
-function return_row_with_data(item_id){
+function return_row_with_data(barcode){
     $("#item_search").addClass('ui-autocomplete-loader-center');
     let branch_id=$('#branch_id').val();
     let warehouse_id=$('#warehouse_id').val();
@@ -340,14 +341,14 @@ function return_row_with_data(item_id){
         method: 'GET',
         dataType: 'json',
         data: {
-            item_id: item_id,branch_id:branch_id,warehouse_id:warehouse_id
+            barcode: barcode,branch_id:branch_id,warehouse_id:warehouse_id
         },
         success: function(res){
             $('#details_data').append(res);
             $("#item_search").val('');
             $("#item_search").removeClass('ui-autocomplete-loader-center');
         },error: function(e){
-            console.log("error "+e);
+            console.log(e);
         }
     });
 	

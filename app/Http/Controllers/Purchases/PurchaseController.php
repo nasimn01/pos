@@ -89,7 +89,7 @@ class PurchaseController extends Controller
                         <select class="form-control form-select " name="unit[]" required>
                             <option value="">Select</option>';
                             foreach ($product->product_price as $unit) {
-                                $data .= '<option value="' . $unit->unit_id . '">' . $unit->unit?->name . '</option>';
+                                $data .= '<option value="' . $unit->unit_id . '~'.$unit->unit?->qty.'">' . $unit->unit?->name .' ('.(float)$unit->unit?->qty.')</option>';
                             }
             $data .= '</select>
                     </td>';
@@ -151,8 +151,8 @@ class PurchaseController extends Controller
                         $pd=new Purchase_details;
                         $pd->purchase_id=$pur->id;
                         $pd->product_id=$product_id;
-                        $pd->unit_id=$request->unit[$i];
-                        $pd->quantity=$request->qty[$i];
+                        $pd->unit_id=explode('~',$request->unit[$i])[0];
+                        $pd->quantity=$request->qty[$i]*explode('~',$request->unit[$i])[1];
                         $pd->unit_price=$request->price[$i];
                         $pd->tax=$request->tax[$i]>0?$request->tax[$i]:0;
                         $pd->discount_type=$request->discount_type[$i];

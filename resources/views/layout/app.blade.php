@@ -105,8 +105,7 @@
                             <p>2022 &copy; POS</p>
                         </div>
                         <div class="float-end">
-                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="#">Nasim</a></p>
+                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="#">Muktodhara LTD</a></p>
                         </div>
                     </div>
                 </div>
