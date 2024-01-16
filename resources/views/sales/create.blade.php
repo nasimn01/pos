@@ -93,10 +93,17 @@
 
 
                                 <div class="col-md-2 mt-2">
-                                    <label for="reference_no" class="float-end"><h6>{{__('Reference Number')}}</h6></label>
+                                    <label for="reference_no" class="float-end"><h6>{{__('Invoice Number')}}</h6></label>
                                 </div>
-                                <div class="col-md-4 mt-3">
+                                <div class="col-md-4 mt-2">
                                     <input type="text" class="form-control" value="{{ old('reference_no')}}" name="reference_no">
+                                </div>
+
+                                <div class="col-md-2 mt-2">
+                                    <label for="date" class="float-end"><h6>{{__('Due Date')}}</h6></label>
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <input type="text" id="datepicker" class="form-control" value="{{ old('sales_date')}}" name="sales_date" placeholder="dd/mm/yyyy" required>
                                 </div>
                             </div>
                             <div class="row m-3">

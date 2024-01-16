@@ -42,7 +42,7 @@
                                             <th class="p-2">{{__('#SL')}}</th>
                                             <th class="p-2">{{__('Product ID')}}</th>
                                             <th class="p-2">{{__('Product Name')}}</th>
-                                            <th class="p-2">{{__('Total Quantity')}}</th>
+                                            <th class="p-2">{{__('AVG Price')}}</th>
                                             <th class="p-2">{{__('Current Quantity')}}</th>
                                         </tr>
                                     </thead>
@@ -52,7 +52,7 @@
                                             <th scope="row">{{ ++$loop->index }}</th>
                                             <td>{{$s->product_id}}</td>
                                             <td>{{$s->product_name}}</td>
-                                            <td>{{$s->quantity}}</td>
+                                            <td>{{$s->avunitprice}}</td>
                                             <td>{{$s->qty}}</td>
                                         </tr>
                                         @empty

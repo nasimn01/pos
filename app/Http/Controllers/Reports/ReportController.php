@@ -45,7 +45,7 @@ class ReportController extends Controller
             $where=" where (date(stocks.`created_at`) BETWEEN '".$request->fdate."' and '".$tdate."') ";
         }
 
-        $stock= DB::select("SELECT products.product_name,stocks.*,sum(stocks.quantity) as qty, AVG(stocks.unit_price) as avunitprice FROM `stocks` join products on products.id=stocks.product_id $where GROUP BY stocks.product_id");
+        $stock= DB::select("SELECT products.product_name,stocks.*,sum(stocks.quantity) as qty, (select AVG(stocks.unit_price) from stocks as stk where stk.product_id=stocks.product_id and stk.purchase_id is not null limit 1) as avunitprice FROM `stocks` join products on products.id=stocks.product_id $where GROUP BY stocks.product_id");
         return view('reports.sview',compact('stock'));
     }
 

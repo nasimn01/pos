@@ -6,10 +6,10 @@
 @section('content')
 <style>
     @media screen and (max-width: 800px) {
-  .tbl-scroll {
-    overflow: scroll;
-  }
-}
+        .tbl-scroll {
+            overflow: scroll;
+        }
+    }
 </style>
 
 <section id="multiple-column-form">
@@ -96,6 +96,12 @@
 
                             <div class="col-md-2 mt-2">
                                 <label for="reference_no" class="float-end"><h6>Reference Number</h6></label>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <input type="text" class="form-control" value="{{ old('reference_no')}}" name="reference_no">
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="reference_no" class="float-end"><h6>PO Number</h6></label>
                             </div>
                             <div class="col-md-4 mt-2">
                                 <input type="text" class="form-control" value="{{ old('reference_no')}}" name="reference_no">
@@ -249,176 +255,175 @@
         $('.brnch').hide();
         $('.brnch'+e).show();
     }
-
 </script>
 
 <script>
-$(function() {
-    $("#item_search").bind("paste", function(e){
-        $("#item_search").autocomplete('search');
-    } );
-    $("#item_search").autocomplete({
-        source: function(data, cb){
-            
-            $.ajax({
-            autoFocus:true,
-                url: "{{route(currentUser().'.pur.product_search')}}",
-                method: 'GET',
-                dataType: 'json',
-                data: {
-                    name: data.term
-                },
-                success: function(res){
-                    var result;
-                    result = [{label: 'No Records Found ',value: ''}];
-                    if (res.length) {
-                        result = $.map(res, function(el){
-                            return {
-                                label: el.value +'-'+ el.label,
-                                value: '',
-                                id: el.id,
-                                item_name: el.value
-                            };
-                        });
+    $(function() {
+        $("#item_search").bind("paste", function(e){
+            $("#item_search").autocomplete('search');
+        } );
+        $("#item_search").autocomplete({
+            source: function(data, cb){
+                
+                $.ajax({
+                autoFocus:true,
+                    url: "{{route(currentUser().'.pur.product_search')}}",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        name: data.term
+                    },
+                    success: function(res){
+                        var result;
+                        result = [{label: 'No Records Found ',value: ''}];
+                        if (res.length) {
+                            result = $.map(res, function(el){
+                                return {
+                                    label: el.value +'-'+ el.label,
+                                    value: '',
+                                    id: el.id,
+                                    item_name: el.value
+                                };
+                            });
+                        }
+
+                        cb(result);
+                    },error: function(e){
+                        console.log("error "+e);
                     }
-
-                    cb(result);
-                },error: function(e){
-                    console.log("error "+e);
-                }
-            });
-        },
-
-            response:function(e,ui){
-                if(ui.content.length==1){
-                    $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
-                    $(this).autocomplete("close");
-                }
-                //console.log(ui.content[0].id);
+                });
             },
 
-            //loader start
-            search: function (e, ui) {},
-            select: function (e, ui) { 
-                if(typeof ui.content!='undefined'){
-                    console.log("Autoselected first");
-                    if(isNaN(ui.content[0].id)){
-                        return;
+                response:function(e,ui){
+                    if(ui.content.length==1){
+                        $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+                        $(this).autocomplete("close");
                     }
-                    var item_id=ui.content[0].id;
-                }
-                else{
-                    console.log("manual Selected");
-                    var item_id=ui.item.id;
-                }
+                    //console.log(ui.content[0].id);
+                },
 
-                return_row_with_data(item_id);
+                //loader start
+                search: function (e, ui) {},
+                select: function (e, ui) { 
+                    if(typeof ui.content!='undefined'){
+                        console.log("Autoselected first");
+                        if(isNaN(ui.content[0].id)){
+                            return;
+                        }
+                        var item_id=ui.content[0].id;
+                    }
+                    else{
+                        console.log("manual Selected");
+                        var item_id=ui.item.id;
+                    }
+
+                    return_row_with_data(item_id);
+                    $("#item_search").val('');
+                },   
+                //loader end
+        });
+
+
+    });
+
+    function return_row_with_data(item_id){
+    $("#item_search").addClass('ui-autocomplete-loader-center');
+        $.ajax({
+            autoFocus:true,
+            url: "{{route(currentUser().'.pur.product_search_data')}}",
+            method: 'GET',
+            dataType: 'json',
+            data: {item_id: item_id},
+            success: function(res){
+                $('#details_data').append(res);
                 $("#item_search").val('');
-            },   
-            //loader end
-    });
+                $("#item_search").removeClass('ui-autocomplete-loader-center');
+            },error: function(e){console.log("error "+e);}
+        });
+        
+    }
+    //INCREMENT ITEM
+    function removerow(e){
+    $(e).parents('tr').remove();
+    }
 
-
-});
-
-function return_row_with_data(item_id){
-  $("#item_search").addClass('ui-autocomplete-loader-center');
-    $.ajax({
-        autoFocus:true,
-        url: "{{route(currentUser().'.pur.product_search_data')}}",
-        method: 'GET',
-        dataType: 'json',
-        data: {item_id: item_id},
-        success: function(res){
-            $('#details_data').append(res);
-            $("#item_search").val('');
-            $("#item_search").removeClass('ui-autocomplete-loader-center');
-        },error: function(e){console.log("error "+e);}
-    });
-	
-}
-//INCREMENT ITEM
-function removerow(e){
-  $(e).parents('tr').remove();
-}
-
-//CALCUALATED SALES PRICE
-function get_cal(e){
-  var purchase_price = (isNaN(parseFloat($(e).parents('tr').find('.price').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.price').val().trim()); 
-  var qty = (isNaN(parseFloat($(e).parents('tr').find('.qty').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.qty').val().trim()); 
-  var tax = (isNaN(parseFloat($(e).parents('tr').find('.tax').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.tax').val().trim()); 
-  var discount_type = parseFloat($(e).parents('tr').find('.discount_type').val().trim()); 
-  var discount = (isNaN(parseFloat($(e).parents('tr').find('.discount').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.discount').val().trim()); 
-  
-  if(discount_type=="0")
-    discount=(purchase_price*(discount/100));
-
-    tax=((purchase_price ) *(tax/100));
-
-    $(e).parents('tr').find('.discount_cal').val(discount)
-    $(e).parents('tr').find('.tax_cal').val(tax)
-
-  var unit_cost = ((purchase_price + tax));
-  var subtotal = ((unit_cost * qty) - (discount * qty));
-
-  $(e).parents('tr').find('.unit_cost').val(unit_cost);
-  $(e).parents('tr').find('.subtotal').val(subtotal);
-  total_calculate();
-}
-//END
-//CALCULATE PROFIT MARGIN PERCENTAGE
-function total_calculate(){
-    var totalqty = 0;
-    $('.qty').each(function(e){
-        totalqty += parseFloat($(this).val());
-    });
+    //CALCUALATED SALES PRICE
+    function get_cal(e){
+    var purchase_price = (isNaN(parseFloat($(e).parents('tr').find('.price').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.price').val().trim()); 
+    var qty = (isNaN(parseFloat($(e).parents('tr').find('.qty').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.qty').val().trim()); 
+    var tax = (isNaN(parseFloat($(e).parents('tr').find('.tax').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.tax').val().trim()); 
+    var discount_type = parseFloat($(e).parents('tr').find('.discount_type').val().trim()); 
+    var discount = (isNaN(parseFloat($(e).parents('tr').find('.discount').val().trim()))) ? 0 :parseFloat($(e).parents('tr').find('.discount').val().trim()); 
     
-    var subtotal = 0;
-    $('.subtotal').each(function(e){
-        subtotal += parseFloat($(this).val());
-    });
+    if(discount_type=="0")
+        discount=(purchase_price*(discount/100));
 
-    $(".total_qty").text(totalqty);
-    $(".total_qty_p").val(totalqty);
+        tax=((purchase_price ) *(tax/100));
 
-    $(".tsubtotal").text(subtotal);
-    $(".tsubtotal_p").val(subtotal);
-    
-    check_change();
-}
-//END
+        $(e).parents('tr').find('.discount_cal').val(discount)
+        $(e).parents('tr').find('.tax_cal').val(tax)
 
-function check_change(){
-    var other_charge=(isNaN(parseFloat($('#other_charge').val().trim()))) ? 0 :parseFloat($('#other_charge').val().trim());
-    var discount_all=(isNaN(parseFloat($('#discount_all').val().trim()))) ? 0 :parseFloat($('#discount_all').val().trim());$('#discount_all').val();
-    var discount_all_type=$('#discount_all_type').val();
-    var tsubtotal=$(".tsubtotal_p").val();
+    var unit_cost = ((purchase_price + tax));
+    var subtotal = ((unit_cost * qty) - (discount * qty));
 
-    if(discount_all_type=="0")
-        discount_all=(tsubtotal*(discount_all/100));
-    
-    $(".tdiscount").text(discount_all.toFixed(2));
-    $(".tdiscount_p").val(discount_all.toFixed(2));
-    $(".tother_charge").text(other_charge.toFixed(2));
+    $(e).parents('tr').find('.unit_cost').val(unit_cost);
+    $(e).parents('tr').find('.subtotal').val(subtotal);
+    total_calculate();
+    }
+    //END
+    //CALCULATE PROFIT MARGIN PERCENTAGE
+    function total_calculate(){
+        var totalqty = 0;
+        $('.qty').each(function(e){
+            totalqty += parseFloat($(this).val());
+        });
+        
+        var subtotal = 0;
+        $('.subtotal').each(function(e){
+            subtotal += parseFloat($(this).val());
+        });
 
-    cal_grandtotl()
-}
+        $(".total_qty").text(totalqty);
+        $(".total_qty_p").val(totalqty);
 
-function cal_grandtotl(){
-    var tsubtotal_p=(isNaN(parseFloat($('.tsubtotal_p').val().trim()))) ? 0 :parseFloat($('.tsubtotal_p').val().trim());
-    var other_charge=(isNaN(parseFloat($('#other_charge').val().trim()))) ? 0 :parseFloat($('#other_charge').val().trim());
-    var tdiscount_p=(isNaN(parseFloat($('.tdiscount_p').val().trim()))) ? 0 :parseFloat($('.tdiscount_p').val().trim());
-    var grandtotal=((tsubtotal_p+other_charge)-tdiscount_p);
-    var roundof=Math.floor(grandtotal);
+        $(".tsubtotal").text(subtotal);
+        $(".tsubtotal_p").val(subtotal);
+        
+        check_change();
+    }
+    //END
 
-        subtotal_diff=grandtotal-roundof;
-         
-             $(".troundof").html(parseFloat(subtotal_diff).toFixed(2)); 
-             $(".troundof_p").val(parseFloat(subtotal_diff).toFixed(2)); 
-             $(".tgrandtotal").html(parseFloat(roundof).toFixed(2)); 
-             $(".tgrandtotal_p").val(parseFloat(roundof).toFixed(2)); 
+    function check_change(){
+        var other_charge=(isNaN(parseFloat($('#other_charge').val().trim()))) ? 0 :parseFloat($('#other_charge').val().trim());
+        var discount_all=(isNaN(parseFloat($('#discount_all').val().trim()))) ? 0 :parseFloat($('#discount_all').val().trim());$('#discount_all').val();
+        var discount_all_type=$('#discount_all_type').val();
+        var tsubtotal=$(".tsubtotal_p").val();
 
-}
+        if(discount_all_type=="0")
+            discount_all=(tsubtotal*(discount_all/100));
+        
+        $(".tdiscount").text(discount_all.toFixed(2));
+        $(".tdiscount_p").val(discount_all.toFixed(2));
+        $(".tother_charge").text(other_charge.toFixed(2));
+
+        cal_grandtotl()
+    }
+
+    function cal_grandtotl(){
+        var tsubtotal_p=(isNaN(parseFloat($('.tsubtotal_p').val().trim()))) ? 0 :parseFloat($('.tsubtotal_p').val().trim());
+        var other_charge=(isNaN(parseFloat($('#other_charge').val().trim()))) ? 0 :parseFloat($('#other_charge').val().trim());
+        var tdiscount_p=(isNaN(parseFloat($('.tdiscount_p').val().trim()))) ? 0 :parseFloat($('.tdiscount_p').val().trim());
+        var grandtotal=((tsubtotal_p+other_charge)-tdiscount_p);
+        var roundof=Math.floor(grandtotal);
+
+            subtotal_diff=grandtotal-roundof;
+            
+                $(".troundof").html(parseFloat(subtotal_diff).toFixed(2)); 
+                $(".troundof_p").val(parseFloat(subtotal_diff).toFixed(2)); 
+                $(".tgrandtotal").html(parseFloat(roundof).toFixed(2)); 
+                $(".tgrandtotal_p").val(parseFloat(roundof).toFixed(2)); 
+
+    }
 
 </script>
 @endpush
