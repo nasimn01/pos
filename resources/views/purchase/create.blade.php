@@ -31,7 +31,7 @@
                                 <div class="col-md-4 form-group">
                                     <select required onchange="change_data(this.value)" class="form-control form-select" name="branch_id" id="branch_id">
                                         <option value="">Select Branches</option>    
-                                    @forelse($branches as $b)
+                                        @forelse($branches as $b)
                                             <option value="{{ $b->id }}" {{old('branch_id')==$b->id?'selected':''}}>{{ $b->name }}</option>
                                         @empty
                                             <option value="">No branch found</option>
@@ -274,10 +274,10 @@ $(function() {
                     if (res.length) {
                         result = $.map(res, function(el){
                             return {
-                                label: el.product_name +'-'+ el.barcode,
+                                label: el.value +'-'+ el.label,
                                 value: '',
                                 id: el.id,
-                                item_name: el.product_name
+                                item_name: el.value
                             };
                         });
                     }

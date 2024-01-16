@@ -62,8 +62,7 @@ class SalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function product_sc(Request $request)
-    {
+    public function product_sc(Request $request){
         if($request->name){
             if($request->oldpro)
                 $product=DB::select("SELECT products.id,product_prices.price,products.product_name,product_prices.barcode,sum(stocks.quantity) as qty FROM `product_prices`
@@ -96,8 +95,7 @@ class SalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function product_sc_d(Request $request)
-    {
+    public function product_sc_d(Request $request){
         if($request->barcode){
             $product=collect(\DB::select("SELECT products.id,product_prices.price,products.product_name,product_prices.barcode,sum(stocks.quantity) as qty FROM `product_prices` JOIN products on products.id=product_prices.product_id
             JOIN stocks on stocks.product_id=product_prices.product_id WHERE stocks.company_id=".company()['company_id']." and stocks.branch_id=".$request->branch_id." and stocks.warehouse_id=".$request->warehouse_id." and product_prices.barcode='".$request->barcode."' GROUP BY products.id"))->first();
@@ -132,9 +130,7 @@ class SalesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddNewRequest $request)
-    {
-       
+    public function store(AddNewRequest $request){
         DB::beginTransaction();
         try{
             $pur= new Sales;
@@ -165,7 +161,6 @@ class SalesController extends Controller
                         $pd->quantity=$request->qty[$i];
                         $pd->unit_price=$request->price[$i];
                         $pd->tax=$request->tax[$i]>0?$request->tax[$i]:0;
-                        
                         $pd->discount_type=$request->discount_type[$i];
                         $pd->discount=$request->discount[$i];
                         $pd->sub_amount=$request->unit_cost[$i];
@@ -173,7 +168,7 @@ class SalesController extends Controller
                         if($pd->save()){
                             $stock=new Stock;
                             $stock->product_id=$product_id;
-                            $stock->purchase_id=$pur->id;
+                            $stock->sales_id=$pur->id;
                             $stock->company_id=company()['company_id'];
                             $stock->branch_id=$request->branch_id;
                             $stock->warehouse_id=$request->warehouse_id;
@@ -182,11 +177,9 @@ class SalesController extends Controller
                             $stock->tax=$pd->tax;
                             $stock->discount=$pd->discount;
                             $stock->save();
-
-                            DB::commit();
                         }
-
                     }
+                    DB::commit();
                 }
                 Toastr::success('Create Successfully!');
                 return redirect()->route(currentUser().'.sales.index');
@@ -196,7 +189,7 @@ class SalesController extends Controller
         }catch(Exception $e){
             Toastr::warning('Please try again');
             DB::rollback();
-            dd($e);
+            //dd($e);
             return redirect()->back()->withInput();
         }
     }
