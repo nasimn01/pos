@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\Location\Country;
 use App\Models\Settings\Location\Division;
 use App\Models\Settings\Location\District;
-use App\Models\Customers\customer;
+use App\Models\Customers\Customer;
 use App\Models\Settings\Branch;
 use Illuminate\Http\Request;
 use App\Http\Requests\Customer\AddNewRequest;
@@ -27,9 +27,9 @@ class CustomerController extends Controller
     public function index()
     {
         if( currentUser()=='owner')
-            $customers = customer::where(company())->paginate(10);
+            $customers = Customer::where(company())->paginate(10);
         else
-            $customers = customer::where(company())->where(branch())->paginate(10);
+            $customers = Customer::where(company())->where(branch())->paginate(10);
 
         return view('customer.index',compact('customers'));
     }
@@ -57,7 +57,7 @@ class CustomerController extends Controller
     public function store(AddNewRequest $request)
     {
         try{
-            $cus= new customer;
+            $cus= new Customer;
             $cus->customer_name= $request->customerName;
             $cus->contact= $request->contact;
             $cus->email= $request->email;
@@ -90,7 +90,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customers\customer  $customer
+     * @param  \App\Models\Customers\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function show(customer $customer)
@@ -101,7 +101,7 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customers\customer  $customer
+     * @param  \App\Models\Customers\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -110,7 +110,7 @@ class CustomerController extends Controller
         $divisions = Division::all();
         $districts = District::all();
         $branches = Branch::where(company())->get();
-        $customer = customer::findOrFail(encryptor('decrypt',$id));
+        $customer = Customer::findOrFail(encryptor('decrypt',$id));
         return view('customer.edit',compact('countries','divisions','districts','customer','branches'));
     }
 
@@ -118,13 +118,13 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customers\customer  $customer
+     * @param  \App\Models\Customers\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request,$id)
     {
         try{
-            $sup= customer::findOrFail(encryptor('decrypt',$id));
+            $sup= Customer::findOrFail(encryptor('decrypt',$id));
             $sup->customer_name= $request->customerName;
             $sup->contact= $request->contact;
             $sup->email= $request->email;
@@ -155,12 +155,12 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customers\customer  $customer
+     * @param  \App\Models\Customers\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $cat= customer::findOrFail(encryptor('decrypt',$id));
+        $cat= Customer::findOrFail(encryptor('decrypt',$id));
         $cat->delete();
         return redirect()->back();
     }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Accounts\child_one;
-use App\Models\Accounts\sub_head;
+use App\Models\Accounts\Child_one;
+use App\Models\Accounts\Sub_head;
 use Illuminate\Http\Request;
 use App\Http\Requests\Accounts\ChildOne\AddNewRequest;
 use App\Http\Requests\Accounts\ChildOne\UpdateRequest;
@@ -23,7 +23,7 @@ class ChildOneController extends Controller
      */
     public function index()
     {
-        $data= child_one::where(company())->paginate(10);
+        $data= Child_one::where(company())->paginate(10);
         return view('accounts.child_one.index',compact('data'));
     }
 
@@ -34,7 +34,7 @@ class ChildOneController extends Controller
      */
     public function create()
     {
-        $data= sub_head::where(company())->get();
+        $data= Sub_head::where(company())->get();
         return view('accounts.child_one.create',compact('data'));
     }
 
@@ -47,7 +47,7 @@ class ChildOneController extends Controller
     public function store(AddNewRequest $request)
     {
         try{
-            $mac = new child_one();
+            $mac = new Child_one();
             $mac->company_id=company()['company_id'];
             $mac->sub_head_id= $request->sub_head;
             $mac->head_name= $request->head_name;
@@ -83,8 +83,8 @@ class ChildOneController extends Controller
      */
     public function edit($id)
     {
-        $data= sub_head::where(company())->get();
-        $child= child_one::findOrFail(encryptor('decrypt',$id));
+        $data= Sub_head::where(company())->get();
+        $child= Child_one::findOrFail(encryptor('decrypt',$id));
         return view('accounts.child_one.edit',compact('data','child'));
     }
 
@@ -98,7 +98,7 @@ class ChildOneController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         try{
-            $mac = child_one::findOrFail(encryptor('decrypt',$id));
+            $mac = Child_one::findOrFail(encryptor('decrypt',$id));
             $mac->sub_head_id= $request->sub_head;
             $mac->head_name= $request->head_name;
             $mac->head_code= $request->head_code;
@@ -117,12 +117,12 @@ class ChildOneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Accounts\child_one  $child_one
+     * @param  \App\Models\Accounts\Child_one  $child_one
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $child= child_one::findOrFail(encryptor('decrypt',$id));
+        $child= Child_one::findOrFail(encryptor('decrypt',$id));
         $child->delete();
         return redirect()->back();
     }

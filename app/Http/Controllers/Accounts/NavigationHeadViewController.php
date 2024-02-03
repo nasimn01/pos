@@ -18,7 +18,7 @@ class NavigationHeadViewController extends Controller
      */
     public function index()
     {
-        $data= master_account::where(company())->get();
+        $data= Master_account::where(company())->get();
         return view('accounts.navigate.index',compact('data'));
     }
 

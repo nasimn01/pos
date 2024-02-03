@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class child_two extends Model
+class Child_two extends Model
 {
     use HasFactory,SoftDeletes;
     public function child_one(){
-        return $this->belongsTo(child_one::class);
+        return $this->belongsTo(Child_one::class);
     }
 }

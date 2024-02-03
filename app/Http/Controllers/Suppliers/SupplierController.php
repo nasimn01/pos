@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\Location\Country;
 use App\Models\Settings\Location\Division;
 use App\Models\Settings\Location\District;
-use App\Models\Suppliers\supplier;
+use App\Models\Suppliers\Supplier;
 use App\Models\Settings\Branch;
 use Illuminate\Http\Request;
 use App\Http\Requests\Supplier\AddNewRequest;
@@ -27,9 +27,9 @@ class SupplierController extends Controller
     public function index()
     {
         if( currentUser()=='owner')
-            $suppliers = supplier::where(company())->paginate(10);
+            $suppliers = Supplier::where(company())->paginate(10);
         else
-            $suppliers = supplier::where(company())->where(branch())->paginate(10);
+            $suppliers = Supplier::where(company())->where(branch())->paginate(10);
 
         return view('supplier.index',compact('suppliers'));
     }
@@ -57,7 +57,7 @@ class SupplierController extends Controller
     public function store(AddNewRequest $request)
     {
         try{
-            $sup= new supplier;
+            $sup= new Supplier;
             $sup->supplier_name= $request->supplierName;
             $sup->contact= $request->contact;
             $sup->email= $request->email;
@@ -88,7 +88,7 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Suppliers\supplier  $supplier
+     * @param  \App\Models\Suppliers\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -99,7 +99,7 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Suppliers\supplier  $supplier
+     * @param  \App\Models\Suppliers\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -108,7 +108,7 @@ class SupplierController extends Controller
         $divisions = Division::all();
         $districts = District::all();
         $branches = Branch::where(company())->get();
-        $supplier = supplier::findOrFail(encryptor('decrypt',$id));
+        $supplier = Supplier::findOrFail(encryptor('decrypt',$id));
         return view('supplier.edit',compact('countries','divisions','districts','supplier','branches'));
     }
 
@@ -116,13 +116,13 @@ class SupplierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Suppliers\supplier  $supplier
+     * @param  \App\Models\Suppliers\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, $id)
     {
         try{
-            $sup= supplier::findOrFail(encryptor('decrypt',$id));
+            $sup= Supplier::findOrFail(encryptor('decrypt',$id));
             $sup->supplier_name= $request->supplierName;
             $sup->contact= $request->contact;
             $sup->email= $request->email;
@@ -151,12 +151,12 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Suppliers\supplier  $supplier
+     * @param  \App\Models\Suppliers\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $cat= supplier::findOrFail(encryptor('decrypt',$id));
+        $cat= Supplier::findOrFail(encryptor('decrypt',$id));
         $cat->delete();
         return redirect()->back();
     }

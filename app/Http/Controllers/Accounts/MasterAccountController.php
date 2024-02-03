@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Accounts\master_account;
+use App\Models\Accounts\Master_account;
 use App\Models\Settings\Company;
 use Illuminate\Http\Request;
 use App\Http\Requests\Accounts\Master\AddNewRequest;
@@ -25,7 +25,7 @@ class MasterAccountController extends Controller
     public function index()
     {
 
-        $data= master_account::where(company())->paginate(10);
+        $data= Master_account::where(company())->paginate(10);
         return view('accounts.master.index',compact('data'));
     }
 
@@ -48,7 +48,7 @@ class MasterAccountController extends Controller
     public function store(AddNewRequest $request)
     {
         try{
-            $mac = new master_account;
+            $mac = new Master_account;
             $mac->company_id=company()['company_id'];
             $mac->head_name= $request->head_name;
             $mac->head_code= $request->head_code;
@@ -68,7 +68,7 @@ class MasterAccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Accounts\master_account  $master_account
+     * @param  \App\Models\Accounts\Master_account  $master_account
      * @return \Illuminate\Http\Response
      */
     public function show(master_account $master_account)
@@ -79,12 +79,12 @@ class MasterAccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Accounts\master_account  $master_account
+     * @param  \App\Models\Accounts\Master_account  $master_account
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $mac = master_account::findOrFail(encryptor('decrypt',$id));
+        $mac = Master_account::findOrFail(encryptor('decrypt',$id));
         return view('accounts.master.edit',compact('mac'));
     }
 
@@ -98,7 +98,7 @@ class MasterAccountController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         try{
-            $mac = master_account::findOrFail(encryptor('decrypt',$id));;
+            $mac = Master_account::findOrFail(encryptor('decrypt',$id));;
             $mac->head_name= $request->head_name;
             $mac->head_code= $request->head_code;
             $mac->opening_balance= $request->opening_balance;
@@ -116,12 +116,12 @@ class MasterAccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Accounts\master_account  $master_account
+     * @param  \App\Models\Accounts\Master_account  $master_account
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $mac= master_account::findOrFail(encryptor('decrypt',$id));
+        $mac= Master_account::findOrFail(encryptor('decrypt',$id));
         $mac->delete();
         return redirect()->back();
     }

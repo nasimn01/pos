@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Accounts\sub_head;
-use App\Models\Accounts\master_account;
+use App\Models\Accounts\Sub_head;
+use App\Models\Accounts\Master_account;
 use Illuminate\Http\Request;
 use App\Http\Requests\Accounts\Subhead\AddNewRequest;
 use App\Http\Requests\Accounts\Subhead\UpdateRequest;
@@ -23,7 +23,7 @@ class SubHeadController extends Controller
      */
     public function index()
     {
-        $data= sub_head::where(company())->paginate(10);
+        $data= Sub_head::where(company())->paginate(10);
         return view('accounts.sub_head.index',compact('data'));
     }
 
@@ -34,7 +34,7 @@ class SubHeadController extends Controller
      */
     public function create()
     {
-        $data= master_account::where(company())->get();
+        $data= Master_account::where(company())->get();
         return view('accounts.sub_head.create',compact('data'));
     }
 
@@ -47,7 +47,7 @@ class SubHeadController extends Controller
     public function store(AddNewRequest $request)
     {
         try{
-            $mac = new sub_head();
+            $mac = new Sub_head();
             $mac->company_id=company()['company_id'];
             $mac->master_head_id= $request->master_head;
             $mac->head_name= $request->head_name;
@@ -78,13 +78,13 @@ class SubHeadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Accounts\sub_head  $sub_head
+     * @param  \App\Models\Accounts\Sub_head  $sub_head
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data= master_account::where(company())->get();
-        $sub= sub_head::findOrFail(encryptor('decrypt',$id));
+        $data= Master_account::where(company())->get();
+        $sub= Sub_head::findOrFail(encryptor('decrypt',$id));
         return view('accounts.sub_head.edit',compact('data','sub'));
     }
 
@@ -92,13 +92,13 @@ class SubHeadController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Accounts\sub_head  $sub_head
+     * @param  \App\Models\Accounts\Sub_head  $sub_head
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         try{
-            $mac = sub_head::findOrFail(encryptor('decrypt',$id));
+            $mac = Sub_head::findOrFail(encryptor('decrypt',$id));
             $mac->master_head_id= $request->master_head;
             $mac->head_name= $request->head_name;
             $mac->head_code= $request->head_code;
@@ -117,12 +117,12 @@ class SubHeadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Accounts\sub_head  $sub_head
+     * @param  \App\Models\Accounts\Sub_head  $sub_head
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $sub= sub_head::findOrFail(encryptor('decrypt',$id));
+        $sub= Sub_head::findOrFail(encryptor('decrypt',$id));
         $sub->delete();
         return redirect()->back();
     }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Accounts\child_two;
-use App\Models\Accounts\child_one;
+use App\Models\Accounts\Child_two;
+use App\Models\Accounts\Child_one;
 use Illuminate\Http\Request;
 use App\Http\Requests\Accounts\ChildTwo\AddNewRequest;
 use App\Http\Requests\Accounts\ChildTwo\UpdateRequest;
@@ -23,7 +23,7 @@ class ChildTwoController extends Controller
      */
     public function index()
     {
-        $data= child_two::where(company())->paginate(10);
+        $data= Child_two::where(company())->paginate(10);
         return view('accounts.child_two.index',compact('data'));
     }
 
@@ -34,7 +34,7 @@ class ChildTwoController extends Controller
      */
     public function create()
     {
-        $data= child_one::where(company())->get();
+        $data= Child_one::where(company())->get();
         return view('accounts.child_two.create',compact('data'));
     }
 
@@ -47,7 +47,7 @@ class ChildTwoController extends Controller
     public function store(AddNewRequest $request)
     {
         try{
-            $mac = new child_two();
+            $mac = new Child_two();
             $mac->company_id=company()['company_id'];
             $mac->child_one_id= $request->child_one;
             $mac->head_name= $request->head_name;
@@ -67,7 +67,7 @@ class ChildTwoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Accounts\child_two  $child_two
+     * @param  \App\Models\Accounts\Child_two  $child_two
      * @return \Illuminate\Http\Response
      */
     public function show(child_two $child_two)
@@ -83,21 +83,21 @@ class ChildTwoController extends Controller
      */
     public function edit($id)
     {
-        $data= child_one::where(company())->get();
-        $child= child_two::findOrFail(encryptor('decrypt',$id));
+        $data= Child_one::where(company())->get();
+        $child= Child_two::findOrFail(encryptor('decrypt',$id));
         return view('accounts.child_two.edit',compact('data','child'));
     }
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Accounts\child_two  $child_two
+     * @param  \App\Models\Accounts\Child_two  $child_two
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, $id)
     {
         try{
-            $mac = child_two::findOrFail(encryptor('decrypt',$id));
+            $mac = Child_two::findOrFail(encryptor('decrypt',$id));
             $mac->child_one_id= $request->child_one;
             $mac->head_name= $request->head_name;
             $mac->head_code= $request->head_code;
@@ -116,12 +116,12 @@ class ChildTwoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Accounts\child_two  $child_two
+     * @param  \App\Models\Accounts\Child_two  $child_two
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $child= child_two::findOrFail(encryptor('decrypt',$id));
+        $child= Child_two::findOrFail(encryptor('decrypt',$id));
         $child->delete();
         return redirect()->back();
     }

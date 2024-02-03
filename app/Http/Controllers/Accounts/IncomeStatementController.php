@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accounts;
 use App\Http\Controllers\Controller;
 
 use App\Models\Vouchers\GeneralLedger;
-use App\Models\Accounts\master_account;
+use App\Models\Accounts\Master_account;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use Exception;
@@ -27,7 +27,7 @@ class IncomeStatementController extends Controller
     public function details(Request $r){
         $month=$r->month;
         $year=$r->year;
-        $acc_head=master_account::where(company())->get();
+        $acc_head=Master_account::where(company())->get();
         /* operating income */
         $incomeheadop=array();
         $incomeheadopone=array();

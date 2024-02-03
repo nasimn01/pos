@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Settings\Branch;
 use App\Models\Settings\Warehouse;
 use App\Models\Settings\Company;
-use App\Models\Customers\customer;
+use App\Models\Customers\Customer;
 use App\Models\Products\Product;
 use App\Http\Requests\Sales\AddNewRequest;
 use Brian2694\Toastr\Facades\Toastr;
@@ -47,10 +47,10 @@ class SalesController extends Controller
     {
         $branches = Branch::where(company())->get();
         if( currentUser()=='owner'){
-            $customers = customer::where(company())->get();
+            $customers = Customer::where(company())->get();
             $Warehouses = Warehouse::where(company())->get();
         }else{
-            $customers = customer::where(company())->where(branch())->get();
+            $customers = Customer::where(company())->where(branch())->get();
             $Warehouses = Warehouse::where(company())->where(branch())->get();
         }
         
@@ -155,7 +155,7 @@ class SalesController extends Controller
             if($pur->save()){
                 if($request->product_id){
                     foreach($request->product_id as $i=>$product_id){
-                        $pd=new sales_details;
+                        $pd=new Sales_details;
                         $pd->sales_id=$pur->id;
                         $pd->product_id=$product_id;
                         $pd->quantity=$request->qty[$i];

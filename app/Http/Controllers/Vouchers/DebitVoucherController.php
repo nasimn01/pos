@@ -9,8 +9,8 @@ use App\Models\Vouchers\DevoucherBkdn;
 use App\Models\Settings\Company;
 use App\Models\Vouchers\GeneralVoucher;
 use App\Models\Vouchers\GeneralLedger;
-use App\Models\Accounts\child_one;
-use App\Models\Accounts\child_two;
+use App\Models\Accounts\Child_one;
+use App\Models\Accounts\Child_two;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use Brian2694\Toastr\Facades\Toastr;
@@ -40,11 +40,11 @@ class DebitVoucherController extends Controller
     public function create()
     {
         $paymethod=array();
-        $account_data=child_one::whereIn('head_code',[11001,11002])->where(company())->get();
+        $account_data=Child_one::whereIn('head_code',[11001,11002])->where(company())->get();
         
         if($account_data){
             foreach($account_data as $ad){
-                $shead=child_two::where('child_one_id',$ad->id);
+                $shead=Child_two::where('child_one_id',$ad->id);
                 if($shead->count() > 0){
 					$shead=$shead->get();
                     foreach($shead as $sh){

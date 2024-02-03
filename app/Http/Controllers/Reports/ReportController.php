@@ -9,7 +9,7 @@ use App\Models\Purchases\Purchase;
 use App\Models\Sales\Sales_details;
 use App\Models\Sales\Sales;
 use App\Models\Suppliers\Supplier;
-use App\Models\Customers\customer;
+use App\Models\Customers\Customer;
 use Illuminate\Http\Request;
 use DB;
 
@@ -63,7 +63,7 @@ class ReportController extends Controller
         if($request->cus){
             $data=$data->where('customer_id',$request->cus);
         }
-        $customers = customer::where(company())->get();
+        $customers = Customer::where(company())->get();
         $data= $data->paginate(10);
         //$sales = Sales_details::all();
         return view('reports.salesview',compact('data','customers'));
