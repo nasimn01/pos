@@ -18,7 +18,7 @@
                             @csrf
                             <div class="row">
                                 @if( currentUser()=='owner')
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-lg-3 col-md-4 col-sm-12 d-none">
                                         <div class="form-group">
                                             <label for="branch_id">{{__('Branches Name')}}<span class="text-danger">*</span></label>
                                             <select class="form-control form-select" name="branch_id" id="branch_id">
@@ -37,58 +37,70 @@
                                     <input type="hidden" value="{{ branch()['branch_id']}}" name="branch_id">
                                 @endif
 
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="supplierName">{{__('Supplier Name')}}<span class="text-danger">*</span></label>
-                                        <input type="text" id="supplierName" class="form-control" value="{{ old('supplierName')}}" name="supplierName">
+                                        <input type="text" class="form-control" value="{{ old('supplierName')}}" name="supplierName" required>
                                         @if($errors->has('supplierName'))
                                         <span class="text-danger"> {{ $errors->first('supplierName') }}</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="company">{{__('Company Name')}}</label>
+                                        <input type="text" class="form-control" value="{{ old('companyName')}}" name="companyName">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="contact">{{__('Contact')}}<span class="text-danger">*</span></label>
-                                        <input type="text" id="contact" class="form-control" value="{{ old('contact')}}" name="contact">
+                                        <input type="number" class="form-control" value="{{ old('contact')}}" name="contact" required>
                                         @if($errors->has('contact'))
                                         <span class="text-danger"> {{ $errors->first('contact') }}</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="email">{{__('Email')}}</label>
-                                        <input type="text" id="email" class="form-control" value="{{ old('email')}}" name="email">
+                                        <input type="email" class="form-control" value="{{ old('email')}}" name="email">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="phone">{{__('Phone')}}</label>
-                                        <input type="text" id="phone" class="form-control" value="{{ old('phone')}}" name="phone">
+                                        <input type="number" class="form-control" value="{{ old('phone')}}" name="phone">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="taxNumber">{{__('TAX Number')}}</label>
-                                        <input type="text" id="taxNumber" class="form-control" value="{{ old('taxNumber')}}" name="taxNumber">
+                                        <input type="number" class="form-control" value="{{ old('taxNumber')}}" name="taxNumber">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
-                                        <label for="gstNumber">{{__('GST Number')}}</label>
-                                        <input type="text" id="gstNumber" class="form-control" value="{{ old('gstNumber')}}" name="gstNumber">
+                                        <label for="fax">{{__('Fax')}}</label>
+                                        <input type="number" class="form-control" value="{{ old('fax')}}" name="fax">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="openingAmount">{{__('Opening Balance')}}</label>
-                                        <input type="text" id="openingAmount" class="form-control" value="{{ old('openingAmount')}}" name="openingAmount">
+                                        <input type="number" class="form-control" value="{{ old('openingAmount')}}" name="openingAmount">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="openingAmount">{{__('Number Of Due Date')}}</label>
+                                        <input type="number" class="form-control" value="{{ old('number_of_due_date')}}" name="number_of_due_date">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="countryName">{{__('Country')}}<span class="text-danger">*</span></label>
-                                        <select onchange="show_division(this.value)" class="form-control form-select" name="countryName" id="countryName">
+                                        <select onchange="show_division(this.value)" class="form-control form-select" name="countryName">
                                             <option value="">Select Country</option>
                                             @forelse($countries as $d)
                                                 <option value="{{$d->id}}" {{ old('countryName')==$d->id?"selected":""}}> {{ $d->name}}</option>
@@ -101,11 +113,11 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
-                                        <label for="divisionName">{{__('Division')}}</label>
-                                        <select onchange="show_district(this.value)" class="form-control form-select" name="divisionName" id="divisionName">
-                                            <option value="">Select Division</option>
+                                        <label for="divisionName">{{__('State')}}</label>
+                                        <select onchange="show_district(this.value)" class="form-control form-select">
+                                            <option value="">Select State</option>
                                             @forelse($divisions as $d)
                                                 <option class="div div{{$d->country_id}}" value="{{$d->id}}" {{ old('divisionName')==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
@@ -114,11 +126,11 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
-                                        <label for="districtName">{{__('District')}}</label>
-                                        <select class="form-control form-select" name="districtName" id="districtName">
-                                            <option value="">Select District</option>
+                                        <label for="districtName">{{__('City')}}</label>
+                                        <select class="form-control form-select" name="districtName">
+                                            <option value="">Select City</option>
                                             @forelse($districts as $d)
                                                 <option class="dist dist{{$d->division_id}}" value="{{$d->id}}" {{ old('districtName')==$d->id?"selected":""}}> {{ $d->name}}</option>
                                             @empty
@@ -127,17 +139,16 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="postCode">{{__('Post Code')}}</label>
-                                        <input type="text" id="postCode" class="form-control" value="{{ old('postCode')}}" name="postCode">
+                                        <input type="text" class="form-control" value="{{ old('postCode')}}" name="postCode">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="address" class="form-label">{{__('Address')}}</label>
-                                        <textarea class="form-control" name="address" id="address" rows="2">{{ old('address')}}</textarea>
-                                        
+                                        <textarea class="form-control" name="address" rows="2">{{ old('address')}}</textarea>
                                     </div>
                                 </div>
                             </div>

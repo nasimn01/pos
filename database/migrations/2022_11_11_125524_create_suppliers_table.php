@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('supplier_name');
+            $table->string('companyName')->nullable();
             $table->string('contact');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('tax_number')->nullable();
-            $table->string('gst_number')->nullable();
+            $table->string('fax')->nullable();
             $table->string('opening_balance')->nullable();
+            $table->integer('number_of_due_date')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
             $table->unsignedBigInteger('division_id')->nullable();
             $table->unsignedBigInteger('district_id')->nullable();

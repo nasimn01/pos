@@ -52,10 +52,10 @@
                                         <a href="{{route(currentUser().'.supplier.edit',encryptor('encrypt',$sup->id))}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a href="javascript:void()" onclick="$('#form{{$sup->id}}').submit()">
+                                        <a class="text-danger" href="javascript:void()" onclick="$('#form{{$sup->id}}').submit()">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                        <form id="form{{$sup->id}}" action="{{route(currentUser().'.supplier.destroy',encryptor('encrypt',$sup->id))}}" method="post">
+                                        <form id="form{{$sup->id}}" onsubmit="return confirm('Are you sure?')" action="{{route(currentUser().'.supplier.destroy',encryptor('encrypt',$sup->id))}}" method="post">
                                             @csrf
                                             @method('delete')
                                         </form>

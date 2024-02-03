@@ -59,12 +59,14 @@ class SupplierController extends Controller
         try{
             $sup= new Supplier;
             $sup->supplier_name= $request->supplierName;
+            $sup->companyName= $request->companyName;
             $sup->contact= $request->contact;
             $sup->email= $request->email;
             $sup->phone= $request->phone;
             $sup->tax_number= $request->taxNumber;
-            $sup->gst_number= $request->gstNumber;
+            $sup->fax= $request->fax;
             $sup->opening_balance= $request->openingAmount;
+            $sup->number_of_due_date= $request->number_of_due_date;
             $sup->country_id= $request->countryName;
             $sup->division_id= $request->divisionName;
             $sup->district_id= $request->districtName;
@@ -124,12 +126,14 @@ class SupplierController extends Controller
         try{
             $sup= Supplier::findOrFail(encryptor('decrypt',$id));
             $sup->supplier_name= $request->supplierName;
+            $sup->companyName= $request->companyName;
             $sup->contact= $request->contact;
             $sup->email= $request->email;
             $sup->phone= $request->phone;
             $sup->tax_number= $request->taxNumber;
-            $sup->gst_number= $request->gstNumber;
+            $sup->fax= $request->fax;
             $sup->opening_balance= $request->openingAmount;
+            $sup->number_of_due_date= $request->number_of_due_date;
             $sup->country_id= $request->countryName;
             $sup->division_id= $request->divisionName;
             $sup->district_id= $request->districtName;
