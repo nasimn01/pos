@@ -24,6 +24,7 @@ use App\Http\Controllers\Products\ProductController as product;
 use App\Http\Controllers\Suppliers\SupplierController as supplier;
 use App\Http\Controllers\Customers\CustomerController as customer;
 use App\Http\Controllers\Purchases\PurchaseController as purchase;
+use App\Http\Controllers\Purchases\PurchaseOrderController as purchaseOrder;
 use App\Http\Controllers\Sales\SalesController as sales;
 use App\Http\Controllers\Settings\BranchController as branch;
 use App\Http\Controllers\Settings\WarehouseController as warehouse;
@@ -157,6 +158,9 @@ Route::group(['middleware'=>isOwner::class],function(){
         Route::get('journal_get_head', [journal::class, 'get_head'])->name('owner.journal_get_head');
 
         //Purchase
+        Route::resource('purchaseOrder',purchaseOrder::class,['as'=>'owner']);
+        Route::get('/po_product_search_data', [purchaseOrder::class,'product_search_data'])->name('owner.pur.po_product_search_data');
+
         Route::resource('purchase',purchase::class,['as'=>'owner']);
         Route::get('/product_search', [purchase::class,'product_search'])->name('owner.pur.product_search');
         Route::get('/product_search_data', [purchase::class,'product_search_data'])->name('owner.pur.product_search_data');

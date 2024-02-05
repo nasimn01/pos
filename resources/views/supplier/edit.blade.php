@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
-                                        <label for="divisionName">{{__('Division')}}</label>
+                                        <label for="divisionName">{{__('State')}}</label>
                                         <select onchange="show_district(this.value)" class="form-control form-select" name="divisionName">
                                             <option value="">Select State</option>
                                             @forelse($divisions as $d)
@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-12">
                                     <div class="form-group">
-                                        <label for="districtName">{{__('District')}}</label>
+                                        <label for="districtName">{{__('City')}}</label>
                                         <select class="form-control form-select" name="districtName">
                                             <option value="">Select City</option>
                                             @forelse($districts as $d)

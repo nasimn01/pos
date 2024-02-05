@@ -26,11 +26,11 @@
                                     <th scope="col">{{__('Email')}}</th>
                                     <th scope="col">{{__('Phone')}}</th>
                                     <th scope="col">{{__('TAX Number')}}</th>
-                                    <th scope="col">{{__('GST Number')}}</th>
+                                    <th scope="col">{{__('Fax Number')}}</th>
                                     <th scope="col">{{__('Opening balance')}}</th>
                                     <th scope="col">{{__('Country')}}</th>
-                                    <th scope="col">{{__('Division')}}</th>
-                                    <th scope="col">{{__('District')}}</th>
+                                    <th scope="col">{{__('State')}}</th>
+                                    <th scope="col">{{__('City')}}</th>
                                     <th class="white-space-nowrap">{{__('Action')}}</th>
                                 </tr>
                             </thead>
@@ -43,7 +43,7 @@
                                     <td>{{$sup->email}}</td>
                                     <td>{{$sup->phone}}</td>
                                     <td>{{$sup->tax_number}}</td>
-                                    <td>{{$sup->gst_number}}</td>
+                                    <td>{{$sup->fax}}</td>
                                     <td>{{$sup->opening_balance}}</td>
                                     <td>{{$sup->country?->name}}</td>
                                     <td>{{$sup->division?->name}}</td>

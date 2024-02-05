@@ -46,6 +46,8 @@
     <li class="sidebar-item has-sub">
         <a href="#" class='sidebar-link'><i class="bi bi-cart-plus-fill"></i><span>{{__('Purchases')}}</span></a>
         <ul class="submenu">
+            <li class="py-1 submenu-item"><a href="{{route(currentUser().'.purchaseOrder.index')}}">{{__('Purchase Order')}}</a></li>
+            <li class="py-1 submenu-item"><a href="#">{{__('Purchase Receive')}}</a></li>
             <li class="py-1 submenu-item"><a href="{{route(currentUser().'.purchase.index')}}">{{__('Purchase')}}</a></li>
 		</ul>   
     </li>
